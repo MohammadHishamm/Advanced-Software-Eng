@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<html  xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -33,36 +33,119 @@
 
         <div style="margin-top: 100px">
 
-            <img src="../images/loader.gif">
+            <img src="/images/loader.gif">
 
         </div>
 
         <div class="mx-auto "  style="width: 500px; height: 200px; overflow: hidden; margin-top: 20px;">
-        <img src="../Images/MyWebsite/loader logo.png" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+        <img src="/images/MyWebsite/loader logo.png" alt="" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
     </div>
 
-    <!-- Loaders -->
-    <!-- <div class="text-center transition transition-2 is-active" id="preloading">
 
-        <div style="margin-top: 100px">
-
-            <img src="../images/loader.gif">
-
-        </div>
-        <p style="margin-top: 20px;   
-color: #0f141a;
-font-size: 3.0rem;
-font-weight: bolder;">Arab Data Hub</p>
-    </div> -->
-
+    <!-- TopNav -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <button class="btn btn-link ms-lg-5 mb-lg-0 mb-5" data-mdb-toggle="offcanvas" href="#offcanvasExample"
+            role="button" aria-controls="offcanvasExample">
+            <i class="fa-solid fa-bars-staggered btn-open hero_main_text2"></i>
+        </button>
+        <a class="navbar-brand me-auto mb-lg-0 mb-5" href=""
+            style="width: 360px; height: 72px; overflow: hidden;">
+            <img src="/images/MyWebsite/logo2.png" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+        </a>
 
 
 
-    {% comment %} <?php include "Partials/Toast.php" ?>
-    <?php include "Partials/Top-Nav.php" ?>
-    <?php include "Partials/Side-Nav.php" ?>
-    <?php include "Partials/Top-Button.php" ?> {% endcomment %}
+
+        <ul class="navbar-nav mx-auto mb-4 mb-lg-0 mt-2 ">
+            <li class="nav-item ">
+                <form class="d-flex" action="" method="post" role="search">
+
+                    <input class="form-control me-2 rounded-9 rounded-pill search" autocomplete="off" name="search"
+                        type="search" placeholder="Find a specfic course ?" aria-label="Search">
+                </form>
+            </li>
+        </ul>
+
+            <div class="mx-auto  mb-4 mb-lg-0 mt-2 " >
+              <div class="row align-items-center">
+                <div class="mx-auto  mb-4 mb-lg-0 mt-2 " >
+                    <div class="row">
+              
+                        <div class="col">
+                         <a href="">
+                            <button class="btn" style="background-color: #58779D; color: white;">
+                             SignUp
+                            </button>
+                        </a>
+                    </div>
+                </div>
+              </div>
+            </div>
+    </div>
+</nav>
+
+<div class="sidebar close shadow-lg  rounded rounded-4" >
+    <div class="logo-details">
+      <span class="logo_name t-4 " style="width: 90px; height: 90px; overflow: hidden;">
+      <img src="Images/MyWebsite/logo only.png"  style="width: 100%; height: 100%; object-fit: cover;">  
+      </span>
+      <i class="ms-auto fa-solid  fs-5 logo_name btn-close" ></i>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a href="">
+          <i class='bx bx-user' ></i>
+          <span class="link_name">Account</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="">Account</a></li>
+        </ul>
+      </li>
+      
+      <li>
+        <a href="/SWE-PROJECT/php/chat/privatechat.php">
+          <i class='bx bx-chat' ></i>
+          <span class="link_name">chat</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="/SWE-PROJECT/php/chat/privatechat.php">chatt</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/SWE-PROJECT/public/wishlist.php">
+          <i class='bx bx-heart' ></i>
+          <span class="link_name">Wishlist</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="/SWE-PROJECT/public/wishlist.php">Explore</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/SWE-PROJECT/Public/checkout.php">
+          <i class='bx bx-cart'></i>
+          <span class="link_name">Cart</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="/SWE-PROJECT/Public/checkout.php">History</a></li>
+        </ul>
+      </li>
+      <li>
+        <a  href="Edit-Profile.php">
+          <i class='bx bx-cog' ></i>
+          <span class="link_name" >Settings</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="Edit-Profile.php">Settings</a></li>
+        </ul>
+      </li>
+
+    </ul>
+  </div>
+
+
+
 
     <!-- First Section -->
     <div class="  mb-10" style="height: min-content; margin-top: 100px; ">
@@ -95,7 +178,7 @@ font-weight: bolder;">Arab Data Hub</p>
                             style="background-color: #58779D; color: white; letter-spacing: 3px;">
                             Apply Now
                         </a>
-                        <a href="/SWE-PROJECT/Public/Categories.php">
+                        <a href="">
                         <button class="btn btn-link ms-5 p-3 fs-7" style="color:black; letter-spacing: 3px;">
                             <i class="fa-sharp fa-solid fa-circle-play" style="color: black;"></i>
                           
@@ -187,7 +270,7 @@ font-weight: bolder;">Arab Data Hub</p>
                         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light"
                             style="width: 20rem; height: 25rem;  ">
                             <img src="" style="object-fit: cover ; height: 100%; width: 100%;" />
-                            <a href="View-Course.php?playlist_id='.$fetch_playlist['playlist_id'].'">
+                            <a href="">
                                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);">
                                 </div>
                             </a>
@@ -311,7 +394,7 @@ font-weight: bolder;">Arab Data Hub</p>
                 <img src="../Images/web_design back image.png" class="w-100 h-100" />
                 <div class="mask text-light d-flex justify-content-center  flex-column text-center"
                     style="background-color: rgba(0, 0, 0, 0.5) ">
-                    <a href="Categories.php" style="color:white;">
+                    <a href="" style="color:white;">
                         <h4>Web Design</h4>
                         <p class="m-0">100 Courses</p>
                     </a>
@@ -322,7 +405,7 @@ font-weight: bolder;">Arab Data Hub</p>
                 <img src="../Images/web_design back image.png" class="w-100 h-100" />
                 <div class="mask text-light d-flex justify-content-center  flex-column text-center"
                     style="background-color: rgba(0, 0, 0, 0.5) ">
-                    <a href="Categories.php" style="color:white;">
+                    <a href="" style="color:white;">
                         <h4>Web Design</h4>
                         <p class="m-0">100 Courses</p>
                     </a>
@@ -333,7 +416,7 @@ font-weight: bolder;">Arab Data Hub</p>
                 <img src="../Images/web_design back image.png" class="w-100 h-100" />
                 <div class="mask text-light d-flex justify-content-center  flex-column text-center"
                     style="background-color: rgba(0, 0, 0, 0.5) ">
-                    <a href="categories.php" style="color:white;">
+                    <a href="" style="color:white;">
                         <h4>Web Design</h4>
                         <p class="m-0">100 Courses</p>
                     </a>
@@ -344,7 +427,7 @@ font-weight: bolder;">Arab Data Hub</p>
                 <img src="../Images/web_design back image.png" class="w-100 h-100" />
                 <div class="mask text-light d-flex justify-content-center  flex-column text-center"
                     style="background-color: rgba(0, 0, 0, 0.5) ">
-                    <a href="categories.php" style="color:white;">
+                    <a href="" style="color:white;">
                         <h4>Web Design</h4>
                         <p class="m-0">100 Courses</p>
                     </a>
@@ -572,7 +655,145 @@ font-weight: bolder;">Arab Data Hub</p>
     <!-- End   Features -->
 
     <!-- Footer -->
-    <?php include "Partials/Bottom-Nav.php" ?>
+    
+  <!-- Footer -->
+  <footer
+  class="text-center text-lg-start text-white mt-5" 
+  style="background-color: #929fba"
+  >
+<!-- Grid container -->
+<div class="container p-4 pb-0">
+<!-- Section: Links -->
+<section class="">
+<!--Grid row-->
+<div class="row">
+  <!-- Grid column -->
+  <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+    <h6 class="text-uppercase mb-4 font-weight-bold">
+      Arab Data Hub
+    </h6>
+    <p>
+      Here you can use rows and columns to organize your footer
+      content. Lorem ipsum dolor sit amet, consectetur adipisicing
+      elit.
+    </p>
+  </div>
+  <!-- Grid column -->
+
+  <hr class="w-100 clearfix d-md-none" />
+
+  <!-- Grid column -->
+  <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+    <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+    <p>
+      <a class="text-white">MDBootstrap</a>
+    </p>
+    <p>
+      <a class="text-white">MDWordPress</a>
+    </p>
+    <p>
+      <a class="text-white">BrandFlow</a>
+    </p>
+    <p>
+      <a class="text-white">Bootstrap Angular</a>
+    </p>
+  </div>
+  <!-- Grid column -->
+
+  <hr class="w-100 clearfix d-md-none" />
+
+  <!-- Grid column -->
+  <hr class="w-100 clearfix d-md-none" />
+
+  <!-- Grid column -->
+  <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+    <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+    <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+    <p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
+    <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+    <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+  </div>
+  <!-- Grid column -->
+
+  <!-- Grid column -->
+  <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+    <h6 class="text-uppercase mb-4 font-weight-bold">Follow us</h6>
+
+    <!-- Facebook -->
+    <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #3b5998"
+       href="#!"
+       role="button"
+       ><i class="fab fa-facebook-f"></i
+      ></a>
+
+    <!-- Twitter -->
+    <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #55acee"
+       href="#!"
+       role="button"
+       ><i class="fab fa-twitter"></i
+      ></a>
+
+    <!-- Google -->
+    <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #dd4b39"
+       href="#!"
+       role="button"
+       ><i class="fab fa-google"></i
+      ></a>
+
+    <!-- Instagram -->
+    <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #ac2bac"
+       href="#!"
+       role="button"
+       ><i class="fab fa-instagram"></i
+      ></a>
+
+    <!-- Linkedin -->
+    <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #0082ca"
+       href="#!"
+       role="button"
+       ><i class="fab fa-linkedin-in"></i
+      ></a>
+    <!-- Github -->
+    <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #333333"
+       href="#!"
+       role="button"
+       ><i class="fab fa-github"></i
+      ></a>
+  </div>
+</div>
+<!--Grid row-->
+</section>
+<!-- Section: Links -->
+</div>
+<!-- Grid container -->
+
+<!-- Copyright -->
+<div
+ class="text-center p-3"
+ style="background-color: rgba(0, 0, 0, 0.2)"
+ >
+© 2023 Copyright:
+<a class="text-white" href=""
+ >Arab Data Hub.com</a
+>
+</div>
+<!-- Copyright -->
+</footer>
+<!-- Footer -->
+
+
 
 
     <!-- Load library from the CDN -->
@@ -622,8 +843,13 @@ font-weight: bolder;">Arab Data Hub</p>
     document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
         if (textArray.length) setTimeout(type, newTextDelay + 250);
     });
+
+
+   
+  
     </script>
     <script src="../js/Loaders.js"></script>
+    <script src="../js/side-nav.js"></script>
     <!-- MDB -->
     <script
     type="text/javascript"

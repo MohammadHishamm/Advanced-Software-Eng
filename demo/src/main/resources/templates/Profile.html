@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arab Data Hub</title>
+    <script src="../js/Loaders.js"></script>
+    <link rel="stylesheet" href="../css/All.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="../js/MDB java/mdb.min.js"></script>
+
+    <link rel="stylesheet" href="../css/Sidenav.css">
+    <link rel="stylesheet" href="../css/MDB css/mdb.min.css">
+    <link rel="stylesheet" href="../css/All.css">
+    <script src="../js/MDB java/mdb.min.js"></script>
+</head>
+
+<style>
+    .high-quality-image {
+        max-width: 100%;
+        /* Ensure the image doesn't exceed its container */
+        height: auto;
+        /* Maintain the image's aspect ratio */
+        image-rendering: auto;
+        /* Use the default image rendering algorithm */
+    }
+</style>
+
+<body style="background-color: #CED8E3; overflow: hidden;">
+
+    <!-- Loaders -->
+    <div class="text-center transition transition-1 is-active" id="preloading">
+
+        <div style="margin-top: 100px">
+
+            <img src="/Images/loader.gif">
+
+        </div>
+        <p style="margin-top: 20px;   
+        color: #0f141a;
+        font-size: 3.0rem;
+        font-weight: bolder;">Arab Data Hub</p>
+    </div>
+
+    <!-- TopNav -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <button class="btn btn-link ms-lg-5 mb-lg-0 mb-5" data-mdb-toggle="offcanvas" href="#offcanvasExample"
+                role="button" aria-controls="offcanvasExample">
+                <i class="fa-solid fa-bars-staggered btn-open hero_main_text2"></i>
+            </button>
+            <a class="navbar-brand me-auto mb-lg-0 mb-5" href="" style="width: 360px; height: 72px; overflow: hidden;">
+                <img src="/images/MyWebsite/logo2.png" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+            </a>
+
+
+
+
+            <ul class="navbar-nav mx-auto mb-4 mb-lg-0 mt-2 ">
+                <li class="nav-item ">
+                    <form class="d-flex" action="" method="post" role="search">
+
+                        <input class="form-control me-2 rounded-9 rounded-pill search" autocomplete="off" name="search"
+                            type="search" placeholder="Find a specfic course ?" aria-label="Search">
+                    </form>
+                </li>
+            </ul>
+
+            <div class="mx-auto  mb-4 mb-lg-0 mt-2 ">
+                <div class="row align-items-center">
+                    <div class="mx-auto  mb-4 mb-lg-0 mt-2 ">
+                        <div class="row">
+
+                            <div class="col">
+                                <a href="">
+                                    <button class="btn" style="background-color: #58779D; color: white;">
+                                        SignUp
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </nav>
+
+
+    <section>
+        <div>
+            <div class=" d-flex justify-content-center align-items-center ">
+                <div class="col-12">
+                    <!-- Profile Image section -->
+                    <div class=" text-white d-flex flex-xxl-row flex-column   align-items-start  justify-content-start align-items-xxl-center"
+                        style="background-color: #000; height:min-content; padding-top: 50px; padding-bottom: 20px;">
+                        <div class="col-xxl-1 col-4 ms-5 me-5 ms-xxl-3 ">
+
+
+                            <img src="/images/users/" alt="" class="rounded rounded-5 high-quality-image"
+                                style="width: 400px; height: auto;">
+
+
+
+
+                        </div>
+                        <div class="col-xxl-2 col-5 ms-5 ">
+                            <p class="fs-2 ">
+                                <span class="fs-6 text-success"> (Online) </span>
+                            </p>
+                            <p class="text-muted">
+
+                            </p>
+                            <p class="text-muted">User joined on
+
+                            </p>
+                            <p class="text-muted"></p>
+                        </div>
+
+                        <div class="col-xxl-2 col-6  offset-1 offset-xxl-6 ">
+                            <a href="Edit-Profile.php" class="btn btn-light">Edit Profile</a>
+                        </div>
+
+                    </div>
+
+                    <!-- Profile Information section -->
+                    <div class="card-body p-4 text-black " style="background-color: white;">
+
+
+                        <div class=" pt-3 mt-2">
+                            <p class="lead fw-normal mb-1">Bio</p>
+                            <div class="p-4">
+                                <p class="font-italic mb-1">
+
+                                </p>
+                            </div>
+                        </div>
+                        <div class=" mb-5">
+                            <p class="lead fw-normal  mb-3">User Social Links</p>
+                            <i class="fa-brands fa-linkedin ms-3 fs-6"></i>
+                            <a href="" target="_blank" class="text-muted ms-2 mb-2">
+
+                            </a>
+                            <br>
+                            <i class="fa-brands fa-github ms-3 fs-6"></i>
+                            <a href="" target="_blank" class="text-muted ms-2 mb-2">
+
+                            </a>
+                            <br>
+                            <i class="fa-brands fa-facebook ms-3 fs-6"></i>
+                            <a href="" target="_blank" class="text-muted ms-2 mb-2">
+
+                            </a>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <p class="lead fw-normal mb-0">Recent Courses</p>
+                            <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
+                        </div>
+
+                        <div class="row d-flex justify-content-start align-items-center">
+
+
+
+
+
+
+                            <div class="col-3 mb-3">
+                                <div class="card" style="width: 300px;">
+                                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                                        <img src="../Images/courses/thumbs/" class="img-fluid" />
+                                        <a href="">
+                                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <div class="row mb-3">
+                                                <div class="col-7 d-flex justify-content-start align-items-center">
+                                                    <img src="/Images/users/" alt="Generic placeholder image"
+                                                        class="img-fluid rounded-circle border border-dark border-3"
+                                                        style="width: 40px;">
+                                                    <span class="ps-2" style="font-size: 13px;">
+
+                                                    </span>
+                                                </div>
+                                                <div class="col-5 d-flex justify-content-end align-items-center">
+                                                    <ul class="mb-0 list-unstyled d-flex flex-row  "
+                                                        style="color: yellow;">
+                                                        <li>
+                                                            <i class="fas fa-star fa-xs"></i>
+                                                        </li>
+                                                        <li>
+                                                            <i class="fas fa-star fa-xs"></i>
+                                                        </li>
+                                                        <li>
+                                                            <i class="fas fa-star fa-xs"></i>
+                                                        </li>
+                                                        <li>
+                                                            <i class="fas fa-star fa-xs"></i>
+                                                        </li>
+                                                        <li>
+                                                            <i class="fas fa-star fa-xs"></i>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <p class="card-text ">
+
+                                            </p>
+                                            <p class="card-text mb-3 text-truncate">
+
+                                            </p>
+                                            <div>
+                                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                                    <p class="small mb-0"><i class="far fa-clock me-2"></i>
+
+                                                    </p>
+                                                    <p class="fw-bold mb-0">
+
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../js/Loaders.js"></script>
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js">
+    </script>
+</body>
+
+</html>
