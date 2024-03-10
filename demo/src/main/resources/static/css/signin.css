@@ -1,0 +1,77 @@
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #3268fc;
+}
+.h-custom {
+  height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+  .h-custom {
+    height: 100%;
+  }
+}
+
+.icon-bar {
+  position: fixed;
+  top: 95%;
+  left: 79%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.icon-bar a {
+  text-align: center;
+  padding: 10px;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 20px;
+}
+
+.icon-bar a:hover {
+  background-color: #000;
+}
+
+.facebook {
+  background: #3b5998;
+  color: white;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.twitter {
+  background: #55acee;
+  color: white;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.google {
+  background: #dd4b39;
+  color: white;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.linkedin {
+  background: #007bb5;
+  color: white;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.youtube {
+  background: #bb0000;
+  color: white;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.titlesign {
+  font-family: "Courier New", monospace;
+  font-size: 30px;
+  font-weight: bold;
+}

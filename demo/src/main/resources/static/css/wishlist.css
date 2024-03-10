@@ -1,0 +1,45 @@
+.button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 30px;
+}
+.buttonarea {
+  padding-left: 77%;
+}
+.delete {
+  background: #fff;
+  padding-left: 150px;
+  color: red;
+  border: none;
+}
+.button1 {
+  background-color: red;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 30px;
+}
+a:link,
+a:visited {
+  color: white;
+  text-decoration: none;
+}
+
+a:link:active,
+a:visited:active {
+  color: white;
+}
