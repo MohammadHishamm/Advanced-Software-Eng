@@ -1,0 +1,47 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="navigation">
+
+    <!-- TopNav -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <button class="btn btn-link ms-lg-5 mb-lg-0 mb-5" data-mdb-toggle="offcanvas" href="#offcanvasExample"
+                role="button" aria-controls="offcanvasExample">
+                <i class="fa-solid fa-bars-staggered btn-open hero_main_text2"></i>
+            </button>
+            <a class="navbar-brand me-auto mb-lg-0 mb-5" href="/" style="width: 360px; height: 72px; overflow: hidden;">
+                <img src="/images/MyWebsite/logo2.png" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+            </a>
+
+
+
+
+            <ul class="navbar-nav mx-auto mb-4 mb-lg-0 mt-2 ">
+                <li class="nav-item ">
+                    <form class="d-flex" action="" method="post" role="search">
+
+                        <input class="form-control me-2 rounded-9 rounded-pill search" autocomplete="off" name="search"
+                            type="search" placeholder="Find a specfic course ?" aria-label="Search">
+                    </form>
+                </li>
+            </ul>
+
+            <div class="mx-auto  mb-4 mb-lg-0 mt-2 ">
+                <div class="row align-items-center">
+                    <div class="mx-auto  mb-4 mb-lg-0 mt-2 ">
+                        <div class="row">
+
+                            <div class="col">
+                                <a href="/sign">
+                                    <button class="btn" style="background-color: #58779D; color: white;">
+
+                                        SignUpp
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </nav>
+
+</div>
