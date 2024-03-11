@@ -2,10 +2,11 @@ package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
+
 import com.example.demo.models.User;
 import com.example.demo.repositories.UserRepository;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 
@@ -13,12 +14,12 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RequestMapping("/sign")
 @RestController
@@ -73,7 +74,7 @@ public class SignUpController {
     }
 
     @PostMapping("/signin")
-    public ModelAndView signinProcess(@ModelAttribute("user") User user, BindingResult bindingResult) {
+    public ModelAndView signinProcess(@ModelAttribute("user") User user, BindingResult bindingResult ,HttpSession session) {
         ModelAndView mav = new ModelAndView("Signup-in.html");
         User dbUser = this.userRepository.findByEmail(user.getEmail());
         if (dbUser == null) {
@@ -84,6 +85,11 @@ public class SignUpController {
                 if (!isPasswordMatched) {
                 
                     bindingResult.rejectValue("password", "error.user", "Incorrect password");
+                   
+                }
+                else{
+                    session.setAttribute("email", dbUser.getEmail());
+                   
                 }
             }
             if (bindingResult.hasErrors()) {
@@ -91,6 +97,7 @@ public class SignUpController {
                 return mav;
             }
             return new ModelAndView("redirect:/");
+          
         }
     
     
