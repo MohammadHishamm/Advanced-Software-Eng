@@ -33,7 +33,7 @@
     <div class="container">
         <div class="forms-container">
             <div class="signin-signup">
-                <form method="post" class="sign-in-form" id="login_form" action="/user/signin">
+                <form method="post" class="sign-in-form" id="login_form" action="/sign/signin">
                     <h2 class="title">Sign in</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
@@ -67,38 +67,31 @@
                         </a>
                     </div>
                 </form>
-                <form method="post" class="sign-up-form" id="/user/signup">
+                <form method="post" class="sign-up-form" action="/sign/signup">
                     <h2 class="title">Sign up</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
                         <input type="text" placeholder="Full name" id="name1" name="name" />
-                        </br>
-                        <span class="alert" id="alert3"></span>
-            
+                        <span class="alert" th:each="error : ${errors}" th:if="${error.field == 'name'}" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
+
                     </div>
                     </br>
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
                         <input type="text" placeholder="Email" id="email1" name="email" />
-                        </br>
-            
-            
+                        <span th:each="error : ${errors}" th:if="${error.field == 'email'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
                     </div>
                     </br>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
                         <input type="password" placeholder="Password" id="password1" name="password" />
-                        </br>
-            
-            
+                        <span th:each="error : ${errors}" th:if="${error.field == 'password'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
                     </div>
                     </br>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
                         <input type="password" placeholder="Confirm password" id="password2" name="Confirmpass" />
-                        </br>
-                        <span class="alert" id="alert6"></span>
-            
+                        <span th:each="error : ${errors}" th:if="${error.field == 'Confirmpass'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
                     </div>
                     </br>
                     <input type="submit" name="register" class="btn btn-success" value="sign up" />
@@ -111,13 +104,15 @@
                             <i class="fab fa-twitter"></i>
                         </a>
                         <a href="'"  class="social-icon" >
-                        <i class="fab fa-google"></i>
+                            <i class="fab fa-google"></i>
                         </a>
                         <a href="#" class="social-icon">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                     </div>
                 </form>
+                
+                
 
 
 
