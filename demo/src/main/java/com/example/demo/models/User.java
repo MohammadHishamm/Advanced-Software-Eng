@@ -25,19 +25,16 @@ public class User {
 
     @Size(min = 6, message = "Password must be at least 6 characters long")
     private String password;
-    private String Confirmpass;
-   
-
+  
 
     public User() {
     }
 
-    public User(int user_id, String name, String email, String password, String Confirmpass) {
+    public User(int user_id, String name, String email, String password) {
         this.user_id = user_id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.Confirmpass = Confirmpass;
     }
 
     public int getUser_id() {
@@ -72,14 +69,6 @@ public class User {
         this.password = password;
     }
 
-    public String getConfirmpass() {
-        return this.Confirmpass;
-    }
-
-    public void setConfirmpass(String Confirmpass) {
-        this.Confirmpass = Confirmpass;
-    }
-
     public User user_id(int user_id) {
         setUser_id(user_id);
         return this;
@@ -100,11 +89,6 @@ public class User {
         return this;
     }
 
-    public User Confirmpass(String Confirmpass) {
-        setConfirmpass(Confirmpass);
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -113,12 +97,12 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return user_id == user.user_id && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(Confirmpass, user.Confirmpass);
+        return user_id == user.user_id && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user_id, name, email, password, Confirmpass);
+        return Objects.hash(user_id, name, email, password);
     }
 
     @Override
@@ -128,9 +112,9 @@ public class User {
             ", name='" + getName() + "'" +
             ", email='" + getEmail() + "'" +
             ", password='" + getPassword() + "'" +
-            ", Confirmpass='" + getConfirmpass() + "'" +
             "}";
     }
+   
 
     
 }
