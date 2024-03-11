@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Arab Data Hub</title>
-    <script src="../js/Loaders.js"></script>
+    <script src="/Js/Loaders.js"></script>
     <link rel="stylesheet" href="../css/All.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="../js/MDB java/mdb.min.js"></script>
+    <script src="/Js/MDB java/mdb.min.js"></script>
 
-    <link rel="stylesheet" href="../css/Sidenav.css">
-    <link rel="stylesheet" href="../css/MDB css/mdb.min.css">
-    <link rel="stylesheet" href="../css/All.css">
-    <script src="../js/MDB java/mdb.min.js"></script>
+    <link rel="stylesheet" href="/css/Sidenav.css">
+    <link rel="stylesheet" href="/css/MDB css/mdb.min.css">
+    <link rel="stylesheet" href="/css/All.css">
+    <script src="/js/MDB java/mdb.min.js"></script>
 </head>
 
 <style>
@@ -47,46 +47,10 @@
     </div>
 
     <!-- TopNav -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <button class="btn btn-link ms-lg-5 mb-lg-0 mb-5" data-mdb-toggle="offcanvas" href="#offcanvasExample"
-                role="button" aria-controls="offcanvasExample">
-                <i class="fa-solid fa-bars-staggered btn-open hero_main_text2"></i>
-            </button>
-            <a class="navbar-brand me-auto mb-lg-0 mb-5" href="" style="width: 360px; height: 72px; overflow: hidden;">
-                <img src="/images/MyWebsite/logo2.png" alt="" style="width: 100%; height: 100%; object-fit: cover;">
-            </a>
+    <div th:replace="fragments/Navbar::navigation"></div>
 
-
-
-
-            <ul class="navbar-nav mx-auto mb-4 mb-lg-0 mt-2 ">
-                <li class="nav-item ">
-                    <form class="d-flex" action="" method="post" role="search">
-
-                        <input class="form-control me-2 rounded-9 rounded-pill search" autocomplete="off" name="search"
-                            type="search" placeholder="Find a specfic course ?" aria-label="Search">
-                    </form>
-                </li>
-            </ul>
-
-            <div class="mx-auto  mb-4 mb-lg-0 mt-2 ">
-                <div class="row align-items-center">
-                    <div class="mx-auto  mb-4 mb-lg-0 mt-2 ">
-                        <div class="row">
-
-                            <div class="col">
-                                <a href="">
-                                    <button class="btn" style="background-color: #58779D; color: white;">
-                                        SignUp
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </nav>
+    <!-- SideNav -->
+    <div th:replace="fragments/SideNav::sidenav"></div>
 
 
     <section>
@@ -108,19 +72,20 @@
                         </div>
                         <div class="col-xxl-2 col-5 ms-5 ">
                             <p class="fs-2 ">
+                                Omar Hosny
                                 <span class="fs-6 text-success"> (Online) </span>
                             </p>
                             <p class="text-muted">
 
                             </p>
-                            <p class="text-muted">User joined on
+                            <!-- <p class="text-muted">User joined on  -->
 
                             </p>
                             <p class="text-muted"></p>
                         </div>
 
                         <div class="col-xxl-2 col-6  offset-1 offset-xxl-6 ">
-                            <a href="Edit-Profile.php" class="btn btn-light">Edit Profile</a>
+                            <a href="/user/edit" class="btn btn-light">Edit Profile</a>
                         </div>
 
                     </div>
@@ -166,7 +131,7 @@
 
 
 
-                            <div class="col-3 mb-3">
+                            <!-- <div class="col-3 mb-3">
                                 <div class="card" style="width: 300px;">
                                     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                                         <img src="../Images/courses/thumbs/" class="img-fluid" />
@@ -226,7 +191,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -234,10 +199,11 @@
         </div>
     </section>
 
-    <script src="../js/Loaders.js"></script>
+    <script src="/Js/Loaders.js"></script>
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js">
     </script>
+    <script src="../js/side-nav.js"></script>
 </body>
 
 </html>
