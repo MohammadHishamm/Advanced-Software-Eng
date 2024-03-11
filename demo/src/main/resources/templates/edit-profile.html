@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -141,61 +141,38 @@
                                             <hr>
 
                                            
-                                              
-                                                <form  method="post"  action="/user/update">
-                                                  <div class="row">
-                                                      <div class="col-sm-3">
-                                                          <p class="mb-0" style="font-size: 1.3rem; text-weight: bold">
-                                                              Name
-                                                          </p>
-                                                      </div>
-                                                      <div class="row">
-                                                          <div class="col-sm-6">
-                                                              <input class="text-muted mb-0" name="name"
-                                                                  value=""></input>
-                                                          </div>
-                                                      </div>
+                                            <form method="post" action="/user/update">
+                                              <div class="row">
+                                                  <div class="col-sm-3">
+                                                      <p class="mb-0" style="font-size: 1.3rem; font-weight: bold;">Name</p>
                                                   </div>
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <p class="mb-0" style="font-size: 1.3rem; text-weight: bold">Email
-                                                        </p>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <input class="text-muted mb-0"name="email"
-                                                                value=""></input>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <p class="mb-0" style="font-size: 1.3rem; text-weight: bold">Password
-                                                        </p>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <input class="text-muted mb-0"name="password"
-                                                                value=""></input>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-sm-12 offset-sm-9">
-                                                    <!-- <button type="submit" name="delete_user" class="mb-0 btn btn-danger">Delete Account</button> -->
-                                                       
-                                                        <button type="submit" name="update_personal_data"
-                                                                class="mb-0 btn btn-success">Update</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                                </form> 
-                                                    
-                                                </div>
-                                                <div class=" row">
-                                             
-                                                <hr>
-                                              
-                                        </div>
-                                        </form>
+                                                  <div class="col-sm-6">
+                                                      <input class="text-muted mb-0" name="name" th:value="${name}" />
+                                                  </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="col-sm-3">
+                                                      <p class="mb-0" style="font-size: 1.3rem; font-weight: bold;">Email</p>
+                                                  </div>
+                                                  <div class="col-sm-6">
+                                                      <input class="text-muted mb-0" name="email" th:value="${email}" />
+                                                  </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="col-sm-3">
+                                                      <p class="mb-0" style="font-size: 1.3rem; font-weight: bold;">Password</p>
+                                                  </div>
+                                                  <div class="col-sm-6">
+                                                      <input type="password" class="text-muted mb-0" name="password" th:value="${password}" />
+                                                  </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="col-sm-12 offset-sm-9">
+                                                      <button type="submit" name="update_personal_data" class="mb-0 btn btn-success">Update</button>
+                                                  </div>
+                                              </div>
+                                          </form>
+                                          
                                     </div>
                                 </div>
                             </div>

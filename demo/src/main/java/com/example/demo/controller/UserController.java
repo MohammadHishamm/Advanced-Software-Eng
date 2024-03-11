@@ -48,10 +48,26 @@ public class UserController {
     }
     
     @GetMapping("edit")
-    public ModelAndView editprifle() {
+    public ModelAndView editprifle(HttpSession session) {
         ModelAndView mav = new ModelAndView("edit-profile.html");
-        return mav;
-    
+        String userEmail = (String) session.getAttribute("email");
+        if (userEmail == null) {
+     
+            return new ModelAndView("redirect:/sign");
+        }
+
+        User user = this.userRepository.findByEmail(userEmail);
+        if (user != null) {
+       
+            mav.addObject("name", user.getName());
+            mav.addObject("email", user.getEmail());
+            mav.addObject("password", user.getPassword());
+        } else {
+           
+            mav.addObject("errorMessage", "User not found");
+        }
+        
+    return mav;
     
     }
 
