@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
 
@@ -12,8 +15,15 @@ public class User {
     @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int user_id;
+   
+    @NotEmpty(message = "Name cannot be empty")
     private String name;
+
+    @NotEmpty(message = "Email cannot be empty")
+    @Email(message = "Enter a valid email format")
     private String email;
+
+    @Size(min = 6, message = "Password must be at least 6 characters long")
     private String password;
    
 
