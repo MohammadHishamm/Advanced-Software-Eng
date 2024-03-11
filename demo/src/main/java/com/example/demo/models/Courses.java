@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+
 import java.util.Objects;
 
 @Entity
@@ -16,6 +18,8 @@ public class Courses {
     private String course_description;
     private String course_requirements;
     private String course_price;
+
+
 
 
     public Courses() {
@@ -135,5 +139,8 @@ public class Courses {
             ", course_price='" + getCourse_price() + "'" +
             "}";
     }
+
     
+
 }
+   

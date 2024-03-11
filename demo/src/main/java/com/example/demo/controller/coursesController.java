@@ -1,17 +1,46 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.example.demo.models.Courses;
+import com.example.demo.repositories.CoursesRepository;
 
 @RequestMapping("/courses")
 @RestController
 public class coursesController {
-     @GetMapping("")
+
+    @Autowired
+    private CoursesRepository coursesRepository;
+
+    @GetMapping("add-course")
     public ModelAndView courses() {
        ModelAndView mav = new ModelAndView("courses.html");
+       Courses course= new Courses();
+       mav.addObject("course", course);
        return mav;
     }
+
+    @PostMapping("save-course") 
+    public String savecourse(@ModelAttribute Courses course) {
+        this.coursesRepository.save(course);
+        return "Added";
+
+    }
+
+    
+
+
+
 
 }
