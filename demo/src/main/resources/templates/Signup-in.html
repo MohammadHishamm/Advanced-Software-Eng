@@ -38,6 +38,7 @@
                     <div class="input-field">
                         <i class="fas fa-user"></i>
                         <input type="text" placeholder="Email" id="email" name="email" />
+                        <span th:each="error : ${errors}" th:if="${error.field == 'email'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
                         </br>
             
             
@@ -46,6 +47,7 @@
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
                         <input type="password" placeholder="Password" id="password" name="password" />
+                        <span th:each="error : ${errors}" th:if="${error.field == 'password'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
                         </br>
             
                     </div>
@@ -67,6 +69,9 @@
                         </a>
                     </div>
                 </form>
+
+
+
                 <form method="post" class="sign-up-form" action="/sign/signup">
                     <h2 class="title">Sign up</h2>
                     <div class="input-field">

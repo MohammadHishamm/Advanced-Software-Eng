@@ -11,9 +11,9 @@ import jakarta.validation.Valid;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,29 +64,34 @@ public class SignUpController {
     
 
 
-@GetMapping("signin")
-public ModelAndView signin() {
-    ModelAndView mav = new ModelAndView("Signup-in.html");
-    User newuser = new User();
-    mav.addObject("user", newuser);
-    return mav;
-}
-@PostMapping("signin")
-public RedirectView signinProcess(@RequestParam("email") String email,@RequestParam("password") String password) {
-    User dbUser=  this.userRepository.findByEmail(email);
-    Boolean ispasswordmatched= BCrypt.checkpw(password, dbUser.getPassword());
+    @GetMapping("signin")
+    public ModelAndView signin() {
+        ModelAndView mav = new ModelAndView("Signup-in.html");
+        User newuser = new User();
+        mav.addObject("user", newuser);
+        return mav;
+    }
 
-    if(ispasswordmatched)
-    return new RedirectView("/");
-    else
-    return new RedirectView("/user/signin");
-
-}
-
-
-
+    @PostMapping("/signin")
+    public ModelAndView signinProcess(@ModelAttribute("user") User user, BindingResult bindingResult) {
+        ModelAndView mav = new ModelAndView("Signup-in.html");
+        User dbUser = this.userRepository.findByEmail(user.getEmail());
+        if (dbUser == null) {
+                bindingResult.rejectValue("email", "error.user", "Invalid email");
+            } else {
+            
+                boolean isPasswordMatched = BCrypt.checkpw(user.getPassword(), dbUser.getPassword());
+                if (!isPasswordMatched) {
+                
+                    bindingResult.rejectValue("password", "error.user", "Incorrect password");
+                }
+            }
+            if (bindingResult.hasErrors()) {
+                mav.addObject("errors", bindingResult.getAllErrors());
+                return mav;
+            }
+            return new ModelAndView("redirect:/");
+        }
     
-
-
     
 }
