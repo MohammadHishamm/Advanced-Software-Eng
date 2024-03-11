@@ -36,7 +36,7 @@
 
     <!-- Multi step form -->
     <section class="multi_step_form">
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" th:object="${instructor}" >
             <!-- Tittle -->
             <div class="tittle">
                 <h2>Become a teacher with us!</h2>
@@ -46,17 +46,18 @@
             </div>
 
             <!-- fieldsets -->
-            <fieldset>
-                <label>Choose your gender <span
-                        style="color: red !important; display: inline; float: none;">*</span></label>
-                <div class="container mb-3">
-                    <input type="radio" id="male" name="gender_male" />
-                    <label for="male">Male</label>
-                    <input type="radio" id="female" name="gender_female" />
-                    <label for="female">Female</label>
-                    <br />
-                    <span class="alert"></span>
-                </div>
+            <fieldset>          
+                 <div class="language-picker js-language-picker"
+                        data-trigger-class="li4-btn li4-btn--subtle js-tab-focus mb-3">
+                            <label for="gender">Select your gender</label>
+
+                            <select name="gender" id="gender" th:field="*{gender}">
+                                <option  value="Male" selected>Male</option>
+                                <option  value="Female">Female</option>
+                                <option  value="Mark">Mark</option>
+                                <option  value="Elgayar">Elgayar</option>
+                            </select>
+                    </div>
 
                 <tr>
 
@@ -70,22 +71,20 @@
 
                     <div class="language-picker js-language-picker"
                         data-trigger-class="li4-btn li4-btn--subtle js-tab-focus mb-3">
-                        <form action="" class="language-picker__form">
-                            <label for="language-picker-select">Select your language</label>
+                            <label for="Language">Select your language</label>
 
-                            <select name="language-picker-select" id="language-picker-select">
+                            <select name="language" id="Language" th:field="*{Language}">
                                 <option lang="de" value="Arabic" selected>Arabic</option>
                                 <option lang="en" value="English">English</option>
                                 <option lang="fr" value="Francais">Français</option>
                                 <option lang="it" value="Italiano">Italiano</option>
                             </select>
-                        </form>
                     </div>
 
                     <label for="country">Country</label><span
                         style="color: red !important; display: inline; float: none;">*</span>
 
-                    <select id="country" name="country" class="form-control  mb-3">
+                    <select id="country" name="country" th:field="*{country}" class="form-control  mb-3">
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Åland Islands">Åland Islands</option>
                         <option value="Albania">Albania</option>
@@ -341,11 +340,11 @@
                     <label>Upload your CV here <span
                             style="color: red !important; display: inline; float: none;">*</span></label>
                     <br />
-                    <input type="text" class="form-control" value="<?=$user_id?>" hidden placeholder="Enter your name"
+                    <input type="text" class="form-control" value="" hidden placeholder="Enter your name"
                         name="name">
                     </div>
                     <div class="form-group ">
-                        <input type="file" name="pdf_file" class="form-control" accept=".pdf" />
+                        <input type="file"  th:field="*{Pdf}"  name="Pdf" class="form-control" accept=".pdf" />
                     </div>
 
 
@@ -354,7 +353,7 @@
                     <label>Additional comment <span
                             style="color: red !important; display: inline; float: none;">*</span></label>
                     <br>
-                    <textarea name="comment" rows="10" cols="50" class=" w-100"></textarea>
+                    <textarea name="comment" th:field="*{comment}" rows="10" cols="50" class=" w-100"></textarea>
                     <br />
                     <br />
 
