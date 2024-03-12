@@ -98,8 +98,9 @@ public class UserController {
     }
     
     @GetMapping("delete")
-    public RedirectView deleteUser(@RequestParam("email") String email) {
-        User userToDelete = userRepository.findByEmail(email);
+    public RedirectView deleteUser(HttpSession session)  {
+        String Email = (String) session.getAttribute("email");
+        User userToDelete = userRepository.findByEmail(Email);
         userRepository.delete(userToDelete);
         return new RedirectView("/");
     }
