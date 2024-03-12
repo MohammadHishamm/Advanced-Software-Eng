@@ -18,4 +18,10 @@ public class DemoApplication {
        return mav;
     }
 
+	@GetMapping("/error")
+	    public ModelAndView error() {
+       ModelAndView mav = new ModelAndView("error.html");
+       return mav;
+    }
+
 }

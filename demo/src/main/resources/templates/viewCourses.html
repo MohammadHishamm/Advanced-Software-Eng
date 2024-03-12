@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Courses details</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="../css/viewCourses.css">
+   <link rel="stylesheet" href="../css/Sidenav.css">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+   
+   
+
+</head>
+<body>
+
+   <div th:replace="fragments/SideNav::sidenav"></div>
+
+  <!-- TopNav -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+   <div class="container-fluid">
+       <button class="btn btn-link ms-lg-5 mb-lg-0 mb-5" data-mdb-toggle="offcanvas" href="#offcanvasExample"
+           role="button" aria-controls="offcanvasExample">
+           <i class="fa-solid fa-bars-staggered btn-open hero_main_text2"></i>
+       </button>
+       <a class="navbar-brand me-auto mb-lg-0 mb-5" href=""
+           style="width: 360px; height: 72px; overflow: hidden;">
+           <img src="/images/MyWebsite/logo2.png" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+       </a>
+
+
+
+
+       <ul class="navbar-nav mx-auto mb-4 mb-lg-0 mt-2 ">
+           <li class="nav-item ">
+               <form class="d-flex" action="" method="post" role="search">
+
+                   <input class="form-control me-2 rounded-9 rounded-pill search" autocomplete="off" name="search"
+                       type="search" placeholder="Find a specfic course ?" aria-label="Search">
+               </form>
+           </li>
+       </ul>
+
+           <div class="mx-auto  mb-4 mb-lg-0 mt-2 " >
+             <div class="row align-items-center">
+               <div class="mx-auto  mb-4 mb-lg-0 mt-2 " >
+                   <div class="row">
+
+                       <div class="col">
+                        <a href="">
+                           <button class="btn" style="background-color: #58779D; color: white;">
+                            SignUp
+                           </button>
+                       </a>
+                   </div>
+               </div>
+             </div>
+           </div>
+   </div>
+</nav>
+   
+<div th:replace="fragments/SideNav::sidenav"></div>
+  
+  
+  <div class="container">
+      <h2 class="container-heading">Courses</h2>
+      <div class="course-list">
+          <!-- HTML Course -->
+          <div  class="course" th:each="course : ${courses}">
+              <!-- unsplash img for html -->
+              <p style="color: green;" th:text="${course.course_status}"></p>
+              <img src="../Images/img.jpg" alt="HTML Course Image">
+              <h2 th:text="${course.course_title}"></h2>
+              <p th:text="${course.course_description}"></p>
+             <span> Price: <span style="color: red;" th:text="${course.course_price}"></span>$</span> 
+             <div class="d-flex flex-column mt-4">
+               
+               <a class="btn btn-secondary btn-sm mt-2" href="">
+                   Update
+               </a>
+               <a href="" class="btn btn-danger btn-sm mt-2">
+                  Delete
+              </a>
+           </div>
+          </div>
+          
+      </div>
+  </div>
+  <!-- <footer>
+      <p>&copy; 2024 Arab Data Hub. All rights reserved.</p>
+  </footer> -->
+   
+   </body>
+   <script src="../js/side-nav.js"></script>
+</html>

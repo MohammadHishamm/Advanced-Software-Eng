@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,19 @@ public class coursesController {
 
     @Autowired
     private CoursesRepository coursesRepository;
+    @GetMapping("")
+    public ModelAndView getcourses() {
+        ModelAndView mav = new ModelAndView("viewCourses.html");
+        List<Courses> courses = this.coursesRepository.findAll();
+        mav.addObject("courses", courses);
+         return mav;
+
+    }
+
+
+
+
+
 
     @GetMapping("add-course")
     public ModelAndView courses() {

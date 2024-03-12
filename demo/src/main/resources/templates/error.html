@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        
+        .error-container {
+            text-align: center;
+        }
+        
+        .error-code {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ff6347; /* Tomato */
+        }
+        
+        .error-message {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .error-actions {
+            margin-top: 20px;
+        }
+        
+        .error-actions a {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #007bff; /* Blue */
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .error-actions a:hover {
+            background-color: #0056b3; /* Darker Blue */
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <div class="error-message">Oops! Page not found.</div>
+        <div class="error-actions">
+            <a href="/">Go to Home</a>
+        </div>
+    </div>
+</body>
+</html>
