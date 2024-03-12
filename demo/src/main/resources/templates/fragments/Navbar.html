@@ -1,4 +1,3 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="navigation">
 
     <!-- TopNav -->
@@ -12,15 +11,11 @@
                 <img src="/images/MyWebsite/logo2.png" alt="" style="width: 100%; height: 100%; object-fit: cover;">
             </a>
 
-
-
-
             <ul class="navbar-nav mx-auto mb-4 mb-lg-0 mt-2 ">
                 <li class="nav-item ">
                     <form class="d-flex" action="" method="post" role="search">
-
                         <input class="form-control me-2 rounded-9 rounded-pill search" autocomplete="off" name="search"
-                            type="search" placeholder="Find a specfic course ?" aria-label="Search">
+                            type="search" placeholder="Find a specific course?" aria-label="Search">
                     </form>
                 </li>
             </ul>
@@ -29,12 +24,15 @@
                 <div class="row align-items-center">
                     <div class="mx-auto  mb-4 mb-lg-0 mt-2 ">
                         <div class="row">
-
                             <div class="col">
-                                <a href="/sign">
+                                <a th:if="${session.email == null}" href="/sign">
                                     <button class="btn" style="background-color: #58779D; color: white;">
-
                                         SignUp
+                                    </button>
+                                </a>
+                                <a th:if="${session.email != null}" href="/sign/signout">
+                                    <button class="btn" style="background-color: #58779D; color: white;">
+                                        SignOut
                                     </button>
                                 </a>
                             </div>

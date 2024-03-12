@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.models.User;
 import com.example.demo.repositories.UserRepository;
@@ -73,7 +74,7 @@ public class SignUpController {
         return mav;
     }
 
-    @PostMapping("/signin")
+    @PostMapping("signin")
     public ModelAndView signinProcess(@ModelAttribute("user") User user, BindingResult bindingResult ,HttpSession session) {
         ModelAndView mav = new ModelAndView("Signup-in.html");
         User dbUser = this.userRepository.findByEmail(user.getEmail());
@@ -99,6 +100,11 @@ public class SignUpController {
             return new ModelAndView("redirect:/");
           
         }
-    
+            @GetMapping("signout")
+             public RedirectView signout(HttpSession session) {
+            session.invalidate();
+           return new RedirectView("/");
+        }
+        
     
 }
