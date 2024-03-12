@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.models.User;
 import com.example.demo.repositories.UserRepository;
@@ -75,28 +76,33 @@ public class UserController {
     public ModelAndView updateuser(@RequestParam("email") String email) {
         User userToUpdate = userRepository.findByEmail(email);
         ModelAndView mav = new ModelAndView("edit-profile.html");
+
         mav.addObject("user", userToUpdate);
         return mav;
     }
     
     @PostMapping("update")
-    public String updateUserProcess(@ModelAttribute User user) {
-        // Retrieve the existing user from the database
+    public RedirectView updateUserProcess(@ModelAttribute User user) {
+     
         User existingUser = userRepository.findByEmail(user.getEmail());
     
-        // Update the existing user's properties
+     
         existingUser.setName(user.getName());
-        existingUser.setEmail(user.getName());
+        existingUser.setEmail(user.getEmail());
         existingUser.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
-        // Update other properties as needed
+   
     
-        // Save the updated user
         userRepository.save(existingUser);
     
-        return "User updated successfully";
+        return new RedirectView("/user/profile");
     }
     
-
+    @GetMapping("delete")
+    public RedirectView deleteUser(@RequestParam("email") String email) {
+        User userToDelete = userRepository.findByEmail(email);
+        userRepository.delete(userToDelete);
+        return new RedirectView("/");
+    }
 
 
 }
