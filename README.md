@@ -22,7 +22,7 @@ Welcome to the Arab Data Hub eLearning platform project repository! This project
 
 ## Home
 <p align="center">
-  <img src="Images/MyWebsite/Home_img.png" alt="Arab Data Hub Logo">
+  <img src="demo/src/main/resources/static/Images/MyWebsite/Home_img.png" alt="Arab Data Hub Logo">
 </p>
 
 ## 📝 Introduction
