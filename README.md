@@ -3,7 +3,7 @@
 
 
 <p align="center">
-  <img src="Images/MyWebsite/logo2.png" alt="Arab Data Hub Logo">
+  <img src="demo/src/main/resources/static/Images/MyWebsite/logo2.png" alt="Arab Data Hub Logo">
 </p>
 
 
