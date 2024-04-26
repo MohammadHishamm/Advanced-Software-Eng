@@ -1,12 +1,15 @@
 package com.example.demo.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -25,6 +28,8 @@ public class Instructor
     @OneToOne
     @JoinColumn(name = "user_id") 
     private User user;
+
+
 
     public Instructor(int id, String Gender, String Position, String Language, String Country, String Pdf, String Comment, User user) {
         this.id = id;
