@@ -80,6 +80,26 @@ public class coursesController {
     
     
 
+    @GetMapping("view-course")
+    public ModelAndView view_course(@RequestParam("courseid") int id) {
+       ModelAndView mav = new ModelAndView("view-course.html");
+       Courses course =  this.coursesRepository.findById(id);
+       if(course != null) 
+       {
+            Instructor instructor =  course.getInstructor();
+
+            mav.addObject("course" , course );
+            mav.addObject("instructor" , instructor );
+       }
+       else
+       {
+            mav = new ModelAndView("index.html");
+       }
+
+       return mav;
+    }
+
+
 
     
 

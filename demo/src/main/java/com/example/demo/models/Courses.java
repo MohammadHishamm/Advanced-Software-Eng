@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -35,6 +37,10 @@ public class Courses {
     private Double course_price;
 
 
+    
+    @OneToOne
+    @JoinColumn(name = "instructor_id") 
+    private Instructor instructor;
 
 
     public Courses() {
@@ -155,6 +161,29 @@ public class Courses {
             "}";
     }
 
+
+    public Courses(int course_id, String course_title, String course_status, String course_description, String course_requirements, Double course_price, Instructor instructor) {
+        this.course_id = course_id;
+        this.course_title = course_title;
+        this.course_status = course_status;
+        this.course_description = course_description;
+        this.course_requirements = course_requirements;
+        this.course_price = course_price;
+        this.instructor = instructor;
+    }
+
+    public Instructor getInstructor() {
+        return this.instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
+
+    public Courses instructor(Instructor instructor) {
+        setInstructor(instructor);
+        return this;
+    }
     
 
 }
