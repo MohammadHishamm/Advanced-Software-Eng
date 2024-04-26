@@ -19,10 +19,13 @@
 
 <body>
 
-    <div th:replace="fragments/side-nav::adminsidenav"></div>
+    
 
     <div class="page d-flex">
+        <div th:replace="fragments/side-nav::adminsidenav">
 
+        </div>
+        
         <div class="content w-full">
             <!-- Start Head -->
             <div class="head bg-white p-15 between-flex">
@@ -552,6 +555,7 @@
                 <!-- End Projects Table -->
             </div>
         </div>
+    </div> 
 </body>
 
 </html>

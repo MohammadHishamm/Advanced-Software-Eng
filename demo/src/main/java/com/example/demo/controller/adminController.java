@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class adminController {
     @GetMapping("")
     public ModelAndView getpage() {
-        ModelAndView mav = new ModelAndView("fragments/side-nav.html");
+        ModelAndView mav = new ModelAndView("Admin/index.html");
         return mav;
     }
 }
