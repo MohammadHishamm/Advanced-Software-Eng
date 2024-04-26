@@ -29,7 +29,33 @@ public class Instructor
     @JoinColumn(name = "user_id") 
     private User user;
 
+    @OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL)
+    private List<Courses> courses;
 
+    public Instructor(int id, String Gender, String Position, String Language, String Country, String Pdf, String Comment, User user, List<Courses> courses) {
+        this.id = id;
+        this.Gender = Gender;
+        this.Position = Position;
+        this.Language = Language;
+        this.Country = Country;
+        this.Pdf = Pdf;
+        this.Comment = Comment;
+        this.user = user;
+        this.courses = courses;
+    }
+
+    public List<Courses> getCourses() {
+        return this.courses;
+    }
+
+    public void setCourses(List<Courses> courses) {
+        this.courses = courses;
+    }
+
+    public Instructor courses(List<Courses> courses) {
+        setCourses(courses);
+        return this;
+    }
 
     public Instructor(int id, String Gender, String Position, String Language, String Country, String Pdf, String Comment, User user) {
         this.id = id;
@@ -49,7 +75,6 @@ public class Instructor
     public void setUser(User user) {
         this.user = user;
     }
-
     public Instructor user(User user) {
         setUser(user);
         return this;

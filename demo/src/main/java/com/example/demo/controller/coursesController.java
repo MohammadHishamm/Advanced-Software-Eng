@@ -19,7 +19,9 @@ import com.example.demo.models.Courses;
 import com.example.demo.models.Instructor;
 import com.example.demo.models.User;
 import com.example.demo.repositories.CoursesRepository;
+import com.example.demo.repositories.InstructorRepository;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @RequestMapping("/courses")
@@ -28,6 +30,10 @@ public class coursesController {
 
     @Autowired
     private CoursesRepository coursesRepository;
+    @Autowired
+    private InstructorRepository instructorRepository;
+    
+    
     @GetMapping("")
     public ModelAndView getcourses() {
         ModelAndView mav = new ModelAndView("viewCourses.html");
@@ -51,7 +57,7 @@ public class coursesController {
     }
 
     @PostMapping("save-course") 
-    public ModelAndView saveCourse(@ModelAttribute @Valid Courses course, BindingResult bindingResult) {
+    public ModelAndView saveCourse(@ModelAttribute @Valid Courses course, BindingResult bindingResult ,HttpSession session) {
         ModelAndView mav = new ModelAndView("courses.html");
         
         if (bindingResult.hasErrors()) {
@@ -59,10 +65,35 @@ public class coursesController {
             return mav;
         }
 
-        this.coursesRepository.save(course);
-        return new ModelAndView("redirect:/courses/add-course");
+        if (session.getAttribute("email") != null)
+        {
+            // int id  = (int)session.getAttribute("id");
+            // Instructor instructor = instructorRepository.findbyUser_id(id);
+
+            // if (instructor != null) {
+              
+            //     List<Courses> instructorCourses = instructor.getCourses();
+            //     instructorCourses.add(course);
+            //     instructor.setCourses(instructorCourses);
+    
+              
+            //     instructorRepository.save(instructor);
+                
+               
+            //     return new ModelAndView("redirect:/courses/add-course");
+            // } else {
+              
+            //   //  mav.addObject("error", "Instructor not found");
+                return mav;
+            // }
+        } else {
+          
+         //   mav.addObject("error", "User session not found");
+            return mav;
+        }
       
     }
+
 
 
     @GetMapping("view-course")
