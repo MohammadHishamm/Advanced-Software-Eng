@@ -60,8 +60,8 @@ public class coursesController {
         }
 
         this.coursesRepository.save(course);
-        mav.setViewName("redirect:/courses");
-        return mav;
+        return new ModelAndView("redirect:/courses/add-course");
+      
     }
 
 

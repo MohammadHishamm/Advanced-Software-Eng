@@ -15,6 +15,8 @@ import com.example.demo.repositories.UserRepository;
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RequestMapping("/teacher")
 @RestController
@@ -68,6 +70,11 @@ public class InstructorController
             
         
      
+    @GetMapping("add-course")
+    public ModelAndView addcourse() {
+       ModelAndView mav = new ModelAndView("courses.html");
+       return mav;
+    }
     
     
     
