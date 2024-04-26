@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+
 import java.util.Objects;
 
 @Entity
@@ -18,6 +21,34 @@ public class Instructor
     private String Country;
     private String Pdf;
     private String Comment;
+
+    @OneToOne
+    @JoinColumn(name = "user_id") 
+    private User user;
+
+    public Instructor(int id, String Gender, String Position, String Language, String Country, String Pdf, String Comment, User user) {
+        this.id = id;
+        this.Gender = Gender;
+        this.Position = Position;
+        this.Language = Language;
+        this.Country = Country;
+        this.Pdf = Pdf;
+        this.Comment = Comment;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Instructor user(User user) {
+        setUser(user);
+        return this;
+    }
 
 
     public Instructor() {

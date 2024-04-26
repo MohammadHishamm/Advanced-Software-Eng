@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RequestMapping("/sign")
@@ -47,23 +48,28 @@ public class SignUpController {
     }
 
     @PostMapping("signup")
-    public ModelAndView saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
+    public ModelAndView saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult, HttpSession session, @RequestParam("Confirmpass") String confirmPassword) {
         ModelAndView mav = new ModelAndView("Signup-in.html");
-   
-           
-       
-    if (bindingResult.hasErrors()) {
-        mav.addObject("signupErrors", bindingResult.getAllErrors()); // Set attribute for SignUp errors
-        return mav;
-    }
-
     
-       
+     
+        if (!user.getPassword().equals(confirmPassword)) {
+            bindingResult.rejectValue("password", "error.user", "Passwords do not match");
+        }
+    
+        if (bindingResult.hasErrors()) {
+            mav.addObject("signupErrors", bindingResult.getAllErrors()); 
+            return mav;
+        }
+    
+        // Encrypt password
         String encodePassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
         user.setPassword(encodePassword);
+        user.setType("student");
         this.userRepository.save(user);
+        session.setAttribute("email", user.getEmail());
         return new ModelAndView("redirect:/");
     }
+    
     
 
 
@@ -90,7 +96,7 @@ public class SignUpController {
         }
     }
     if (bindingResult.hasErrors()) {
-        mav.addObject("signinErrors", bindingResult.getAllErrors()); // Set attribute for SignIn errors
+        mav.addObject("signinErrors", bindingResult.getAllErrors()); 
         return mav;
     }
     return new ModelAndView("redirect:/");
