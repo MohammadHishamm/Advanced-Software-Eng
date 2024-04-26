@@ -47,15 +47,16 @@ public class SignUpController {
     }
 
     @PostMapping("signup")
-    public ModelAndView saveUser(@Valid @ModelAttribute User user, Errors errors) {
+    public ModelAndView saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
         ModelAndView mav = new ModelAndView("Signup-in.html");
    
            
-            if (errors.hasErrors()) {
-                mav.addObject("errors", errors.getAllErrors());
-                return mav;
-            }
-        
+       
+    if (bindingResult.hasErrors()) {
+        mav.addObject("signupErrors", bindingResult.getAllErrors()); // Set attribute for SignUp errors
+        return mav;
+    }
+
     
        
         String encodePassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
@@ -78,28 +79,23 @@ public class SignUpController {
     public ModelAndView signinProcess(@ModelAttribute("user") User user, BindingResult bindingResult ,HttpSession session) {
         ModelAndView mav = new ModelAndView("Signup-in.html");
         User dbUser = this.userRepository.findByEmail(user.getEmail());
-        if (dbUser == null) {
-                bindingResult.rejectValue("email", "error.user", "Invalid email");
-            } else {
-            
-                boolean isPasswordMatched = BCrypt.checkpw(user.getPassword(), dbUser.getPassword());
-                if (!isPasswordMatched) {
-                
-                    bindingResult.rejectValue("password", "error.user", "Incorrect password");
-                   
-                }
-                else{
-                    session.setAttribute("email", dbUser.getEmail());
-                   
-                }
-            }
-            if (bindingResult.hasErrors()) {
-                mav.addObject("errors", bindingResult.getAllErrors());
-                return mav;
-            }
-            return new ModelAndView("redirect:/");
-          
+    if (dbUser == null) {
+        bindingResult.rejectValue("email", "error.user", "Invalid email");
+    } else {
+        boolean isPasswordMatched = BCrypt.checkpw(user.getPassword(), dbUser.getPassword());
+        if (!isPasswordMatched) {
+            bindingResult.rejectValue("password", "error.user", "Incorrect password");
+        } else {
+            session.setAttribute("email", dbUser.getEmail());
         }
+    }
+    if (bindingResult.hasErrors()) {
+        mav.addObject("signinErrors", bindingResult.getAllErrors()); // Set attribute for SignIn errors
+        return mav;
+    }
+    return new ModelAndView("redirect:/");
+}
+
             @GetMapping("signout")
              public RedirectView signout(HttpSession session) {
             session.invalidate();
