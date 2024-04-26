@@ -4,6 +4,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -16,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.models.Courses;
 import com.example.demo.repositories.CoursesRepository;
+
+import jakarta.validation.Valid;
 
 @RequestMapping("/courses")
 @RestController
@@ -46,10 +49,17 @@ public class coursesController {
     }
 
     @PostMapping("save-course") 
-    public String savecourse(@ModelAttribute Courses course) {
-        this.coursesRepository.save(course);
-        return "Added";
+    public ModelAndView saveCourse(@ModelAttribute @Valid Courses course, BindingResult bindingResult) {
+        ModelAndView mav = new ModelAndView("courses.html");
+        
+        if (bindingResult.hasErrors()) {
+            mav.addObject("errors", bindingResult.getAllErrors());
+            return mav;
+        }
 
+        this.coursesRepository.save(course);
+        mav.setViewName("redirect:/courses");
+        return mav;
     }
 
     
