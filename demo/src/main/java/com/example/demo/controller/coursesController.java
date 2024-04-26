@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.web.servlet.ModelAndView;
@@ -61,6 +61,25 @@ public class coursesController {
         mav.setViewName("redirect:/courses");
         return mav;
     }
+
+    @GetMapping("view-course")
+    public ModelAndView view_course(@RequestParam("courseid") int id) {
+       ModelAndView mav = new ModelAndView("view-course.html");
+       Courses course =  this.coursesRepository.findById(id);
+       if(course != null) 
+       {
+            mav.addObject("course", course);
+       }
+       else
+       {
+            mav = new ModelAndView("index.html");
+       }
+
+       return mav;
+    }
+    
+    
+
 
     
 
