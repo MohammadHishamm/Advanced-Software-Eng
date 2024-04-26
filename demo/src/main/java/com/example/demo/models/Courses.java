@@ -4,7 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.util.Objects;
 
@@ -12,12 +15,24 @@ import java.util.Objects;
 public class Courses {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     private int course_id;
+
+    @NotEmpty(message = "Please enter a title for the Course")
     private String course_title;
+
+    @NotBlank(message = "Course status is required")
     private String course_status;
+
+    @NotEmpty(message = "Please enter a description for the Course")
     private String course_description;
+
+    @NotEmpty(message = "Please the requirements of the Course")
     private String course_requirements;
-    private String course_price;
+
+    @NotNull(message = "Course price is required")
+    @Positive(message = "Course price must be a positive number")
+    private Double course_price;
 
 
 
@@ -25,7 +40,7 @@ public class Courses {
     public Courses() {
     }
 
-    public Courses(int course_id, String course_title, String course_status, String course_description, String course_requirements, String course_price) {
+    public Courses(int course_id, String course_title, String course_status, String course_description, String course_requirements, Double course_price) {
         this.course_id = course_id;
         this.course_title = course_title;
         this.course_status = course_status;
@@ -74,11 +89,11 @@ public class Courses {
         this.course_requirements = course_requirements;
     }
 
-    public String getCourse_price() {
+    public Double getCourse_price() {
         return this.course_price;
     }
 
-    public void setCourse_price(String course_price) {
+    public void setCourse_price(Double course_price) {
         this.course_price = course_price;
     }
 
@@ -107,7 +122,7 @@ public class Courses {
         return this;
     }
 
-    public Courses course_price(String course_price) {
+    public Courses course_price(Double course_price) {
         setCourse_price(course_price);
         return this;
     }

@@ -26,25 +26,32 @@
 
         <form action="save-course" method="post" enctype="multipart/form-data">
             <p>Course status <span>*</span></p>
-            <select name="course_status" class="box" required>
+            <select name="course_status" class="box" >
                 <option value="" selected disabled>-- select status</option>
                 <option value="active">Active</option>
                 <option value="deactive">Deactive</option>
             </select>
+            <span th:each="error : ${errors}" th:if="${error.field == 'course_status'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
+
             <p>Course title <span>*</span></p>
-            <input type="text" name="course_title" maxlength="100" required placeholder="enter playlist title" class="box">
+            <input type="text" name="course_title" maxlength="100"  placeholder="enter playlist title" class="box">
+            <span th:each="error : ${errors}" th:if="${error.field == 'course_title'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
+
             <p>Course description <span>*</span></p>
-            <textarea name="course_description" class="box" required placeholder="write description" maxlength="1000" cols="30"
+            <textarea name="course_description" class="box"  placeholder="write description" maxlength="1000" cols="30"
                 rows="10"></textarea>
+                <span th:each="error : ${errors}" th:if="${error.field == 'course_description'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
             <p>Course requirements <span>*</span></p>
-            <textarea name="course_requirements" class="box" required placeholder="write requirements" maxlength="1000"
+            <textarea name="course_requirements" class="box"  placeholder="write requirements" maxlength="1000"
                 cols="30" rows="10"></textarea>
-            <p>what the student will learn from these course <span>*</span></p>
-            <input name='tags' type='text' value='html,css' class="box" required maxlength="10" size="10">
+                <span th:each="error : ${errors}" th:if="${error.field == 'course_requirements'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
+           
+            
             <p>Course Price <span>*</span></p>
-            <input type="text" name="course_price" maxlength="100" required placeholder="enter playlist Price" class="box">
+            <input type="text" name="course_price" maxlength="100"  placeholder="enter playlist Price" class="box">
+            <span th:each="error : ${errors}" th:if="${error.field == 'course_price'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
             <p>Course thumbnail <span>*</span></p>
-            <input type="file" name="course_thumbnail" accept="image/*" required class="box">
+            <input type="file" name="course_thumbnail" accept="image/*"  class="box">
             <input type="submit" value="Add course" name="submit" class="btn">
         </form>
 
