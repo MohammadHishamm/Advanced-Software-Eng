@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.models.Courses;
+import com.example.demo.models.Instructor;
 import com.example.demo.repositories.CoursesRepository;
 
 import jakarta.validation.Valid;
@@ -62,23 +63,6 @@ public class coursesController {
         return mav;
     }
 
-    @GetMapping("view-course")
-    public ModelAndView view_course(@RequestParam("courseid") int id) {
-       ModelAndView mav = new ModelAndView("view-course.html");
-       Courses course =  this.coursesRepository.findById(id);
-       if(course != null) 
-       {
-            mav.addObject("course", course);
-       }
-       else
-       {
-            mav = new ModelAndView("index.html");
-       }
-
-       return mav;
-    }
-    
-    
 
     @GetMapping("view-course")
     public ModelAndView view_course(@RequestParam("courseid") int id) {
