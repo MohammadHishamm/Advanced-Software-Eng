@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.models.Courses;
 import com.example.demo.models.Instructor;
+import com.example.demo.models.User;
 import com.example.demo.repositories.CoursesRepository;
 
 import jakarta.validation.Valid;
@@ -71,9 +72,9 @@ public class coursesController {
        if(course != null) 
        {
             Instructor instructor =  course.getInstructor();
-
+            User user = instructor.getUser();
             mav.addObject("course" , course );
-            mav.addObject("instructor" , instructor );
+            mav.addObject("User" , user );
        }
        else
        {
