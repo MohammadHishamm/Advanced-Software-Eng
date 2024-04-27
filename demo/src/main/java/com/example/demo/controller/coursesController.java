@@ -21,10 +21,10 @@ import com.example.demo.models.Student;
 import com.example.demo.models.User;
 import com.example.demo.repositories.CoursesRepository;
 import com.example.demo.repositories.InstructorRepository;
-<<<<<<< HEAD
-=======
+
+
 import com.example.demo.repositories.StudentRepository;
->>>>>>> b69c209add577b2010f27c5a0779ccab5271a678
+
 import com.example.demo.repositories.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
