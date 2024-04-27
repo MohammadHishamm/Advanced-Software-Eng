@@ -7,6 +7,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
+import jakarta.validation.constraints.NotEmpty;
+
 import java.util.Objects;
 
 @Entity
@@ -16,10 +18,19 @@ public class Instructor
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String Gender;
+
+    @NotEmpty(message = "Position is required")
     private String Position;
+
+    
     private String Language;
+
+    
     private String Country;
-    private String Pdf;
+
+    @NotEmpty(message = "Position is required")
+    private String Pdf; 
+
     private String Comment;
 
     @OneToOne

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import com.example.demo.repositories.UserRepository;
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @RequestMapping("/teacher")
 @RestController
@@ -44,10 +46,17 @@ public class InstructorController
 
  
     @PostMapping("teacherform")
-    public ModelAndView saveInstructor(@ModelAttribute Instructor instructor, HttpSession session) {
+    public ModelAndView saveInstructor(@ModelAttribute @Valid Instructor instructor, BindingResult bindingResult, HttpSession session ) {
+        ModelAndView mav = new ModelAndView("Teacher-Form.html");
        
-       
-           
+        if (bindingResult.hasErrors()) {
+            mav.addObject("errors", bindingResult.getAllErrors());
+            
+            return mav;
+            
+        }   
+        else{
+
             String email = (String) session.getAttribute("email");
     
          
@@ -64,6 +73,7 @@ public class InstructorController
     
             
             return new ModelAndView("redirect:/");
+        }
         } 
             
         

@@ -49,13 +49,14 @@
             <fieldset>          
                  <div class="language-picker js-language-picker"
                         data-trigger-class="li4-btn li4-btn--subtle js-tab-focus mb-3">
-                            <label for="gender">Select your gender</label>
+                            <label for="Gender">Select your gender</label>
 
-                            <select name="gender" id="gender" th:field="*{gender}">
+                            <select name="Gender" id="gender" >
                                 <option  value="Male" selected>Male</option>
                                 <option  value="Female">Female</option>
                         
                             </select>
+                            
                     </div>
 
                 <tr>
@@ -63,16 +64,16 @@
                     <label>Your Position <span
                             style="color: red !important; display: inline; float: none;">*</span></label>
                     <br>
-                    <input type="text" name="position" class="mb-3 border w-100 ">
-
-                    <br />
-                    <span class="alert"></span>
-
+                    <input type="text" name="Position" class="mb-3 border w-100 ">
+                    <br/>
+                    <span th:each="error : ${errors}" th:if="${error.field == 'Position'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
+                   
+                    
                     <div class="language-picker js-language-picker"
                         data-trigger-class="li4-btn li4-btn--subtle js-tab-focus mb-3">
                             <label for="Language">Select your language</label>
 
-                            <select name="language" id="Language" th:field="*{Language}">
+                            <select name="Language" id="Language" >
                                 <option lang="de" value="Arabic" selected>Arabic</option>
                                 <option lang="en" value="English">English</option>
                                 <option lang="fr" value="Francais">Français</option>
@@ -80,10 +81,10 @@
                             </select>
                     </div>
 
-                    <label for="country">Country</label><span
+                    <label for="Country">Country</label><span
                         style="color: red !important; display: inline; float: none;">*</span>
 
-                    <select id="country" name="country" th:field="*{country}" class="form-control  mb-3">
+                    <select id="country" name="Country" th:field="*{Country}" class="form-control  mb-3">
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Åland Islands">Åland Islands</option>
                         <option value="Albania">Albania</option>
@@ -345,9 +346,9 @@
                     <div class="form-group ">
                         <input type="file"  th:field="*{Pdf}"  name="Pdf" class="form-control" accept=".pdf" />
                     </div>
-
-
+                    <span th:each="error : ${errors}" th:if="${error.field == 'Pdf'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
                     <br />
+                    
 
                     <label>Additional comment <span
                             style="color: red !important; display: inline; float: none;">*</span></label>
