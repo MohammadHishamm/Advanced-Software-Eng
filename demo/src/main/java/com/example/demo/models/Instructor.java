@@ -1,14 +1,20 @@
 package com.example.demo.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
+<<<<<<< HEAD
 import jakarta.validation.constraints.NotEmpty;
 
+=======
+import java.util.List;
+>>>>>>> 95929962975625e33fefdb1cff75e4736e5b4b64
 import java.util.Objects;
 
 @Entity
@@ -37,6 +43,34 @@ public class Instructor
     @JoinColumn(name = "user_id") 
     private User user;
 
+    @OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL)
+    private List<Courses> courses;
+
+    public Instructor(int id, String Gender, String Position, String Language, String Country, String Pdf, String Comment, User user, List<Courses> courses) {
+        this.id = id;
+        this.Gender = Gender;
+        this.Position = Position;
+        this.Language = Language;
+        this.Country = Country;
+        this.Pdf = Pdf;
+        this.Comment = Comment;
+        this.user = user;
+        this.courses = courses;
+    }
+
+    public List<Courses> getCourses() {
+        return this.courses;
+    }
+
+    public void setCourses(List<Courses> courses) {
+        this.courses = courses;
+    }
+
+    public Instructor courses(List<Courses> courses) {
+        setCourses(courses);
+        return this;
+    }
+
     public Instructor(int id, String Gender, String Position, String Language, String Country, String Pdf, String Comment, User user) {
         this.id = id;
         this.Gender = Gender;
@@ -55,7 +89,6 @@ public class Instructor
     public void setUser(User user) {
         this.user = user;
     }
-
     public Instructor user(User user) {
         setUser(user);
         return this;
