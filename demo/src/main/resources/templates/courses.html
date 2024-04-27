@@ -264,13 +264,12 @@
                 
                 <p>Video thumbnail <span>*</span></p>
                 <input type="file" name="video_thumbnail" accept="image/*"  class="box">
-                <span th:each="error : ${errors}" th:if="${error.field == 'video_thumbnail'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
+               
                 
 
                 <p>Attach Video <span>*</span></p>
                 <input type="file" name="video_play" accept="image/*"  class="box">
-                <span th:each="error : ${errors}" th:if="${error.field == 'video_play'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
-                
+                </br>
                 <input type="submit" value="Add video" name="submit" class="btn">
 
             </form>

@@ -5,21 +5,20 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+
+import java.util.Arrays;
 import java.util.Objects;
 
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class CourseContent {
-    
-@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private int video_id;
 
     @NotEmpty(message = "Please enter a title for the video")
@@ -31,24 +30,21 @@ public class CourseContent {
     @NotEmpty(message = "Please enter a description for the video")
     private String video_description;
 
-    @NotEmpty(message = "Please select thumbnail for the video")
-    private MultipartFile video_thumbnail;
-
-    @NotEmpty(message = "Please upload the video")
-    private MultipartFile video_play;
-
+    
+    private String video_thumbnail;
 
     
-    @OneToOne
+    private String video_play;
+
+    @ManyToOne
     @JoinColumn(name = "course_id") 
     private Courses course;
-
-
 
     public CourseContent() {
     }
 
-    public CourseContent(int video_id, String video_title, String video_playlist, String video_description, MultipartFile video_thumbnail, MultipartFile video_play, Courses course) {
+
+    public CourseContent(int video_id, String video_title, String video_playlist, String video_description, String video_thumbnail, String video_play, Courses course) {
         this.video_id = video_id;
         this.video_title = video_title;
         this.video_playlist = video_playlist;
@@ -90,19 +86,19 @@ public class CourseContent {
         this.video_description = video_description;
     }
 
-    public MultipartFile getVideo_thumbnail() {
+    public String getVideo_thumbnail() {
         return this.video_thumbnail;
     }
 
-    public void setVideo_thumbnail(MultipartFile video_thumbnail) {
+    public void setVideo_thumbnail(String video_thumbnail) {
         this.video_thumbnail = video_thumbnail;
     }
 
-    public MultipartFile getVideo_play() {
+    public String getVideo_play() {
         return this.video_play;
     }
 
-    public void setVideo_play(MultipartFile video_play) {
+    public void setVideo_play(String video_play) {
         this.video_play = video_play;
     }
 
@@ -134,12 +130,12 @@ public class CourseContent {
         return this;
     }
 
-    public CourseContent video_thumbnail(MultipartFile video_thumbnail) {
+    public CourseContent video_thumbnail(String video_thumbnail) {
         setVideo_thumbnail(video_thumbnail);
         return this;
     }
 
-    public CourseContent video_play(MultipartFile video_play) {
+    public CourseContent video_play(String video_play) {
         setVideo_play(video_play);
         return this;
     }
@@ -177,6 +173,5 @@ public class CourseContent {
             ", course='" + getCourse() + "'" +
             "}";
     }
-    
     
 }
