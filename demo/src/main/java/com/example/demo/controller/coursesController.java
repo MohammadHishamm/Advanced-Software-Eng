@@ -38,9 +38,7 @@ public class coursesController {
     private CoursesRepository coursesRepository;
     @Autowired
     private InstructorRepository instructorRepository;
-    @Autowired
-    private UserRepository userRepository;
-    
+
     @Autowired
     private UserRepository userRepository;
 
