@@ -17,9 +17,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.models.Courses;
 import com.example.demo.models.Instructor;
+import com.example.demo.models.Student;
 import com.example.demo.models.User;
 import com.example.demo.repositories.CoursesRepository;
 import com.example.demo.repositories.InstructorRepository;
+
+
+import com.example.demo.repositories.StudentRepository;
+
+import com.example.demo.repositories.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -32,7 +38,12 @@ public class coursesController {
     private CoursesRepository coursesRepository;
     @Autowired
     private InstructorRepository instructorRepository;
-    
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private StudentRepository studentRepository;
     
     @GetMapping("")
     public ModelAndView getcourses() {
@@ -67,25 +78,28 @@ public class coursesController {
 
         if (session.getAttribute("email") != null)
         {
-            // int id  = (int)session.getAttribute("id");
-            // Instructor instructor = instructorRepository.findbyUser_id(id);
+            String email= session.getAttribute("email") .toString();
+            User user = userRepository.findByEmail(email);
+            Instructor instructor= this.instructorRepository.findByUser(user);
 
-            // if (instructor != null) {
+            if (instructor != null) {
               
-            //     List<Courses> instructorCourses = instructor.getCourses();
-            //     instructorCourses.add(course);
-            //     instructor.setCourses(instructorCourses);
+                List<Courses> instructorCourses = instructor.getCourses();
+                instructorCourses.add(course);
+                instructor.setCourses(instructorCourses);
+                course.setInstructor(instructor);
     
               
-            //     instructorRepository.save(instructor);
+                this.instructorRepository.save(instructor);
+                this.coursesRepository.save(course);
                 
                
-            //     return new ModelAndView("redirect:/courses/add-course");
-            // } else {
+                return new ModelAndView("redirect:/courses/add-course");
+            } else {
               
-            //   //  mav.addObject("error", "Instructor not found");
+              //  mav.addObject("error", "Instructor not found");
                 return mav;
-            // }
+            }
         } else {
           
          //   mav.addObject("error", "User session not found");
@@ -97,15 +111,39 @@ public class coursesController {
 
 
     @GetMapping("view-course")
-    public ModelAndView view_course(@RequestParam("courseid") int id) {
+    public ModelAndView view_course(@RequestParam("courseid") int id ,HttpSession session ) {
        ModelAndView mav = new ModelAndView("view-course.html");
        Courses course =  this.coursesRepository.findById(id);
        if(course != null) 
        {
-            Instructor instructor =  course.getInstructor();
-            User user = instructor.getUser();
-            mav.addObject("course" , course );
-            mav.addObject("User" , user );
+            if(session != null)
+            {   
+                //get student from user id to see if the student is already enrolled in the course or not
+                String useremail = (String) session.getAttribute("email");
+                User user1 = userRepository.findByEmail(useremail);
+                Student student = studentRepository.findByUser(user1);
+                //all the courses that this student enrolled in 
+                List<Courses> courses = student.getCourses();
+
+                boolean enrolled_in = false;
+                for (Courses c : courses) {
+                    if (c.getCourse_id() == id) {
+                        enrolled_in = true;
+                        break;
+                    }
+                }
+
+                Instructor instructor =  course.getInstructor();
+                User user2 = instructor.getUser();
+                mav.addObject("course" , course );
+                mav.addObject("User" , user2 );
+                mav.addObject("enroll" , enrolled_in );
+            }
+            else
+            {
+                mav = new ModelAndView("Signup-in.html");
+            }
+
        }
        else
        {

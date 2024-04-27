@@ -113,9 +113,9 @@
                                                    data-mdb-dropdown-init data-mdb-ripple-init aria-expanded="false">My Courses
                                                 </a>
                                                 <ul class="dropdown-menu w-100 text-center" aria-labelledby="dropdownMenuLink">
-                                                    <li><a id="addCourseLink" class="dropdown-item" href="#">Add Courses</a></li>
+                                                    <li><a id="addCourseLink" class="dropdown-item" href="">Add Courses</a></li>
                                                   
-                                                    <li><a id="viewCourseLink" class="dropdown-item" href="#">View Courses</a></li>
+                                                    <li><a id="viewCourseLink" class="dropdown-item" href="">View Courses</a></li>
                                                 </ul>
                                             </div>
                                         </li>
@@ -202,31 +202,25 @@
 
                                                             <div class="box-container">
                                                 
-                                                                <!-- <div class="box" style="text-align: center;">
-                                                                    <h3 class="title" style="margin-bottom: .5rem;">create new
-                                                                        playlist</h3>
-                                                                    <a href="Control-Courses.php?action=add" class="btn">add playlist</a>
-                                                                </div> -->
-                                                <div class="box">
-                                                    <div class="flex">
-                                                    <div><i class="fas fa-circle-dot" style="color:limegreen">
-                                                    </i><span style="color:limegreen">active</span></div>
-                                                   
-                                                    </div>
-                                                    <div class="thumb">
-                                                        <span>0</span>
-                                                        <img src="" alt="">
-                                                    </div>
-                                                    <h3 class="title">Title</h3>
-                                                    <p class="description">description
-                                                    </p>
-                                                    <div class="flex-btn">
-                                                    
-                                                        <a href="" class="btn btn-warning w-100">update</a>
-                                                        <a  class="btn btn-danger w-100">delete</a>
-                                                    </div>
-                                                    <a href="" class="btn btn-primary w-100 mt-3">view playlist</a>
-                                                </div>
+                                                                
+                                                                <div th:each="course: ${courses}" class="box">
+                                                                    <div class="flex">
+                                                                        <div>
+                                                                            <i class="fas fa-circle-dot" style="color:limegreen"></i>
+                                                                            <span style="color:limegreen" th:text="${course.course_status}"></span>
+                                                                        </div>
+                                                                        <div><span style="color:red" name="course_price" th:text="${course.course_price}"></span></div>
+                                                                    </div>
+                                                                    <div class="thumb">
+                                                                        <span>0</span>
+                                                                        <img src="" alt="">
+                                                                    </div>
+                                                                    <h3 class="title" name="course_title" th:text="${course.course_title}"></h3>
+                                                                    <p class="description" name="course_description" th:text="${course.course_description}"></p>
+                                                                    <div class="flex-btn">
+                                                                        <a href="" class="btn btn-warning w-100">update</a>
+                                                                        <a class="btn btn-danger w-100">delete</a>
+                                                                    </div>
                                                 
                                                                                            
                                                 </div>
@@ -296,6 +290,7 @@
     </script>
 <script src="../js/side-nav.js"></script>
 <script>
+ 
      // Function to show the Add Course section and hide the View Course section
      function showAddCourseSection() {
         document.getElementById('addCourseSection').style.display = 'block';
@@ -336,6 +331,30 @@
             window.location.href = "/user/delete?email=${email}";
         }
     }
+
+
+function showAddCourseSection(event) {
+    event.preventDefault();
+    document.getElementById('addCourseSection').style.display = 'block';
+    document.getElementById('viewCourseSection').style.display = 'none';
+}
+
+
+function showViewCourseSection(event) {
+    event.preventDefault(); 
+    document.getElementById('viewCourseSection').style.display = 'block';
+    document.getElementById('addCourseSection').style.display = 'none';
+}
+
+
+document.getElementById('addCourseLink').addEventListener('click', showAddCourseSection);
+document.getElementById('viewCourseLink').addEventListener('click', showViewCourseSection);
+
+
+
+
+    
+ 
 </script>
 
     </body>

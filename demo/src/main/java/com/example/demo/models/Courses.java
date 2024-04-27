@@ -1,17 +1,22 @@
 package com.example.demo.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -39,21 +44,23 @@ public class Courses {
 
 
     
-    @OneToOne
-    @JoinColumn(name = "instructor_id") 
+    @ManyToOne
+    @JoinColumn(name = "instructor_id")
     private Instructor instructor;
 
+ 
 
     public Courses() {
     }
 
-    public Courses(int course_id, String course_title, String course_status, String course_description, String course_requirements, Double course_price) {
+    public Courses(int course_id, String course_title, String course_status, String course_description, String course_requirements, Double course_price, Instructor instructor) {
         this.course_id = course_id;
         this.course_title = course_title;
         this.course_status = course_status;
         this.course_description = course_description;
         this.course_requirements = course_requirements;
         this.course_price = course_price;
+        this.instructor = instructor;
     }
 
     public int getCourse_id() {
@@ -104,6 +111,14 @@ public class Courses {
         this.course_price = course_price;
     }
 
+    public Instructor getInstructor() {
+        return this.instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
+
     public Courses course_id(int course_id) {
         setCourse_id(course_id);
         return this;
@@ -134,6 +149,11 @@ public class Courses {
         return this;
     }
 
+    public Courses instructor(Instructor instructor) {
+        setInstructor(instructor);
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -142,12 +162,12 @@ public class Courses {
             return false;
         }
         Courses courses = (Courses) o;
-        return course_id == courses.course_id && Objects.equals(course_title, courses.course_title) && Objects.equals(course_status, courses.course_status) && Objects.equals(course_description, courses.course_description) && Objects.equals(course_requirements, courses.course_requirements) && Objects.equals(course_price, courses.course_price);
+        return course_id == courses.course_id && Objects.equals(course_title, courses.course_title) && Objects.equals(course_status, courses.course_status) && Objects.equals(course_description, courses.course_description) && Objects.equals(course_requirements, courses.course_requirements) && Objects.equals(course_price, courses.course_price) && Objects.equals(instructor, courses.instructor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(course_id, course_title, course_status, course_description, course_requirements, course_price);
+        return Objects.hash(course_id, course_title, course_status, course_description, course_requirements, course_price, instructor);
     }
 
     @Override
@@ -159,33 +179,11 @@ public class Courses {
             ", course_description='" + getCourse_description() + "'" +
             ", course_requirements='" + getCourse_requirements() + "'" +
             ", course_price='" + getCourse_price() + "'" +
+            ", instructor='" + getInstructor() + "'" +
             "}";
     }
 
+ 
 
-    public Courses(int course_id, String course_title, String course_status, String course_description, String course_requirements, Double course_price, Instructor instructor) {
-        this.course_id = course_id;
-        this.course_title = course_title;
-        this.course_status = course_status;
-        this.course_description = course_description;
-        this.course_requirements = course_requirements;
-        this.course_price = course_price;
-        this.instructor = instructor;
-    }
-
-    public Instructor getInstructor() {
-        return this.instructor;
-    }
-
-    public void setInstructor(Instructor instructor) {
-        this.instructor = instructor;
-    }
-
-    public Courses instructor(Instructor instructor) {
-        setInstructor(instructor);
-        return this;
-    }
-    
 
 }
-   

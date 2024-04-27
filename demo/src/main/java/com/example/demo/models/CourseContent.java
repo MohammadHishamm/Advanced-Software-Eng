@@ -32,10 +32,10 @@ public class CourseContent {
     private String video_description;
 
     @NotEmpty(message = "Please select thumbnail for the video")
-    private String video_thumbnail;
+    private MultipartFile video_thumbnail;
 
     @NotEmpty(message = "Please upload the video")
-    private String video_play;
+    private MultipartFile video_play;
 
 
     

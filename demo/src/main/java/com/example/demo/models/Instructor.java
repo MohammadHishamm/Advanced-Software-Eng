@@ -6,13 +6,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 
 import jakarta.validation.constraints.NotEmpty;
 
-
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -46,8 +48,12 @@ public class Instructor
     @JoinColumn(name = "user_id") 
     private User user;
 
-    @OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL)
-    private List<Courses> courses;
+    @OneToMany(mappedBy = "instructor")
+    private List<Courses> courses = new ArrayList<>();
+
+
+    public Instructor() {
+    }
 
     public Instructor(int id, String Gender, String Position, String Language, String Country, String Pdf, String Comment, User user, List<Courses> courses) {
         this.id = id;
@@ -59,56 +65,6 @@ public class Instructor
         this.Comment = Comment;
         this.user = user;
         this.courses = courses;
-    }
-
-    public List<Courses> getCourses() {
-        return this.courses;
-    }
-
-    public void setCourses(List<Courses> courses) {
-        this.courses = courses;
-    }
-
-    public Instructor courses(List<Courses> courses) {
-        setCourses(courses);
-        return this;
-    }
-
-    public Instructor(int id, String Gender, String Position, String Language, String Country, String Pdf, String Comment, User user) {
-        this.id = id;
-        this.Gender = Gender;
-        this.Position = Position;
-        this.Language = Language;
-        this.Country = Country;
-        this.Pdf = Pdf;
-        this.Comment = Comment;
-        this.user = user;
-    }
-
-    public User getUser() {
-        return this.user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-    public Instructor user(User user) {
-        setUser(user);
-        return this;
-    }
-
-
-    public Instructor() {
-    }
-
-    public Instructor(int id, String Gender, String Position, String Language, String Country, String Pdf, String Comment) {
-        this.id = id;
-        this.Gender = Gender;
-        this.Position = Position;
-        this.Language = Language;
-        this.Country = Country;
-        this.Pdf = Pdf;
-        this.Comment = Comment;
     }
 
     public int getId() {
@@ -167,6 +123,22 @@ public class Instructor
         this.Comment = Comment;
     }
 
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Courses> getCourses() {
+        return this.courses;
+    }
+
+    public void setCourses(List<Courses> courses) {
+        this.courses = courses;
+    }
+
     public Instructor id(int id) {
         setId(id);
         return this;
@@ -202,6 +174,16 @@ public class Instructor
         return this;
     }
 
+    public Instructor user(User user) {
+        setUser(user);
+        return this;
+    }
+
+    public Instructor courses(List<Courses> courses) {
+        setCourses(courses);
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -210,12 +192,12 @@ public class Instructor
             return false;
         }
         Instructor instructor = (Instructor) o;
-        return id == instructor.id && Objects.equals(Gender, instructor.Gender) && Objects.equals(Position, instructor.Position) && Objects.equals(Language, instructor.Language) && Objects.equals(Country, instructor.Country) && Objects.equals(Pdf, instructor.Pdf) && Objects.equals(Comment, instructor.Comment);
+        return id == instructor.id && Objects.equals(Gender, instructor.Gender) && Objects.equals(Position, instructor.Position) && Objects.equals(Language, instructor.Language) && Objects.equals(Country, instructor.Country) && Objects.equals(Pdf, instructor.Pdf) && Objects.equals(Comment, instructor.Comment) && Objects.equals(user, instructor.user) && Objects.equals(courses, instructor.courses);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, Gender, Position, Language, Country, Pdf, Comment);
+        return Objects.hash(id, Gender, Position, Language, Country, Pdf, Comment, user, courses);
     }
 
     @Override
@@ -228,7 +210,10 @@ public class Instructor
             ", Country='" + getCountry() + "'" +
             ", Pdf='" + getPdf() + "'" +
             ", Comment='" + getComment() + "'" +
+            ", user='" + getUser() + "'" +
+            ", courses='" + getCourses() + "'" +
             "}";
     }
-    
+  
+
 }
