@@ -133,7 +133,7 @@ public class coursesController {
                         break;
                     }
                 }
-
+                System.out.println(enrolled_in);
                 Instructor instructor =  course.getInstructor();
                 User user2 = instructor.getUser();
                 mav.addObject("course" , course );
@@ -151,6 +151,7 @@ public class coursesController {
             mav = new ModelAndView("index.html");
        }
 
+      
        return mav;
     }
 
@@ -169,10 +170,27 @@ public class coursesController {
                 Student student =  this.studentRepository.findByUser(user1);
                 
                 List<Courses> courses = student.getCourses();
-                courses.add(course);
-                student.setCourses(courses);
 
-                this.studentRepository.save(student);
+                boolean enrolled_in = false;
+                for (Courses c : courses) {
+                    if (c.getCourse_id() == id) {
+                        enrolled_in = true;
+                        break;
+                    }
+                }
+
+                if(enrolled_in == false)
+                {
+                    courses.add(course);
+                    student.setCourses(courses);
+    
+                    this.studentRepository.save(student);
+                }
+                else
+                {
+
+                }
+
 
                 mav = new ModelAndView("Profile.html");
             }
