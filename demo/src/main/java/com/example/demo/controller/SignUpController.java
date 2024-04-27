@@ -68,7 +68,7 @@ public class SignUpController {
         this.userRepository.save(user);
         session.setAttribute("email", user.getEmail());
         session.setAttribute("id", user.getUser_id());
-
+        session.setAttribute("type", user.getType());
         return new ModelAndView("redirect:/");
     }
     
@@ -94,7 +94,9 @@ public class SignUpController {
         if (!isPasswordMatched) {
             bindingResult.rejectValue("password", "error.user", "Incorrect password");
         } else {
+            session.setAttribute("id", user.getUser_id());
             session.setAttribute("email", dbUser.getEmail());
+            session.setAttribute("type", dbUser.getType());
         }
     }
     if (bindingResult.hasErrors()) {
