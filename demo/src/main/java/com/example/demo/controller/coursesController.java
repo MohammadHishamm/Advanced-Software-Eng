@@ -36,6 +36,7 @@ public class coursesController {
 
     @Autowired
     private CoursesRepository coursesRepository;
+
     @Autowired
     private InstructorRepository instructorRepository;
 
@@ -120,8 +121,8 @@ public class coursesController {
             {   
                 //get student from user id to see if the student is already enrolled in the course or not
                 String useremail = (String) session.getAttribute("email");
-                User user1 = userRepository.findByEmail(useremail);
-                Student student = studentRepository.findByUser(user1);
+                User user1 =  this.userRepository.findByEmail(useremail);
+                Student student =  this.studentRepository.findByUser(user1);
                 //all the courses that this student enrolled in 
                 List<Courses> courses = student.getCourses();
 
@@ -154,10 +155,39 @@ public class coursesController {
     }
 
 
+    @GetMapping("enroll-course")
+    public ModelAndView enroll_course(@RequestParam("courseid") int id ,HttpSession session ) {
+       ModelAndView mav = new ModelAndView("view-course.html");
+       Courses course =  this.coursesRepository.findById(id);
+       if(course != null) 
+       {
+            if(session != null)
+            {   
+                //get student from user id to see if the student is already enrolled in the course or not
+                String useremail = (String) session.getAttribute("email");
+                User user1 = this.userRepository.findByEmail(useremail);
+                Student student =  this.studentRepository.findByUser(user1);
+                
+                List<Courses> courses = student.getCourses();
+                courses.add(course);
+                student.setCourses(courses);
 
-    
+                this.studentRepository.save(student);
 
+                mav = new ModelAndView("Profile.html");
+            }
+            else
+            {
+                mav = new ModelAndView("Signup-in.html");
+            }
 
+       }
+       else
+       {
+            mav = new ModelAndView("index.html");
+       }
 
+       return mav;
+    }
 
 }

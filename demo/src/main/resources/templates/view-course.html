@@ -34,12 +34,11 @@
             <div class="col-12 text-center" style="margin-top: 40px;">
                 <span class="courses_content_teacher"  th:text='${User.name}'></span>
             </div>
-            <div th:if="${session.email != null && session.type == 'student'}" class="col-12 text-center" style="margin-top: 10px;">
-                <form action="" method="POST"   >
-                    <input type="hidden" name="course_id"  th:value='${course.course_id}'>
-                    <input type="hidden" name="student_id" th:value='${session.id}'>
-                    <button class="btn btn-primary btn-lg" name="enroll_course" type="submit">Enroll</button>
-                </form>
+            <div th:if="${session.email != null && session.type == 'student' && enroll == 0}" class="col-12 text-center" style="margin-top: 10px;">
+              
+                    <a class="btn btn-primary btn-lg" href="/courses/enroll-course?courseid=${course.course_id}" >Enroll</a>
+         
+                
             </div>
         </div>
     </div>
