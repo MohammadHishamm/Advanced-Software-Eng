@@ -6,7 +6,10 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+
 import java.util.Objects;
 
 public class Student 
@@ -18,6 +21,28 @@ public class Student
     @OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL)
     private List<Courses> courses;
 
+        @OneToOne
+    @JoinColumn(name = "user_id") 
+    private User user;
+
+    public Student(int id, List<Courses> courses, User user) {
+        this.id = id;
+        this.courses = courses;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Student user(User user) {
+        setUser(user);
+        return this;
+    }
 
     public Student() {
     }

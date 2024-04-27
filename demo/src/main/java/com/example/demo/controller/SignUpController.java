@@ -94,6 +94,7 @@ public class SignUpController {
         if (!isPasswordMatched) {
             bindingResult.rejectValue("password", "error.user", "Incorrect password");
         } else {
+            session.setAttribute("id", user.getUser_id());
             session.setAttribute("email", dbUser.getEmail());
             session.setAttribute("type", dbUser.getType());
         }
