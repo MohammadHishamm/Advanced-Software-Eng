@@ -245,15 +245,16 @@
                 
     
                 <p>Video title <span>*</span></p>
-                <input type="text" name="video_title" maxlength="100"  placeholder="enter playlist title" class="box">
+                <input type="text" name="video_title" maxlength="100"  placeholder="Enter video title" class="box">
                 <span th:each="error : ${errors}" th:if="${error.field == 'video_title'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
     
                 <p>Video playlist <span>*</span></p>
-                <select name="video_playlist" class="box" >
+                <select name="video_playlist" class="box">
                     <option value="" selected disabled>-- select playlist</option>
-                    <option value="active">x</option>
-                    <option value="deactive">y</option>
+                   
+                    <option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.course_title}"></option>
                 </select>
+                
                 <span th:each="error : ${errors}" th:if="${error.field == 'video_playlist'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
 
 

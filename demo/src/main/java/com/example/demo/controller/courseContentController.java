@@ -15,6 +15,7 @@ import com.example.demo.repositories.CourseContentRepository;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import java.io.IOException;
+import java.util.List;
 
 @RequestMapping("/courses")
 @RestController
@@ -39,13 +40,11 @@ public class courseContentController {
             mav.addObject("errors", bindingResult.getAllErrors());
             return mav;
         }
+        else {   
+                
 
-        if (session.getAttribute("email") != null) {
-            
-        courseContentRepository.save(courseContent);
 
-               
-        }
+             }
       
         return mav;
     }

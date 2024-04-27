@@ -6,5 +6,5 @@ import com.example.demo.models.CourseContent;
 
 
 public interface CourseContentRepository extends JpaRepository<CourseContent, Integer> {
-    CourseContent findById(int id);
+   
 }
