@@ -20,6 +20,7 @@ import com.example.demo.models.Instructor;
 import com.example.demo.models.User;
 import com.example.demo.repositories.CoursesRepository;
 import com.example.demo.repositories.InstructorRepository;
+import com.example.demo.repositories.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -32,6 +33,8 @@ public class coursesController {
     private CoursesRepository coursesRepository;
     @Autowired
     private InstructorRepository instructorRepository;
+    @Autowired
+    private UserRepository userRepository;
     
     
     @GetMapping("")
@@ -67,25 +70,28 @@ public class coursesController {
 
         if (session.getAttribute("email") != null)
         {
-            // int id  = (int)session.getAttribute("id");
-            // Instructor instructor = instructorRepository.findbyUser_id(id);
+            String email= session.getAttribute("email") .toString();
+            User user = userRepository.findByEmail(email);
+            Instructor instructor= this.instructorRepository.findByUser(user);
 
-            // if (instructor != null) {
+            if (instructor != null) {
               
-            //     List<Courses> instructorCourses = instructor.getCourses();
-            //     instructorCourses.add(course);
-            //     instructor.setCourses(instructorCourses);
+                List<Courses> instructorCourses = instructor.getCourses();
+                instructorCourses.add(course);
+                instructor.setCourses(instructorCourses);
+                course.setInstructor(instructor);
     
               
-            //     instructorRepository.save(instructor);
+                this.instructorRepository.save(instructor);
+                this.coursesRepository.save(course);
                 
                
-            //     return new ModelAndView("redirect:/courses/add-course");
-            // } else {
+                return new ModelAndView("redirect:/courses/add-course");
+            } else {
               
-            //   //  mav.addObject("error", "Instructor not found");
+              //  mav.addObject("error", "Instructor not found");
                 return mav;
-            // }
+            }
         } else {
           
          //   mav.addObject("error", "User session not found");

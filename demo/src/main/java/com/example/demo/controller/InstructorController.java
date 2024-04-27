@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,18 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.models.Courses;
 import com.example.demo.models.Instructor;
 import com.example.demo.models.User;
+import com.example.demo.repositories.CoursesRepository;
 import com.example.demo.repositories.InstructorRepository;
 import com.example.demo.repositories.UserRepository;
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
-
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-
 import org.springframework.web.bind.annotation.RequestParam;
-
-
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -85,13 +85,28 @@ public class InstructorController
             
         
      
-    @GetMapping("add-course")
-    public ModelAndView addcourse() {
+   
+    
+    @GetMapping("view-course")
+   public ModelAndView view_course(HttpSession session) {
        ModelAndView mav = new ModelAndView("courses.html");
+       String email= session.getAttribute("email") .toString();
+       User user = userRepository.findByEmail(email);
+       Instructor instructor= this.instructorRepository.findByUser(user);
+
+
+       List<Courses> courses = instructor.getCourses();
+       if(courses != null) 
+       {
+        
+            mav.addObject("courses" , courses );
+      
+       }
+       else
+       {
+        return new ModelAndView("redirect:/user/profile");
+       }
+
        return mav;
     }
-    
-    
-    
-    
 }
