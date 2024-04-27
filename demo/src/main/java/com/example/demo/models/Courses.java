@@ -48,7 +48,8 @@ public class Courses {
     @JoinColumn(name = "instructor_id")
     private Instructor instructor;
 
- 
+    @ManyToMany(mappedBy = "courses")
+    private List<Student> students;
 
     public Courses() {
     }
