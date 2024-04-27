@@ -290,64 +290,33 @@
 <script src="../js/side-nav.js"></script>
 <script>
  
-     // Function to show the Add Course section and hide the View Course section
-     function showAddCourseSection() {
-        document.getElementById('addCourseSection').style.display = 'block';
-        document.getElementById('viewCourseSection').style.display = 'none';
-        document.getElementById('addCourseContent').style.display = 'none';
-    }
-
-    // Function to show the View Course section and hide the Add Course section
-    function showViewCourseSection() {
-        document.getElementById('viewCourseSection').style.display = 'block';
-        document.getElementById('addCourseSection').style.display = 'none';
-        document.getElementById('addCourseContent').style.display = 'none';
-    }
-
-    function showViewCourseContent() {
-        document.getElementById('viewCourseSection').style.display = 'none';
-        document.getElementById('addCourseSection').style.display = 'none';
-        document.getElementById('addCourseContent').style.display = 'block';
-    }
-
-    // Add event listeners to the dropdown links
-    document.getElementById('addCourseLink').addEventListener('click', function() {
-        showAddCourseSection();
-    });
     
-    document.getElementById('viewCourseLink').addEventListener('click', function() {
-        showViewCourseSection();
-    });
 
-    document.getElementById('addCourseContentLink').addEventListener('click', function() {
-        showViewCourseContent();
-    });
-
-    // Initially, show the Add Course section and hide the View Course section
-    showViewCourseContent();
-    function confirmDelete() {
-        if (confirm("Are you sure you want to delete this user?")) {
-            window.location.href = "/user/delete?email=${email}";
-        }
-    }
-
-
-function showAddCourseSection(event) {
+ function showAddCourseSection(event) {
     event.preventDefault();
     document.getElementById('addCourseSection').style.display = 'block';
     document.getElementById('viewCourseSection').style.display = 'none';
+    document.getElementById('addCourseContent').style.display = 'none'; 
 }
-
 
 function showViewCourseSection(event) {
     event.preventDefault(); 
     document.getElementById('viewCourseSection').style.display = 'block';
     document.getElementById('addCourseSection').style.display = 'none';
+    document.getElementById('addCourseContent').style.display = 'none'; 
 }
 
+function showAddCourseContentSection(event) {
+    event.preventDefault(); 
+    document.getElementById('addCourseContent').style.display = 'block';
+    document.getElementById('viewCourseSection').style.display = 'none';
+    document.getElementById('addCourseSection').style.display = 'none';
+}
 
 document.getElementById('addCourseLink').addEventListener('click', showAddCourseSection);
 document.getElementById('viewCourseLink').addEventListener('click', showViewCourseSection);
+document.getElementById('addCourseContentLink').addEventListener('click', showAddCourseContentSection); // Add event listener for the "Add Course Content" link
+
 
 
 
