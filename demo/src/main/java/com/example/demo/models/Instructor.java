@@ -10,8 +10,12 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import jakarta.validation.constraints.NotEmpty;
 
+=======
+import java.util.List;
+>>>>>>> 95929962975625e33fefdb1cff75e4736e5b4b64
 =======
 import java.util.List;
 >>>>>>> 95929962975625e33fefdb1cff75e4736e5b4b64

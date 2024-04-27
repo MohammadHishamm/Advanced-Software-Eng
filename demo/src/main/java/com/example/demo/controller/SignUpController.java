@@ -67,6 +67,8 @@ public class SignUpController {
         user.setType("student");
         this.userRepository.save(user);
         session.setAttribute("email", user.getEmail());
+        session.setAttribute("id", user.getUser_id());
+
         return new ModelAndView("redirect:/");
     }
     
