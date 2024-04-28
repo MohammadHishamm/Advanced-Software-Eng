@@ -47,17 +47,15 @@ public ModelAndView courseContent(@RequestParam("course_id") int courseId) {
 }
 @PostMapping("save-course-content")
 public ModelAndView saveCourseContent(@ModelAttribute @Valid CourseContent courseContent,
-                                      BindingResult bindingResult,
-                                      HttpSession session) {
+                                      BindingResult bindingResult) {
     ModelAndView mav = new ModelAndView("courses.html");
 
-    if (bindingResult.hasErrors()) {
+    // if (bindingResult.hasErrors()) {
         
-        mav.setViewName("courses.html");
-        mav.addObject("contenterrors", bindingResult.getAllErrors());
-        return mav;
+    //      mav.addObject("contenterrors", bindingResult.getAllErrors());
+    //     return mav;
     
-    }
+    // }
         
     this.courseContentRepository.save(courseContent);
     
