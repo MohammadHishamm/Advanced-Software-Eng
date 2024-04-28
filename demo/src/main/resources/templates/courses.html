@@ -187,7 +187,7 @@
                                         
                                             </section>
 
-                                            <section id="viewCourseSection">
+                                            <section id="viewCourseSection"  style="display: none;">
                                             <div class="col-lg-8 ">
                                                 <div class=" mb-4">
                                                     <div class="">
@@ -232,7 +232,7 @@
                             </div>
         </section>
 
-        <section  id="addCourseContent" class="playlist-form">
+        <section  id="addCourseContent"   style="display: none;" class="playlist-form">
             <div class="row">
                 <div class="col-sm-3">
                     <p class="mb-0" style="font-size: 1.5rem;">Add Course Content</p>
@@ -252,7 +252,7 @@
                 <select name="video_playlist" class="box">
                     <option value="" selected disabled>-- select playlist</option>
                    
-                    <option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.course_title}"></option>
+                    <option th:each="course : ${courses}" th:value="${course.course_id}" th:text="${course.course_title}"></option>
                 </select>
                 
                 <span th:each="error : ${errors}" th:if="${error.field == 'video_playlist'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
@@ -314,11 +314,10 @@ function showAddCourseContentSection(event) {
     document.getElementById('addCourseSection').style.display = 'none';
 }
 
+
 document.getElementById('addCourseLink').addEventListener('click', showAddCourseSection);
 document.getElementById('viewCourseLink').addEventListener('click', showViewCourseSection);
 document.getElementById('addCourseContentLink').addEventListener('click', showAddCourseContentSection); // Add event listener for the "Add Course Content" link
-
-
 
 
 
