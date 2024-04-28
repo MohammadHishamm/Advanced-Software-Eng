@@ -128,7 +128,7 @@
                                                 <ul class="dropdown-menu w-100 text-center" aria-labelledby="dropdownMenuLink">
                                                     <li><a id="addCourseContentLink" class="dropdown-item" href="">Add Content</a></li>
                                                   
-                                                    <li><a class="dropdown-item" href="">View Content</a></li>
+                                                    <li><a id="viewContentLink" class="dropdown-item" href="">View Content</a></li>
                                                 </ul>
                                             </div>
                                         </li>
@@ -275,6 +275,55 @@
             </form>
     
         </section>
+    <!--//////////////////////////////////////////////////////////////////   View content page--> 
+    <section id="viewContentPage"  style="display: none;">
+        <div class="col-lg-8 ">
+            <div class=" mb-4">
+                <div class="">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0" style="font-size: 1.5rem;"> Your Content</p>
+                        </div>
+                    </div>
+                    <hr>
+            
+                    <section class="playlists">
+
+                        <div class="box-container">
+            
+                            
+                            <div th:each="course: ${courses}" class="box">
+                                <div class="flex">
+                                    <div>
+                                        
+                                        <span style="color:limegreen" ></span> <!--Video title-->
+                                    </div>
+                                    
+                                </div>
+                                <div class="thumb">
+                                   
+                                    <img src="" alt="">
+                                </div>
+                                <h3 class="title" name="course_title" th:text="'Course: ' + ${course.course_title}"></h3>
+
+                                <p class="description" name="course_description" ></p><!--Video description-->
+                                <div class="flex-btn">
+                                    
+                                    <a class="btn btn-danger w-100">delete</a>
+                                </div>
+            
+                                                       
+            </div>
+            </section>
+     
+      
+</div>
+</div>
+</div>
+</section>
+
+<!--//////////////////////////////////////////////////////////////////   end of View content page-->
+
 
 
 
@@ -297,6 +346,7 @@
     document.getElementById('addCourseSection').style.display = 'block';
     document.getElementById('viewCourseSection').style.display = 'none';
     document.getElementById('addCourseContent').style.display = 'none'; 
+    document.getElementById('viewContentPage').style.display = 'none'; 
 }
 
 function showViewCourseSection(event) {
@@ -304,6 +354,7 @@ function showViewCourseSection(event) {
     document.getElementById('viewCourseSection').style.display = 'block';
     document.getElementById('addCourseSection').style.display = 'none';
     document.getElementById('addCourseContent').style.display = 'none'; 
+    document.getElementById('viewContentPage').style.display = 'none'; 
 }
 
 function showAddCourseContentSection(event) {
@@ -311,13 +362,22 @@ function showAddCourseContentSection(event) {
     document.getElementById('addCourseContent').style.display = 'block';
     document.getElementById('viewCourseSection').style.display = 'none';
     document.getElementById('addCourseSection').style.display = 'none';
+    document.getElementById('viewContentPage').style.display = 'none'; 
+}
+
+function showViewContentSection(event) {
+    event.preventDefault(); 
+    document.getElementById('addCourseContent').style.display = 'none';
+    document.getElementById('viewCourseSection').style.display = 'none';
+    document.getElementById('addCourseSection').style.display = 'none';
+    document.getElementById('viewContentPage').style.display = 'block';
 }
 
 
 document.getElementById('addCourseLink').addEventListener('click', showAddCourseSection);
-document.getElementById('viewCourseLink').addEventListener('click', showViewCourseSection);
+document.getElementById('viewCourseLink').addEventListener('click', showViewCourseSection);viewContentLink
 document.getElementById('addCourseContentLink').addEventListener('click', showAddCourseContentSection); // Add event listener for the "Add Course Content" link
-
+document.getElementById('viewContentLink').addEventListener('click', showViewContentSection); 
 
 
     

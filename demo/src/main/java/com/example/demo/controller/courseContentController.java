@@ -33,8 +33,11 @@ private CoursesRepository coursesRepository;
    @GetMapping("add-course-content")
 public ModelAndView courseContent(@RequestParam("course_id") int courseId) {
     ModelAndView mav = new ModelAndView("courses.html");
+    CourseContent content = new CourseContent(); 
+    mav.addObject("courseContent", content);
     Courses course = this.coursesRepository.findById(courseId);
     mav.addObject("course", course);
+
     
     // Fetch all courses from the database
     List<Courses> allCourses = this.coursesRepository.findAll();
@@ -42,20 +45,24 @@ public ModelAndView courseContent(@RequestParam("course_id") int courseId) {
     
     return mav;
 }
-    @PostMapping("save-course-content") 
-    public ModelAndView saveCourse(@ModelAttribute @Valid CourseContent courseContent, BindingResult bindingResult, HttpSession session) {
-        ModelAndView mav = new ModelAndView("courses.html");
+@PostMapping("/save-course-content")
+public ModelAndView saveCourseContent(@ModelAttribute @Valid CourseContent courseContent,
+                                      BindingResult bindingResult,
+                                      HttpSession session) {
+    ModelAndView mav = new ModelAndView("courses.html");
 
-        if (bindingResult.hasErrors()) {
-            mav.addObject("errors", bindingResult.getAllErrors());
-            return mav;
-        }
-        else {   
-                
-
-
-             }
-      
+    if (bindingResult.hasErrors()) {
+        
+        mav.setViewName("courses.html");
+        mav.addObject("errors", bindingResult.getAllErrors());
         return mav;
     }
+        
+    this.courseContentRepository.save(courseContent);
+    
+
+     
+    return mav;
+    
+}
 }
