@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,6 @@ import com.example.demo.models.Student;
 import com.example.demo.models.User;
 import com.example.demo.repositories.CoursesRepository;
 import com.example.demo.repositories.InstructorRepository;
-
 
 import com.example.demo.repositories.StudentRepository;
 
@@ -45,85 +43,75 @@ public class coursesController {
 
     @Autowired
     private StudentRepository studentRepository;
-    
+
     @GetMapping("")
     public ModelAndView getcourses() {
         ModelAndView mav = new ModelAndView("viewCourses.html");
         List<Courses> courses = this.coursesRepository.findAll();
         mav.addObject("courses", courses);
-         return mav;
+        return mav;
 
     }
-
-
-
-
-
 
     @GetMapping("add-course")
     public ModelAndView courses() {
-       ModelAndView mav = new ModelAndView("courses.html");
-       Courses course= new Courses();
-       mav.addObject("course", course);
-       return mav;
+        ModelAndView mav = new ModelAndView("courses.html");
+        Courses course = new Courses();
+        mav.addObject("course", course);
+        return mav;
     }
 
-    @PostMapping("save-course") 
-    public ModelAndView saveCourse(@ModelAttribute @Valid Courses course, BindingResult bindingResult ,HttpSession session) {
+    @PostMapping("save-course")
+    public ModelAndView saveCourse(@ModelAttribute @Valid Courses course, BindingResult bindingResult,
+            HttpSession session) {
         ModelAndView mav = new ModelAndView("courses.html");
-        
+
         if (bindingResult.hasErrors()) {
             mav.addObject("errors", bindingResult.getAllErrors());
             return mav;
         }
 
-        if (session.getAttribute("email") != null)
-        {
-            String email= session.getAttribute("email") .toString();
+        if (session.getAttribute("email") != null) {
+            String email = session.getAttribute("email").toString();
             User user = userRepository.findByEmail(email);
-            Instructor instructor= this.instructorRepository.findByUser(user);
+            Instructor instructor = this.instructorRepository.findByUser(user);
 
             if (instructor != null) {
-              
+
                 List<Courses> instructorCourses = instructor.getCourses();
                 instructorCourses.add(course);
                 instructor.setCourses(instructorCourses);
                 course.setInstructor(instructor);
-    
-              
+
                 this.instructorRepository.save(instructor);
                 this.coursesRepository.save(course);
-                
-               
+
                 return new ModelAndView("redirect:/courses/add-course");
             } else {
-              
-              //  mav.addObject("error", "Instructor not found");
+
+                // mav.addObject("error", "Instructor not found");
                 return mav;
             }
         } else {
-          
-         //   mav.addObject("error", "User session not found");
+
+            // mav.addObject("error", "User session not found");
             return mav;
         }
-      
+
     }
 
-
-
     @GetMapping("view-course")
-    public ModelAndView view_course(@RequestParam("courseid") int id ,HttpSession session ) {
-       ModelAndView mav = new ModelAndView("view-course.html");
-       Courses course =  this.coursesRepository.findById(id);
-       if(course != null) 
-       {
-            if(session != null)
-            {   
-                //get student from user id to see if the student is already enrolled in the course or not
+    public ModelAndView view_course(@RequestParam("courseid") int id, HttpSession session) {
+        ModelAndView mav = new ModelAndView("view-course.html");
+        Courses course = this.coursesRepository.findById(id);
+        if (course != null) {
+            if (session != null) {
+                // get student from user id to see if the student is already enrolled in the
+                // course or not
                 String useremail = (String) session.getAttribute("email");
-                User user1 =  this.userRepository.findByEmail(useremail);
-                Student student =  this.studentRepository.findByUser(user1);
-                //all the courses that this student enrolled in 
+                User user1 = this.userRepository.findByEmail(useremail);
+                Student student = this.studentRepository.findByUser(user1);
+                // all the courses that this student enrolled in
                 List<Courses> courses = student.getCourses();
 
                 boolean enrolled_in = false;
@@ -134,41 +122,34 @@ public class coursesController {
                     }
                 }
                 System.out.println(enrolled_in);
-                Instructor instructor =  course.getInstructor();
+                Instructor instructor = course.getInstructor();
                 User user2 = instructor.getUser();
-                mav.addObject("course" , course );
-                mav.addObject("User" , user2 );
-                mav.addObject("enroll" , enrolled_in );
-            }
-            else
-            {
+                mav.addObject("course", course);
+                mav.addObject("User", user2);
+                mav.addObject("enroll", enrolled_in);
+            } else {
                 mav = new ModelAndView("Signup-in.html");
             }
 
-       }
-       else
-       {
+        } else {
             mav = new ModelAndView("index.html");
-       }
+        }
 
-      
-       return mav;
+        return mav;
     }
 
-
     @GetMapping("enroll-course")
-    public ModelAndView enroll_course(@RequestParam("courseid") int id ,HttpSession session ) {
-       ModelAndView mav = new ModelAndView("view-course.html");
-       Courses course =  this.coursesRepository.findById(id);
-       if(course != null) 
-       {
-            if(session != null)
-            {   
-                //get student from user id to see if the student is already enrolled in the course or not
+    public ModelAndView enroll_course(@RequestParam("courseid") int id, HttpSession session) {
+        ModelAndView mav = new ModelAndView("view-course.html");
+        Courses course = this.coursesRepository.findById(id);
+        if (course != null) {
+            if (session != null) {
+                // get student from user id to see if the student is already enrolled in the
+                // course or not
                 String useremail = (String) session.getAttribute("email");
                 User user1 = this.userRepository.findByEmail(useremail);
-                Student student =  this.studentRepository.findByUser(user1);
-                
+                Student student = this.studentRepository.findByUser(user1);
+
                 List<Courses> courses = student.getCourses();
 
                 boolean enrolled_in = false;
@@ -179,33 +160,67 @@ public class coursesController {
                     }
                 }
 
-                if(enrolled_in == false)
-                {
+                if (enrolled_in == false) {
                     courses.add(course);
                     student.setCourses(courses);
-    
+
                     this.studentRepository.save(student);
-                }
-                else
-                {
+                } else {
 
                 }
-
 
                 mav = new ModelAndView("Profile.html");
-            }
-            else
-            {
+            } else {
                 mav = new ModelAndView("Signup-in.html");
             }
 
-       }
-       else
-       {
+        } else {
             mav = new ModelAndView("index.html");
-       }
+        }
 
-       return mav;
+        return mav;
+    }
+
+    @GetMapping("update-course")
+    public ModelAndView editCourse(@RequestParam("course_id") int courseId) {
+        ModelAndView mav = new ModelAndView("edit-course.html");
+        Courses course = this.coursesRepository.findById(courseId);
+        if (course != null) {
+            mav.addObject("course", course);
+        } else {
+            mav.addObject("errorMessage", "Course not found");
+        }
+        return mav;
+    }
+
+    @PostMapping("update-course")
+    public ModelAndView updateCourse(@ModelAttribute("course") Courses updatedCourse, BindingResult bindingResult,
+            HttpSession session) {
+        ModelAndView mav = new ModelAndView("edit-course.html");
+
+        if (bindingResult.hasErrors()) {
+            mav.addObject("errors", bindingResult.getAllErrors());
+            return mav;
+        }
+
+        Courses existingCourse = coursesRepository.findById(updatedCourse.getCourse_id());
+
+        if (existingCourse != null) {
+
+            existingCourse.setCourse_title(updatedCourse.getCourse_title());
+            existingCourse.setCourse_status(updatedCourse.getCourse_status());
+            existingCourse.setCourse_description(updatedCourse.getCourse_description());
+            existingCourse.setCourse_requirements(updatedCourse.getCourse_requirements());
+            existingCourse.setCourse_price(updatedCourse.getCourse_price());
+
+            coursesRepository.save(existingCourse);
+
+            mav.setViewName("redirect:/courses/view-course?course_id=" + existingCourse.getCourse_id());
+        } else {
+            mav.addObject("errorMessage", "Course not found");
+        }
+
+        return mav;
     }
 
 }
