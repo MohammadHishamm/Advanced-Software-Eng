@@ -259,12 +259,11 @@
                 <input type="text" name="video_title" maxlength="100"  placeholder="Enter video title" class="box">
                 <span th:each="error : ${contenterrors}" th:if="${error.field == 'video_title'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
     
-                <p>Video playlist <span>*</span></p>
+                <p>Select course to add content <span>*</span></p>
                 <select name="video_playlist" class="box">
-                    <option value="" selected disabled>-- Select playlist --</option>
-                    <option value="playlist1">Playlist 1</option>
-                    <option value="playlist2">Playlist 2</option>
-                    <!-- Add more options as needed -->
+                    <option value="" selected disabled>-- Select course --</option>
+                    <!-- Iterate over the list of courses and generate options -->
+                    <option th:each="course : ${courses}" th:value="${course.course_id}" th:text="${course.course_title}"></option>
                 </select>
                 <span th:each="error : ${contenterrors}" th:if="${error.field == 'video_playlist'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
                 
@@ -395,7 +394,7 @@ function showViewContentSection(event) {
   document.getElementById('addCourseLink').addEventListener('click', showAddCourseSection);
   document.getElementById('viewCourseLink').addEventListener('click', showViewCourseSection);
   document.getElementById('addCourseContentLink').addEventListener('click', showAddCourseContentSection);
-
+  document.getElementById('viewContentLink').addEventListener('click', showViewContentSection);
 
   //document.getElementById('updateCourseLink').addEventListener('click', showUpdateCourseSection);
 
