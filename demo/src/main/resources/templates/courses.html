@@ -218,7 +218,7 @@
                                                                     <h3 class="title" name="course_title" th:text="${course.course_title}"></h3>
                                                                     <p class="description" name="course_description" th:text="${course.course_description}"></p>
                                                                     <div class="flex-btn">
-                                                                        <a href="" class="btn btn-warning w-100">update</a>
+                                                                        <a href="" class="btn btn-warning w-100" id="updateCourseLink" th:href="@{'/courses/edit-course?courseid=' + ${course.course_id}}">update</a>
                                                                         <a class="btn btn-danger w-100">delete</a>
                                                                     </div>
                                                 
@@ -231,6 +231,17 @@
                                 </div>
                             </div>
         </section>
+
+
+       
+        
+
+
+
+
+
+
+
 
         <section  id="addCourseContent"   style="display: none;" class="playlist-form">
             <div class="row">
@@ -339,25 +350,30 @@
 <script src="../js/side-nav.js"></script>
 <script>
  
-    
+ 
 
- function showAddCourseSection(event) {
+
+  function showAddCourseSection(event) {
     event.preventDefault();
     document.getElementById('addCourseSection').style.display = 'block';
     document.getElementById('viewCourseSection').style.display = 'none';
     document.getElementById('addCourseContent').style.display = 'none'; 
     document.getElementById('viewContentPage').style.display = 'none'; 
 }
+    //document.getElementById('updateCourseSection').style.display = 'none';
+  
 
-function showViewCourseSection(event) {
+  function showViewCourseSection(event) {
     event.preventDefault(); 
     document.getElementById('viewCourseSection').style.display = 'block';
     document.getElementById('addCourseSection').style.display = 'none';
     document.getElementById('addCourseContent').style.display = 'none'; 
     document.getElementById('viewContentPage').style.display = 'none'; 
 }
+   // document.getElementById('updateCourseSection').style.display = 'none';
+  
 
-function showAddCourseContentSection(event) {
+  function showAddCourseContentSection(event) {
     event.preventDefault(); 
     document.getElementById('addCourseContent').style.display = 'block';
     document.getElementById('viewCourseSection').style.display = 'none';
@@ -373,11 +389,14 @@ function showViewContentSection(event) {
     document.getElementById('viewContentPage').style.display = 'block';
 }
 
+  //document.getElementById('updateCourseLink').addEventListener('click', showUpdateCourseSection);
+  document.getElementById('addCourseLink').addEventListener('click', showAddCourseSection);
+  document.getElementById('viewCourseLink').addEventListener('click', showViewCourseSection);
+  document.getElementById('addCourseContentLink').addEventListener('click', showAddCourseContentSection);
 
-document.getElementById('addCourseLink').addEventListener('click', showAddCourseSection);
-document.getElementById('viewCourseLink').addEventListener('click', showViewCourseSection);viewContentLink
-document.getElementById('addCourseContentLink').addEventListener('click', showAddCourseContentSection); // Add event listener for the "Add Course Content" link
-document.getElementById('viewContentLink').addEventListener('click', showViewContentSection); 
+
+  //document.getElementById('updateCourseLink').addEventListener('click', showUpdateCourseSection);
+
 
 
     

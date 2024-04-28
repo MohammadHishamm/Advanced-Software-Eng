@@ -4,181 +4,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Edit Course</title>
-    <link rel="stylesheet" href="/css/Sidenav.css">
-    <link rel="stylesheet" href="/css/MDB css/mdb.min.css">
-    <link rel="stylesheet" href="../css/edit-course.css"> <!-- Add your custom CSS file -->
-    <link rel="stylesheet" href="/css/All.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <title>Your profile</title>
 </head>
+
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+
+
+    <head>
+
+        <link rel="stylesheet" href="/css/Sidenav.css">
+        <link rel="stylesheet" href="/css/MDB css/mdb.min.css">
+
+        <link rel="stylesheet" href="../css/courses.css">
+
+        <link rel="stylesheet" href="/css/All.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+            integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+        
+
+    </head>
+
+    <style>
+    .tags-container {
+        width: 100%
+    }
+
+    .tags-container .tag {
+        display: inline-block;
+        padding: 3px 12px;
+        font-size: 13px;
+        background: #eee;
+        margin: 3px;
+        border-radius: 5px;
+        text-transform: lowercase;
+        cursor: default;
+    }
+
+    .tags-container .tag .tag-close {
+        cursor: pointer;
+        margin-left: 5px;
+        font-size: 10px;
+    }
+    </style>
 
 <body style="background-color: #ebeff4; overflow: hidden;">
     <div th:replace="fragments/Navbar::navigation"></div>
 
-    <!-- SideNav -->
-    <div th:replace="fragments/SideNav::sidenav"></div>
+  <!-- SideNav -->
+  <div th:replace="fragments/SideNav::sidenav"></div>
 
-    <!-- Loaders -->
-    <div class="text-center transition transition-1 is-active" id="preloading">
-        <div style="margin-top: 100px">
-            <img src="../images/loader.gif">
-        </div>
-        <p style="margin-top: 20px; color: #0f141a; font-size: 3.0rem; font-weight: bolder;">Arab Data Hub</p>
-    </div>
+      <!-- Loaders -->
+      <div class="text-center transition transition-1 is-active" id="preloading">
 
-    <section class="bg-white">
-        <div class="d-flex justify-content-center align-items-center">
-            <div class="col-12">
-                <div class="mt-5 p-4 py-5">
-                    <div class="row" style="margin-left: 35px;">
-                        <div class="col-lg-1 col-4 me-5">
-                            <img src="" alt="" size="48" height="120" width="120" class="rounded rounded-5">
-                        </div>
-                        <div class="col-lg-3 col-5">
-                            <p class="fs-1"></p>
-                        </div>
-                    </div>
+          <div style="margin-top: 100px">
 
-                    <div class="row mt-4">
-                        <!-- side nav -->
-                        <div class="col-lg-3">
-                            <div class="mb-4 mb-lg-0">
-                                <div class="p-0">
-                                    <ul class="list-group">
-                                        <li
-                                            class="list-group-item d-flex justify-content-start align-items-start pt-3 w-100">
-                                            <div class="dropdown w-100">
-                                                <a class="btn btn-light w-100 dropdown-toggle active" href="#"
-                                                    role="button" id="dropdownMenuLink" data-mdb-dropdown-init
-                                                    data-mdb-ripple-init aria-expanded="false">My Courses</a>
-                                                <ul class="dropdown-menu w-100 text-center"
-                                                    aria-labelledby="dropdownMenuLink">
-                                                    <li><a id="addCourseLink" class="dropdown-item" href="#">Add
-                                                            Courses</a></li>
-                                                    <li><a id="viewCourseLink" class="dropdown-item" href="#">View
-                                                            Courses</a></li>
-                                                </ul>
+              <img src="../images/loader.gif">
+
+          </div>
+          <p style="margin-top: 20px;    
+          color: #0f141a;
+          font-size: 3.0rem;
+          font-weight: bolder;">Arab Data Hub</p>
+      </div>
+
+
+      
+      <section class="bg-white ">
+
+          <div>
+
+              <div class=" d-flex justify-content-center align-items-center ">
+                  <div class="col-12 ">
+
+                      <div class="mt-5 p-4 py-5 ">
+                          <div class="row" style="margin-left: 35px; ">
+                              <div class="col-lg-1 col-4 me-5">
+
+
+                                  <img src=""
+                                      alt="" size="48" height="120" width="120"
+                                      class="rounded rounded-5">
+
+                              </div>
+                              <div class="col-lg-3  col-5 ">
+                                  <p class="fs-1 "></p>
+                                 
+                              </div>
+                          </div>
+
+                          <div class="row mt-4">
+
+                            <!-- side nav -->
+
+                            <div class="col-lg-3">
+                              <div class=" mb-4 mb-lg-0">
+                                  <div class=" p-0">
+                                  <ul class="list-group">
+                          
+                         
+                                     
+                                      <li class="list-group-item d-flex justify-content-start align-items-start pt-3 w-100">
+                                          <div class="dropdown w-100">
+                                              <a class="btn btn-light w-100 dropdown-toggle active" href="#" role="button" id="dropdownMenuLink"
+                                                 data-mdb-dropdown-init data-mdb-ripple-init aria-expanded="false">My Courses
+                                              </a>
+                                              <ul class="dropdown-menu w-100 text-center" aria-labelledby="dropdownMenuLink">
+                                                  <li><a id="addCourseLink" class="dropdown-item" href="">Add Courses</a></li>
+                                                
+                                                  <li><a id="viewCourseLink" class="dropdown-item" href="">View Courses</a></li>
+                                              </ul>
+                                          </div>
+                                      </li>
+                                      
+                                      <li class="list-group-item d-flex justify-content-start align-items-start pt-3 w-100">
+                                          <div class="dropdown w-100">
+                                              <a class="btn btn-light w-100 dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                 data-mdb-dropdown-init data-mdb-ripple-init aria-expanded="false">Course Content
+                                              </a>
+                                              <ul class="dropdown-menu w-100 text-center" aria-labelledby="dropdownMenuLink">
+                                                  <li><a id="addCourseContentLink" class="dropdown-item" href="">Add Content</a></li>
+                                                
+                                                  <li><a class="dropdown-item" href="">View Content</a></li>
+                                              </ul>
+                                          </div>
+                                      </li>
+                                      
+                          
+                          </ul>
+                          
+                                  </div>
+                              </div>
+                          </div>
+                             
+                              <div class="col-lg-8 ">
+                                  <div class=" mb-4">
+                                      <div class="">
+                                          
+                                          <hr>
+
+                                          <section id="updatecourseSection" class="playlist-form" style="display: block">
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0" style="font-size: 1.5rem">
+                                                        Edit Course
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </li>
-                                        <li
-                                            class="list-group-item d-flex justify-content-start align-items-start pt-3 w-100">
-                                            <div class="dropdown w-100">
-                                                <a class="btn btn-light w-100 dropdown-toggle" href="#" role="button"
-                                                    id="dropdownMenuLink" data-mdb-dropdown-init data-mdb-ripple-init
-                                                    aria-expanded="false">Course Content</a>
-                                                <ul class="dropdown-menu w-100 text-center"
-                                                    aria-labelledby="dropdownMenuLink">
-                                                    <li><a class="dropdown-item" href="">Add Content</a></li>
-                                                    <li><a class="dropdown-item" href="">View Content</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                                            <form action="../courses/update-course" method="post" enctype="multipart/form-data">
+                                                <p>Course status <span>*</span></p>
+                                                <select name="course_status" class="box">
+                                                    <option value="" selected disabled>
+                                                        -- select status
+                                                    </option>
+                                                    <option value="active">Active</option>
+                                                    <option value="deactive">Deactive</option>
+                                                </select>
+                                                <span th:each="error : ${errors}" th:if="${error.field == 'course_status'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content"></span>
+                                        
+                                                <p>Course title <span>*</span></p>
+                                                <input type="text" name="course_title" maxlength="100" placeholder="Enter course title" class="box" th:value="${existingCourse.course_title}" />
+                                        
+                                                <p>Course description <span>*</span></p>
+                                                <textarea name="course_description" class="box" placeholder="Write description" maxlength="1000" cols="30" rows="10" th:text="${existingCourse.course_description}"></textarea>
+                                        
+                                                <p>Course requirements <span>*</span></p>
+                                                <textarea name="course_requirements" class="box" placeholder="Write requirements" maxlength="1000" cols="30" rows="10" th:text="${existingCourse.course_requirements}"></textarea>
+                                        
+                                                <p>Course Price <span>*</span></p>
+                                                <input type="text" name="course_price" maxlength="100" placeholder="Enter course price" class="box" th:value="${existingCourse.course_price}" />
+                                        
+                                                <p>Course thumbnail <span>*</span></p>
+                                                <input type="file" name="course_thumbnail" accept="image/*" class="box" />
+                                        
+                                                <!-- Hidden input for course id -->
+                                                <input type="hidden" name="course_id" th:value="${existingCourse.course_id}" />
+                                        
+                                                <input type="submit" value="Update course" name="submit" class="btn" />
+                                            </form>
+                                        </section>
+                                        
+     
+      
 
-                        <div class="col-lg-8">
-                            <div class="mb-4">
-                                <div>
-                                    <hr>
-                                    <section id="editCourseSection" class="playlist-form">
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <p class="mb-0" style="font-size: 1.5rem;">Edit Course</p>
-                                            </div>
-                                        </div>
-                                        <form action="../courses/update-course" method="post"
-                                            enctype="multipart/form-data">
-                                            <p>Course status <span>*</span></p>
-                                            <select name="course_status" class="box">
-                                                <option value="" selected disabled>-- select status</option>
-                                                <option value="active">Active</option>
-                                                <option value="deactive">Deactive</option>
-                                            </select>
-                                            <span th:each="error : ${errors}" th:if="${error.field == 'course_status'}"
-                                                class="alert" th:text="${error.defaultMessage}"
-                                                style="color: red; width: max-content;"></span>
 
-                                            <p>Course title <span>*</span></p>
-                                            <input type="text" name="course_title" maxlength="100"
-                                                placeholder="enter playlist title" class="box">
-                                            <span th:each="error : ${errors}" th:if="${error.field == 'course_title'}"
-                                                class="alert" th:text="${error.defaultMessage}"
-                                                style="color: red; width: max-content;"></span>
 
-                                            <p>Course description <span>*</span></p>
-                                            <textarea name="course_description" class="box"
-                                                placeholder="write description" maxlength="1000" cols="30"
-                                                rows="10"></textarea>
-                                            <span th:each="error : ${errors}"
-                                                th:if="${error.field == 'course_description'}" class="alert"
-                                                th:text="${error.defaultMessage}"
-                                                style="color: red; width: max-content;"></span>
 
-                                            <p>Course requirements <span>*</span></p>
-                                            <textarea name="course_requirements" class="box"
-                                                placeholder="write requirements" maxlength="1000" cols="30"
-                                                rows="10"></textarea>
-                                            <span th:each="error : ${errors}"
-                                                th:if="${error.field == 'course_requirements'}" class="alert"
-                                                th:text="${error.defaultMessage}"
-                                                style="color: red; width: max-content;"></span>
 
-                                            <p>Course Price <span>*</span></p>
-                                            <input type="text" name="course_price" maxlength="100"
-                                                placeholder="enter playlist Price" class="box">
-                                            <span th:each="error : ${errors}" th:if="${error.field == 'course_price'}"
-                                                class="alert" th:text="${error.defaultMessage}"
-                                                style="color: red; width: max-content;"></span>
 
-                                            <p>Course thumbnail <span>*</span></p>
-                                            <input type="file" name="course_thumbnail" accept="image/*" class="box">
-                                            <input type="submit" value="Update course" name="submit" class="btn">
-                                        </form>
-                                    </section>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <script src="/js/Loaders.js"></script>
-    <!-- MDB -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js">
+
+     
+
+
+
+
+
+      
+
+
+
+
+        <script src="/js/Loaders.js"></script>
+        <!-- MDB -->
+        <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"
+    >
     </script>
-    <script src="../js/side-nav.js"></script>
-    <script>
-        // Function to show the Add Course section and hide the View Course section
-        function showAddCourseSection() {
-            document.getElementById('addCourseSection').style.display = 'block';
-            document.getElementById('viewCourseSection').style.display = 'none';
-        }
+<script src="../js/side-nav.js"></script>
+<script>
+ 
+ 
 
-        // Function to show the View Course section and hide the Add Course section
-        function showViewCourseSection() {
-            document.getElementById('viewCourseSection').style.display = 'block';
-            document.getElementById('addCourseSection').style.display = 'none';
-        }
 
-        // Add event listeners to the dropdown links
-        document.getElementById('addCourseLink').addEventListener('click', function () {
-            showAddCourseSection();
-        });
+  function showAddCourseSection(event) {
+    event.preventDefault();
+    document.getElementById('addCourseSection').style.display = 'block';
+    document.getElementById('viewCourseSection').style.display = 'none';
+    document.getElementById('addCourseContent').style.display = 'none'; 
+    //document.getElementById('updateCourseSection').style.display = 'none';
+  }
 
-        document.getElementById('viewCourseLink').addEventListener('click', function () {
-            showViewCourseSection();
-        });
+  function showViewCourseSection(event) {
+    event.preventDefault(); 
+    document.getElementById('viewCourseSection').style.display = 'block';
+    document.getElementById('addCourseSection').style.display = 'none';
+    document.getElementById('addCourseContent').style.display = 'none'; 
+   // document.getElementById('updateCourseSection').style.display = 'none';
+  }
 
-        // Initially, show the Add Course section and hide the View Course section
-        showAddCourseSection();
-    </script>
-</body>
+  function showAddCourseContentSection(event) {
+    event.preventDefault(); 
+    document.getElementById('addCourseContent').style.display = 'block';
+    document.getElementById('viewCourseSection').style.display = 'none';
+    document.getElementById('addCourseSection').style.display = 'none';
+    //document.getElementById('updateCourseSection').style.display = 'none';
+  }
 
-</html>
+  //document.getElementById('updateCourseLink').addEventListener('click', showUpdateCourseSection);
+  document.getElementById('addCourseLink').addEventListener('click', showAddCourseSection);
+  document.getElementById('viewCourseLink').addEventListener('click', showViewCourseSection);
+  document.getElementById('addCourseContentLink').addEventListener('click', showAddCourseContentSection);
+
+
+  //document.getElementById('updateCourseLink').addEventListener('click', showUpdateCourseSection);
+
+
+
+    
+ 
+</script>
+
+    </body>
+
+    </html>

@@ -181,46 +181,49 @@ public class coursesController {
         return mav;
     }
 
-    @GetMapping("update-course")
-    public ModelAndView editCourse(@RequestParam("course_id") int courseId) {
+  
+    @GetMapping("/edit-course")
+    public ModelAndView editCourse(@RequestParam("courseid") int courseId) {
+        Courses existingCourse = coursesRepository.findById(courseId);
         ModelAndView mav = new ModelAndView("edit-course.html");
-        Courses course = this.coursesRepository.findById(courseId);
-        if (course != null) {
-            mav.addObject("course", course);
-        } else {
-            mav.addObject("errorMessage", "Course not found");
-        }
+        mav.addObject("existingCourse", existingCourse);
+        return mav;
+    }
+    
+    @PostMapping("/update-course")
+    public ModelAndView updateCourse(@ModelAttribute("existingCourse") Courses updatedCourse,
+                                 BindingResult bindingResult,
+                                 HttpSession session) {
+    ModelAndView mav = new ModelAndView("edit-course.html");
+
+    int courseId = updatedCourse.getCourse_id(); // Retrieve course_id from updatedCourse
+
+    if (bindingResult.hasErrors()) {
+        mav.addObject("errors", bindingResult.getAllErrors());
         return mav;
     }
 
-    @PostMapping("update-course")
-    public ModelAndView updateCourse(@ModelAttribute("course") Courses updatedCourse, BindingResult bindingResult,
-            HttpSession session) {
-        ModelAndView mav = new ModelAndView("edit-course.html");
+    Courses existingCourse = coursesRepository.findById(courseId);
 
-        if (bindingResult.hasErrors()) {
-            mav.addObject("errors", bindingResult.getAllErrors());
-            return mav;
-        }
+    if (existingCourse != null) {
+        // Update the existing course with the new data
+        existingCourse.setCourse_title(updatedCourse.getCourse_title());
+        existingCourse.setCourse_status(updatedCourse.getCourse_status());
+        existingCourse.setCourse_description(updatedCourse.getCourse_description());
+        existingCourse.setCourse_requirements(updatedCourse.getCourse_requirements());
+        existingCourse.setCourse_price(updatedCourse.getCourse_price());
 
-        Courses existingCourse = coursesRepository.findById(updatedCourse.getCourse_id());
+        // Save the updated course
+        coursesRepository.save(existingCourse);
 
-        if (existingCourse != null) {
-
-            existingCourse.setCourse_title(updatedCourse.getCourse_title());
-            existingCourse.setCourse_status(updatedCourse.getCourse_status());
-            existingCourse.setCourse_description(updatedCourse.getCourse_description());
-            existingCourse.setCourse_requirements(updatedCourse.getCourse_requirements());
-            existingCourse.setCourse_price(updatedCourse.getCourse_price());
-
-            coursesRepository.save(existingCourse);
-
-            mav.setViewName("redirect:/courses/view-course?course_id=" + existingCourse.getCourse_id());
-        } else {
-            mav.addObject("errorMessage", "Course not found");
-        }
-
-        return mav;
+        // Redirect to the view page for the updated course
+        mav.setViewName("redirect:/teacher/view-course");
+    } else {
+        mav.addObject("errorMessage", "Course not found");
     }
+
+    return mav;
+}
+
 
 }
