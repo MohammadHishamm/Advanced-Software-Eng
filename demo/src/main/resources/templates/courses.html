@@ -248,15 +248,14 @@
                 <input type="text" name="video_title" maxlength="100"  placeholder="Enter video title" class="box">
                 <span th:each="error : ${errors}" th:if="${error.field == 'video_title'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
     
-                <p>Video playlist <span>*</span></p>
-                <select name="video_playlist" class="box">
-                    <option value="" selected disabled>-- select playlist</option>
-                   
+                <p>Choose course to add content in it <span>*</span></p>
+                <select name="course_id" class="box">
+                    <option value="" selected disabled>-- Select course --</option>
+                    <!-- Iterate over the list of courses and generate options -->
                     <option th:each="course : ${courses}" th:value="${course.course_id}" th:text="${course.course_title}"></option>
                 </select>
-                
-                <span th:each="error : ${errors}" th:if="${error.field == 'video_playlist'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
-
+                <span th:each="error : ${errors}" th:if="${error.field == 'course_id'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
+            
 
                 <p>Video description <span>*</span></p>
                 <textarea name="video_description" class="box"  placeholder="write description" maxlength="1000" cols="30"
