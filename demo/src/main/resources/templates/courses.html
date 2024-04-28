@@ -251,27 +251,29 @@
             </div>
 
 
-            <form action="../courses/save-course-content" method="post" enctype="multipart/form-data">
+            <form action="../coursescontent/save-course-content" method="post" enctype="multipart/form-data">
                 
                 
     
                 <p>Video title <span>*</span></p>
                 <input type="text" name="video_title" maxlength="100"  placeholder="Enter video title" class="box">
-                <span th:each="error : ${errors}" th:if="${error.field == 'video_title'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
+                <span th:each="error : ${contenterrors}" th:if="${error.field == 'video_title'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
     
-                <p>Choose course to add content in it <span>*</span></p>
-                <select name="course_id" class="box">
-                    <option value="" selected disabled>-- Select course --</option>
-                    <!-- Iterate over the list of courses and generate options -->
-                    <option th:each="course : ${courses}" th:value="${course.course_id}" th:text="${course.course_title}"></option>
+                <p>Video playlist <span>*</span></p>
+                <select name="video_playlist" class="box">
+                    <option value="" selected disabled>-- Select playlist --</option>
+                    <option value="playlist1">Playlist 1</option>
+                    <option value="playlist2">Playlist 2</option>
+                    <!-- Add more options as needed -->
                 </select>
-                <span th:each="error : ${errors}" th:if="${error.field == 'course_id'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
+                <span th:each="error : ${contenterrors}" th:if="${error.field == 'video_playlist'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
+                
             
 
                 <p>Video description <span>*</span></p>
                 <textarea name="video_description" class="box"  placeholder="write description" maxlength="1000" cols="30"
                     rows="10"></textarea>
-                    <span th:each="error : ${errors}" th:if="${error.field == 'video_description'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
+                    <span th:each="error : ${contenterrors}" th:if="${error.field == 'video_description'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
                 
                 <p>Video thumbnail <span>*</span></p>
                 <input type="file" name="video_thumbnail" accept="image/*"  class="box">

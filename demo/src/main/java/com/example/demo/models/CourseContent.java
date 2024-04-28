@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -24,7 +25,7 @@ public class CourseContent {
     @NotEmpty(message = "Please enter a title for the video")
     private String video_title;
 
-    @NotEmpty(message = "Please enter the playlist of the video")
+    @NotBlank(message = "Please enter the playlist of the video")
     private String video_playlist;
 
     @NotEmpty(message = "Please enter a description for the video")
@@ -37,12 +38,11 @@ public class CourseContent {
     private String video_play;
 
     @ManyToOne
-    @JoinColumn(name = "course_id") 
+    @JoinColumn(name = "course_id")
     private Courses course;
 
     public CourseContent() {
     }
-
 
     public CourseContent(int video_id, String video_title, String video_playlist, String video_description, String video_thumbnail, String video_play, Courses course) {
         this.video_id = video_id;
@@ -173,5 +173,5 @@ public class CourseContent {
             ", course='" + getCourse() + "'" +
             "}";
     }
-    
+
 }

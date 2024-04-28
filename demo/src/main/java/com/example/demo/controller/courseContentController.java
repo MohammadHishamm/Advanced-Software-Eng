@@ -20,7 +20,7 @@ import jakarta.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
-@RequestMapping("/courses")
+@RequestMapping("/coursescontent")
 @RestController
 public class courseContentController {
 
@@ -45,7 +45,7 @@ public ModelAndView courseContent(@RequestParam("course_id") int courseId) {
     
     return mav;
 }
-@PostMapping("/save-course-content")
+@PostMapping("save-course-content")
 public ModelAndView saveCourseContent(@ModelAttribute @Valid CourseContent courseContent,
                                       BindingResult bindingResult,
                                       HttpSession session) {
@@ -54,15 +54,17 @@ public ModelAndView saveCourseContent(@ModelAttribute @Valid CourseContent cours
     if (bindingResult.hasErrors()) {
         
         mav.setViewName("courses.html");
-        mav.addObject("errors", bindingResult.getAllErrors());
+        mav.addObject("contenterrors", bindingResult.getAllErrors());
         return mav;
+    
     }
         
     this.courseContentRepository.save(courseContent);
     
+    return new ModelAndView("redirect:/teacher/view-course");
 
      
-    return mav;
+
     
 }
 }

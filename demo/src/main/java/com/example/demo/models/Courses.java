@@ -51,10 +51,13 @@ public class Courses {
     @ManyToMany(mappedBy = "courses")
     private List<Student> students;
 
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    private List<CourseContent> coursecontent = new ArrayList<>();
+
     public Courses() {
     }
 
-    public Courses(int course_id, String course_title, String course_status, String course_description, String course_requirements, Double course_price, Instructor instructor) {
+    public Courses(int course_id, String course_title, String course_status, String course_description, String course_requirements, Double course_price, Instructor instructor, List<Student> students, List<CourseContent> coursecontent) {
         this.course_id = course_id;
         this.course_title = course_title;
         this.course_status = course_status;
@@ -62,6 +65,8 @@ public class Courses {
         this.course_requirements = course_requirements;
         this.course_price = course_price;
         this.instructor = instructor;
+        this.students = students;
+        this.coursecontent = coursecontent;
     }
 
     public int getCourse_id() {
@@ -120,6 +125,22 @@ public class Courses {
         this.instructor = instructor;
     }
 
+    public List<Student> getStudents() {
+        return this.students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    public List<CourseContent> getCoursecontent() {
+        return this.coursecontent;
+    }
+
+    public void setCoursecontent(List<CourseContent> coursecontent) {
+        this.coursecontent = coursecontent;
+    }
+
     public Courses course_id(int course_id) {
         setCourse_id(course_id);
         return this;
@@ -155,6 +176,16 @@ public class Courses {
         return this;
     }
 
+    public Courses students(List<Student> students) {
+        setStudents(students);
+        return this;
+    }
+
+    public Courses coursecontent(List<CourseContent> coursecontent) {
+        setCoursecontent(coursecontent);
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -163,12 +194,12 @@ public class Courses {
             return false;
         }
         Courses courses = (Courses) o;
-        return course_id == courses.course_id && Objects.equals(course_title, courses.course_title) && Objects.equals(course_status, courses.course_status) && Objects.equals(course_description, courses.course_description) && Objects.equals(course_requirements, courses.course_requirements) && Objects.equals(course_price, courses.course_price) && Objects.equals(instructor, courses.instructor);
+        return course_id == courses.course_id && Objects.equals(course_title, courses.course_title) && Objects.equals(course_status, courses.course_status) && Objects.equals(course_description, courses.course_description) && Objects.equals(course_requirements, courses.course_requirements) && Objects.equals(course_price, courses.course_price) && Objects.equals(instructor, courses.instructor) && Objects.equals(students, courses.students) && Objects.equals(coursecontent, courses.coursecontent);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(course_id, course_title, course_status, course_description, course_requirements, course_price, instructor);
+        return Objects.hash(course_id, course_title, course_status, course_description, course_requirements, course_price, instructor, students, coursecontent);
     }
 
     @Override
@@ -181,10 +212,9 @@ public class Courses {
             ", course_requirements='" + getCourse_requirements() + "'" +
             ", course_price='" + getCourse_price() + "'" +
             ", instructor='" + getInstructor() + "'" +
+            ", students='" + getStudents() + "'" +
+            ", coursecontent='" + getCoursecontent() + "'" +
             "}";
     }
-
- 
-
 
 }
