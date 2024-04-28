@@ -181,7 +181,6 @@ public class coursesController {
         return mav;
     }
 
-  
     @GetMapping("/edit-course")
     public ModelAndView editCourse(@RequestParam("courseid") int courseId) {
         Courses existingCourse = coursesRepository.findById(courseId);
@@ -189,41 +188,56 @@ public class coursesController {
         mav.addObject("existingCourse", existingCourse);
         return mav;
     }
-    
+
     @PostMapping("/update-course")
     public ModelAndView updateCourse(@ModelAttribute("existingCourse") Courses updatedCourse,
-                                 BindingResult bindingResult,
-                                 HttpSession session) {
-    ModelAndView mav = new ModelAndView("edit-course.html");
+            BindingResult bindingResult,
+            HttpSession session) {
+        ModelAndView mav = new ModelAndView("edit-course.html");
 
-    int courseId = updatedCourse.getCourse_id(); // Retrieve course_id from updatedCourse
+        int courseId = updatedCourse.getCourse_id(); // Retrieve course_id from updatedCourse
 
-    if (bindingResult.hasErrors()) {
-        mav.addObject("errors", bindingResult.getAllErrors());
+        if (bindingResult.hasErrors()) {
+            mav.addObject("errors", bindingResult.getAllErrors());
+            return mav;
+        }
+
+        Courses existingCourse = coursesRepository.findById(courseId);
+
+        if (existingCourse != null) {
+            // Update the existing course with the new data
+            existingCourse.setCourse_title(updatedCourse.getCourse_title());
+            existingCourse.setCourse_status(updatedCourse.getCourse_status());
+            existingCourse.setCourse_description(updatedCourse.getCourse_description());
+            existingCourse.setCourse_requirements(updatedCourse.getCourse_requirements());
+            existingCourse.setCourse_price(updatedCourse.getCourse_price());
+
+            // Save the updated course
+            coursesRepository.save(existingCourse);
+
+            // Redirect to the view page for the updated course
+            mav.setViewName("redirect:/teacher/view-course");
+        } else {
+            mav.addObject("errorMessage", "Course not found");
+        }
+
         return mav;
     }
 
-    Courses existingCourse = coursesRepository.findById(courseId);
+    @GetMapping("/delete-course")
+    public ModelAndView deleteCourse(@RequestParam("courseid") int courseId) {
+        ModelAndView mav = new ModelAndView();
 
-    if (existingCourse != null) {
-        // Update the existing course with the new data
-        existingCourse.setCourse_title(updatedCourse.getCourse_title());
-        existingCourse.setCourse_status(updatedCourse.getCourse_status());
-        existingCourse.setCourse_description(updatedCourse.getCourse_description());
-        existingCourse.setCourse_requirements(updatedCourse.getCourse_requirements());
-        existingCourse.setCourse_price(updatedCourse.getCourse_price());
+        Courses courseToDelete = coursesRepository.findById(courseId);
 
-        // Save the updated course
-        coursesRepository.save(existingCourse);
+        if (courseToDelete != null) {
+            coursesRepository.delete(courseToDelete);
+            mav.setViewName("redirect:/courses");
+        } else {
+            mav.setViewName("error-page");
+        }
 
-        // Redirect to the view page for the updated course
-        mav.setViewName("redirect:/teacher/view-course");
-    } else {
-        mav.addObject("errorMessage", "Course not found");
+        return mav;
     }
-
-    return mav;
-}
-
 
 }
