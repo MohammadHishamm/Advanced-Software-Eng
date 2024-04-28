@@ -55,7 +55,7 @@ public class coursesController {
 
     @GetMapping("add-course")
     public ModelAndView courses() {
-        ModelAndView mav = new ModelAndView("courses.html");
+        ModelAndView mav = new ModelAndView("teacher-coursespage.html");
         Courses course = new Courses();
         mav.addObject("course", course);
         return mav;
@@ -64,7 +64,7 @@ public class coursesController {
     @PostMapping("save-course")
     public ModelAndView saveCourse(@ModelAttribute @Valid Courses course, BindingResult bindingResult,
             HttpSession session) {
-        ModelAndView mav = new ModelAndView("courses.html");
+        ModelAndView mav = new ModelAndView("teacher-coursespage.html");
 
         if (bindingResult.hasErrors()) {
             mav.addObject("errors", bindingResult.getAllErrors());
@@ -86,7 +86,7 @@ public class coursesController {
                 this.instructorRepository.save(instructor);
                 this.coursesRepository.save(course);
 
-                return new ModelAndView("redirect:/courses/add-course");
+                return new ModelAndView("redirect:/courses/view-course");
             } else {
 
                 // mav.addObject("error", "Instructor not found");

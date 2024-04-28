@@ -89,7 +89,7 @@ public class InstructorController
     
     @GetMapping("view-course")
    public ModelAndView view_course(HttpSession session) {
-       ModelAndView mav = new ModelAndView("courses.html");
+       ModelAndView mav = new ModelAndView("teacher-coursespage.html");
        String email= session.getAttribute("email") .toString();
        User user = userRepository.findByEmail(email);
        Instructor instructor= this.instructorRepository.findByUser(user);
