@@ -92,7 +92,7 @@ public ModelAndView saveCourseContent(@ModelAttribute @Valid CourseContent cours
 }
 
 @GetMapping("view-content")
-public ModelAndView view_course(@RequestParam("courseid") int courseId) {
+public ModelAndView view_content(@RequestParam("courseid") int courseId) {
     Courses course= this.coursesRepository.findById(courseId);
     ModelAndView mav = new ModelAndView("view-content.html");
    
@@ -107,6 +107,24 @@ public ModelAndView view_course(@RequestParam("courseid") int courseId) {
 
 
 }
+
+@GetMapping("/delete-content")
+public ModelAndView deleteContent(@RequestParam("courseid") int courseId) {
+    ModelAndView mav = new ModelAndView();
+
+    CourseContent contentToDelete = courseContentRepository.findById(courseId);
+
+    if (contentToDelete != null) {
+        courseContentRepository.delete(contentToDelete);
+        mav.setViewName("redirect:/user/profile");
+    } else {
+        mav.setViewName("error-page");
+    }
+
+    return mav;
+}
+
+
 
 
 }
