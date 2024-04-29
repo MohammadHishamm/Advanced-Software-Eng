@@ -233,7 +233,7 @@ public class coursesController {
 
         if (courseToDelete != null) {
             coursesRepository.delete(courseToDelete);
-            mav.setViewName("redirect:/courses");
+            mav.setViewName("redirect:/user/profile");
         } else {
             mav.setViewName("error-page");
         }
