@@ -59,6 +59,24 @@ public ModelAndView courseContent(@RequestParam("course_id") int courseId) {
 public ModelAndView saveCourseContent(@ModelAttribute @Valid CourseContent courseContent,
                                       BindingResult bindingResult) {
     ModelAndView mav = new ModelAndView("courses.html");
+    int courseid = Integer.parseInt(courseContent.getVideo_playlist());
+    Courses exsistingcourse = this.coursesRepository.findById(courseid);
+    List<CourseContent> contentlist = exsistingcourse.getCoursecontent();
+    contentlist.add(courseContent);
+    exsistingcourse.setCoursecontent(contentlist);
+    courseContent.setCourse(exsistingcourse);
+
+
+
+
+    this.courseContentRepository.save(courseContent);
+    this.coursesRepository.save(exsistingcourse);
+    
+    return new ModelAndView("redirect:/teacher/view-course");
+
+
+
+
 
     // if (bindingResult.hasErrors()) {
         
@@ -67,13 +85,27 @@ public ModelAndView saveCourseContent(@ModelAttribute @Valid CourseContent cours
     
     // }
         
-    this.courseContentRepository.save(courseContent);
-    
-    return new ModelAndView("redirect:/teacher/view-course");
 
      
 
     
+}
+
+@GetMapping("view-content")
+public ModelAndView view_course(@RequestParam("courseid") int courseId) {
+    Courses course= this.coursesRepository.findById(courseId);
+    ModelAndView mav = new ModelAndView("view-content.html");
+   
+    List<CourseContent> content = course.getCoursecontent();
+   
+         mav.addObject("courseContents" , content );
+       
+   
+   
+    return mav;
+
+
+
 }
 
 

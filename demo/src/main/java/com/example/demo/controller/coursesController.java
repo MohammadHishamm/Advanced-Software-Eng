@@ -87,7 +87,7 @@ public class coursesController {
                 this.instructorRepository.save(instructor);
                 this.coursesRepository.save(course);
 
-                return new ModelAndView("redirect:/courses/view-course");
+                return new ModelAndView("redirect:/user/profile");
             } else {
 
                 // mav.addObject("error", "Instructor not found");
@@ -242,21 +242,7 @@ public class coursesController {
     }
 
 
-    @GetMapping("view-content")
-    public ModelAndView view_course(@RequestParam("courseid") int courseId) {
-        Courses course= this.coursesRepository.findById(courseId);
-        ModelAndView mav = new ModelAndView("view-content.html");
-       
-        List<CourseContent> content = course.getCoursecontent();
-       
-             mav.addObject("courseContents" , content );
-       
-       
-        return mav;
-    
  
- 
- }
 
 
 

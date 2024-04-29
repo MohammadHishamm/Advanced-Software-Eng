@@ -247,7 +247,7 @@
                                                                         <h3 class="title" name="course_title" th:text="${course.course_title}"></h3>
                                                                         <p class="description" name="course_description" th:text="${course.course_description}"></p>
                                                                         <div class="flex-btn" style="display: flex; justify-content: space-between;">
-                                                                            <a href="" class="btn btn-warning" th:href="@{'/courses/view-content?courseid=' + ${course.course_id}}" style="width: calc(33.33% - 10px); background-color:lightsteelblue;">view</a>
+                                                                            <a href="" class="btn btn-warning" th:href="@{'/coursescontent/view-content?courseid=' + ${course.course_id}}" style="width: calc(33.33% - 10px); background-color:lightsteelblue;">view</a>
                                                                             <a href="" class="btn btn-warning" th:href="@{'/courses/edit-course?courseid=' + ${course.course_id}}" style="width: calc(33.33% - 10px);">update</a>
                                                                             <a th:href="@{'/courses/delete-course?courseid=' + ${course.course_id}}" class="btn btn-danger" style="width: calc(33.33% - 10px);">delete</a>
                                                                         </div>
