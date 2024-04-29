@@ -12,8 +12,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.models.CourseContent;
 import com.example.demo.models.Courses;
+import com.example.demo.models.Instructor;
+import com.example.demo.models.User;
 import com.example.demo.repositories.CourseContentRepository;
 import com.example.demo.repositories.CoursesRepository;
+import com.example.demo.repositories.InstructorRepository;
+import com.example.demo.repositories.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -29,6 +33,12 @@ public class courseContentController {
 
     @Autowired
 private CoursesRepository coursesRepository;
+
+@Autowired
+private UserRepository userRepository;
+
+@Autowired
+private InstructorRepository instructorRepository;
 
    @GetMapping("add-course-content")
 public ModelAndView courseContent(@RequestParam("course_id") int courseId) {
@@ -65,4 +75,6 @@ public ModelAndView saveCourseContent(@ModelAttribute @Valid CourseContent cours
 
     
 }
+
+
 }

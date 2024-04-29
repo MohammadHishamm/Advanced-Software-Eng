@@ -1,0 +1,69 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <link rel="stylesheet" href="../css/Sidenav.css">
+
+    <link rel="stylesheet" href="../css/MDB css/mdb.min.css">
+    <link rel="stylesheet" href="../css/All.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+    <script src="../js/Loaders.js"></script>
+</head>
+    <!-- Top Nav -->
+    <div th:replace="fragments/Navbar::navigation"></div>
+
+    <!-- SideNav -->
+    <div th:replace="fragments/SideNav::sidenav"></div>
+
+<body style="background-color: #EBEFF4;">
+ 
+    <div class="container-fluid mb-11" th:each="content : ${courseContents}">
+
+<p>testt</p>
+       
+        <!-- <div class="row">
+            <div class="col-9 ms-5 mt-5" style=" " >
+
+                <div>
+                    <span class="courses_content_title">
+                        Course content
+                    </span>
+                
+                    <div class="mt-5" >
+                        <p class="sidnav_courses_content">
+                            Video title
+                        </p>
+                        <p class="courses_content_information" th:text="${content.video_title}"></p>
+                    </div>
+                    <div class="mt-3" >
+                        <p class="sidnav_courses_content">
+                            Video description
+                        </p>
+                        <p class="courses_content_information" th:text="${content.video_description}"></p>
+                    </div>
+                    <a  class="btn btn-danger" >delete</a>
+                </div>
+                
+
+               
+            </div>
+
+          
+        </div> -->
+    </div>
+    <script src="/js/Loaders.js"></script>
+    <!-- MDB -->
+    <script
+type="text/javascript"
+src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"
+>
+</script>
+<script src="../js/side-nav.js"></script>
+</body>
+
+</html>

@@ -135,8 +135,7 @@
                                                             <li><a id="addCourseContentLink" class="dropdown-item"
                                                                     href="">Add Content</a></li>
 
-                                                            <li><a id="viewContentLink" class="dropdown-item"
-                                                                    href="">View Content</a></li>
+                                                           
                                                         </ul>
                                                     </div>
                                                 </li>
@@ -233,38 +232,27 @@
                                                                 <div class="box-container">
 
 
-                                                                    <div th:each="course: ${courses}" class="box">
+                                                                    <div th:each="course: ${courses}" class="box" style="width: 100%;">
                                                                         <div class="flex">
                                                                             <div>
-                                                                                <i class="fas fa-circle-dot"
-                                                                                    style="color:limegreen"></i>
-                                                                                <span style="color:limegreen"
-                                                                                    th:text="${course.course_status}"></span>
+                                                                                <i class="fas fa-circle-dot" style="color:limegreen"></i>
+                                                                                <span style="color:limegreen" th:text="${course.course_status}"></span>
                                                                             </div>
-                                                                            <div><span style="color:red"
-                                                                                    name="course_price"
-                                                                                    th:text="${course.course_price}"></span>
-                                                                            </div>
+                                                                            <div><span style="color:red" name="course_price" th:text="${course.course_price}"></span></div>
                                                                         </div>
                                                                         <div class="thumb">
                                                                             <span>0</span>
                                                                             <img src="" alt="">
                                                                         </div>
-                                                                        <h3 class="title" name="course_title"
-                                                                            th:text="${course.course_title}"></h3>
-                                                                        <p class="description" name="course_description"
-                                                                            th:text="${course.course_description}"></p>
-                                                                        <div class="flex-btn">
-                                                                            <a href="" class="btn btn-warning w-100"
-                                                                                id=""
-                                                                                th:href="@{'/courses/edit-course?courseid=' + ${course.course_id}}">update</a>
-                                                                            <a th:href="@{'/courses/delete-course?courseid=' + ${course.course_id}}"
-                                                                                class="btn btn-danger w-100"
-                                                                                id="">delete</a>
+                                                                        <h3 class="title" name="course_title" th:text="${course.course_title}"></h3>
+                                                                        <p class="description" name="course_description" th:text="${course.course_description}"></p>
+                                                                        <div class="flex-btn" style="display: flex; justify-content: space-between;">
+                                                                            <a href="" class="btn btn-warning" th:href="@{'/courses/view-content?courseid=' + ${course.course_id}}" style="width: calc(33.33% - 10px); background-color:lightsteelblue;">view</a>
+                                                                            <a href="" class="btn btn-warning" th:href="@{'/courses/edit-course?courseid=' + ${course.course_id}}" style="width: calc(33.33% - 10px);">update</a>
+                                                                            <a th:href="@{'/courses/delete-course?courseid=' + ${course.course_id}}" class="btn btn-danger" style="width: calc(33.33% - 10px);">delete</a>
                                                                         </div>
-
-
                                                                     </div>
+                                                                    
                                                             </section>
 
 
@@ -306,14 +294,13 @@
                                                         th:text="${error.defaultMessage}"
                                                         style="color: red; width: max-content;"></span>
 
-                                                    <p>Video playlist <span>*</span></p>
+                                                    <p>Select course to add content <span>*</span></p>
                                                     <select name="video_playlist" class="box">
-                                                        <option value="" selected disabled>-- Select playlist --
-                                                        </option>
-                                                        <option value="playlist1">Playlist 1</option>
-                                                        <option value="playlist2">Playlist 2</option>
-                                                        <!-- Add more options as needed -->
-                                                    </select>
+                                                        
+                                                        <option value="" selected disabled>-- Select course --</option>
+                  
+                    <option th:each="course : ${courses}" th:value="${course.course_id}" th:text="${course.course_title}"></option>
+                </select>
                                                     <span th:each="error : ${contenterrors}"
                                                         th:if="${error.field == 'video_playlist'}" class="alert"
                                                         th:text="${error.defaultMessage}"
@@ -344,61 +331,7 @@
                                                 </form>
 
                                             </section>
-                                            <!--//////////////////////////////////////////////////////////////////   View content page-->
-                                            <section id="viewContentPage" style="display: none;">
-                                                <div class="col-lg-8 ">
-                                                    <div class=" mb-4">
-                                                        <div class="">
-                                                            <div class="row">
-                                                                <div class="col-sm-3">
-                                                                    <p class="mb-0" style="font-size: 1.5rem;"> Your
-                                                                        Content</p>
-                                                                </div>
-                                                            </div>
-                                                            <hr>
-
-                                                            <section class="playlists">
-
-                                                                <div class="box-container">
-
-
-                                                                    <div th:each="course: ${courses}" class="box">
-                                                                        <div class="flex">
-                                                                            <div>
-
-                                                                                <span style="color:limegreen"></span>
-                                                                                <!--Video title-->
-                                                                            </div>
-
-                                                                        </div>
-                                                                        <div class="thumb">
-
-                                                                            <img src="" alt="">
-                                                                        </div>
-                                                                        <h3 class="title" name="course_title"
-                                                                            th:text="'Course: ' + ${course.course_title}">
-                                                                        </h3>
-
-                                                                        <p class="description"
-                                                                            name="course_description"></p>
-                                                                        <!--Video description-->
-                                                                        <div class="flex-btn">
-
-                                                                            <a class="btn btn-danger w-100">delete</a>
-                                                                        </div>
-
-
-                                                                    </div>
-                                                            </section>
-
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </section>
-
-                                            <!--//////////////////////////////////////////////////////////////////   end of View content page-->
-
+                                            
 
 
 
@@ -443,20 +376,13 @@
                                                     document.getElementById('viewContentPage').style.display = 'none';
                                                 }
 
-                                                function showViewContentSection(event) {
-                                                    event.preventDefault();
-                                                    document.getElementById('addCourseContent').style.display = 'none';
-                                                    document.getElementById('viewCourseSection').style.display = 'none';
-                                                    document.getElementById('addCourseSection').style.display = 'none';
-                                                    document.getElementById('viewContentPage').style.display = 'block';
-                                                }
+                                                
 
                                                 //document.getElementById('updateCourseLink').addEventListener('click', showUpdateCourseSection);
                                                 document.getElementById('addCourseLink').addEventListener('click', showAddCourseSection);
                                                 document.getElementById('viewCourseLink').addEventListener('click', showViewCourseSection);
                                                 document.getElementById('addCourseContentLink').addEventListener('click', showAddCourseContentSection);
-
-
+                                                
                                                 //document.getElementById('updateCourseLink').addEventListener('click', showUpdateCourseSection);
 
 

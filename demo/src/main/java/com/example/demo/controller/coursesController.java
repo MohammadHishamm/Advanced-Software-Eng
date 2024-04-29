@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.models.CourseContent;
 import com.example.demo.models.Courses;
 import com.example.demo.models.Instructor;
 import com.example.demo.models.Student;
@@ -239,5 +240,26 @@ public class coursesController {
 
         return mav;
     }
+
+
+    @GetMapping("view-content")
+    public ModelAndView view_course(@RequestParam("courseid") int courseId) {
+        Courses course= this.coursesRepository.findById(courseId);
+        ModelAndView mav = new ModelAndView("view-content.html");
+       
+        List<CourseContent> content = course.getCoursecontent();
+       
+             mav.addObject("courseContents" , content );
+       
+       
+        return mav;
+    
+ 
+ 
+ }
+
+
+
+
 
 }
