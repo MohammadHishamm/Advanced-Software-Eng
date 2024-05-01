@@ -54,6 +54,11 @@ public class Courses {
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<CourseContent> coursecontent = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
+
 
     public Courses() {
     }
