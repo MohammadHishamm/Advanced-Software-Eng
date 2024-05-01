@@ -91,7 +91,10 @@
                           >
                             Remove
                           </a>
-                          <a class="btn btn-secondary btn-sm mt-2" href="">
+                          <a
+                            class="btn btn-secondary btn-sm mt-2"
+                            th:href="@{'/courses/view-course?courseid=' + ${course.course_id}}"
+                          >
                             View Course
                           </a>
                         </div>

@@ -30,12 +30,20 @@
                                         SignUp
                                     </button>
                                 </a>
+                                <a th:if="${session != null and session.type == 'student'}" href="user/wishlist">
+                                    <button style="border: none; background: url('Images/wishlist-icon.png') no-repeat center center; background-size: cover; width: 32px; height: 32px;">
+                                        <!-- No text content needed here -->
+                                    </button>
+                                </a>
+                                
                                 <a th:if="${session.email != null}" href="/sign/signout">
                                     <button class="btn" style="background-color: #58779D; color: white;">
                                         SignOut
                                     </button>
                                 </a>
+                              
                             </div>
+                            
                         </div>
                     </div>
                 </div>
