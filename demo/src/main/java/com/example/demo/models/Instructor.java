@@ -36,7 +36,8 @@ public class Instructor
     
     private String Language;
 
-    
+    private String status;
+
     private String Country;
 
     @NotEmpty(message = "CV is required")
@@ -69,6 +70,32 @@ public class Instructor
 
     public int getId() {
         return this.id;
+    }
+
+    public Instructor(int id, String Gender, String Position, String Language, String status, String Country, String Pdf, String Comment, User user, List<Courses> courses) {
+        this.id = id;
+        this.Gender = Gender;
+        this.Position = Position;
+        this.Language = Language;
+        this.status = status;
+        this.Country = Country;
+        this.Pdf = Pdf;
+        this.Comment = Comment;
+        this.user = user;
+        this.courses = courses;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Instructor status(String status) {
+        setStatus(status);
+        return this;
     }
 
     public void setId(int id) {

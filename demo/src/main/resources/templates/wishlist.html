@@ -1,110 +1,109 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <title>Wishlist</title>
 
-    <link rel="stylesheet" href="../css/Sidenav.css">
+    <link rel="stylesheet" href="../css/Sidenav.css" />
 
-    <link rel="stylesheet" href="../css/MDB css/mdb.min.css">
-    <link rel="stylesheet" href="../css/All.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/MDB css/mdb.min.css" />
+    <link rel="stylesheet" href="../css/All.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <script src="../js/Toast.js"></script>
 
-
-</head>
-<script src="../js/Toast.js"></script>
-
-
-<body>
-
+  <body>
     <audio id="Audio">
-        <source src="../images/alert.wav">
+      <source src="../images/alert.wav" />
     </audio>
     <!-- TopNav -->
     <div th:replace="fragments/Navbar::navigation"></div>
 
     <section class="container-fluid">
-
-
-
-        <div class=" py-5">
-            <div class="row d-flex justify-content-center align-items-center ">
-                <div class="col-10">
-
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h3 class="fw-normal mb-0 text-black">Wishlist</h3>
-                    </div>
-
-                    <div class="row justify-content-center mb-3">
-                        <div class="col-md-12 col-xl-10">
-                            <div class="card shadow-0 border rounded-3">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
-                                            <div class="bg-image hover-zoom ripple rounded ripple-surface">
-                                                <img src="/Images/img.jpg" class="w-100" />
-                                                <a href="">
-                                                    <div class="hover-overlay">
-                                                        <div class="mask"
-                                                            style="background-color: rgba(253, 253, 253, 0.15);">
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-6 col-xl-6">
-                                            <h5></h5>
-                                            <div class="d-flex flex-row">
-                                                <div class="text-danger mb-1 me-2">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                                <span>300</span>
-                                            </div>
-                                            <a class="text-dark" href="" style="font-size: 13px;">username</a>
-
-                                            <p class="text-truncate mb-4 mt-3 mb-md-0">
-                                                Description
-                                            </p>
-                                        </div>
-                                        <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
-                                            <div class="d-flex flex-row align-items-center mb-1">
-                                                <h4 class="mb-1 me-1">200</h4>
-                                                <span class="text-danger"><s>$20.99</s></span>
-                                            </div>
-                                            <div class="d-flex flex-column mt-4">
-                                                <a href="" class="btn btn-danger btn-sm mt-2">
-                                                    Delete
-                                                </a>
-                                                <a class="btn btn-secondary btn-sm mt-2" href="">
-                                                    View Course
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
-                </div>
+      <div class="py-5">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col-10">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h3 class="fw-normal mb-0 text-black">Wishlist</h3>
             </div>
+
+            <div class="row justify-content-center mb-3">
+              <div class="col-md-12 col-xl-10">
+                <div class="card shadow-0 border rounded-3">
+                  <div th:each="course : ${courses}" class="card-body">
+                    <div class="row">
+                      <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                        <div
+                          class="bg-image hover-zoom ripple rounded ripple-surface"
+                        >
+                          <img
+                            src="../images/users/'.$fetch_playlist['user_img'].'"
+                            class="w-100"
+                          />
+                          <a href="">
+                            <div class="hover-overlay">
+                              <div
+                                class="mask"
+                                style="
+                                  background-color: rgba(253, 253, 253, 0.15);
+                                "
+                              ></div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-lg-6 col-xl-6">
+                        <h5></h5>
+
+                        <h4
+                          th:text="${course.course_title}"
+                          class="text-dark"
+                        ></h4>
+
+                        <p
+                          th:text="${course.course_description}"
+                          class="text-truncate mb-4 mt-3 mb-md-0"
+                        ></p>
+                      </div>
+                      <div
+                        class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start"
+                      >
+                        <div class="d-flex flex-row align-items-center mb-1">
+                          <h4
+                            th:text="${course.course_price}"
+                            class="mb-1 me-1"
+                          ></h4>
+                        </div>
+                        <div class="d-flex flex-column mt-4">
+                          <a
+                            th:href="@{../user/remove-wishlist(courseid=${course.course_id})}"
+                            class="btn btn-danger btn-sm mt-2"
+                          >
+                            Remove
+                          </a>
+                          <a class="btn btn-secondary btn-sm mt-2" href="">
+                            View Course
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
-
-
-
-</body>
-
+  </body>
 </html>

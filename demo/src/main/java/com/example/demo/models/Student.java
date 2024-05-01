@@ -35,31 +35,22 @@ public class Student
     @JoinColumn(name = "user_id") 
     private User user;
 
-    public Student(int id, List<Courses> courses, User user) {
-        this.id = id;
-        this.courses = courses;
-        this.user = user;
-    }
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
+    private Wishlist wishlist;
 
-    public User getUser() {
-        return this.user;
-    }
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
+    private Cart cart;
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 
-    public Student user(User user) {
-        setUser(user);
-        return this;
-    }
 
     public Student() {
     }
 
-    public Student(int id, List<Courses> courses) {
+    public Student(int id, List<Courses> courses, User user, Wishlist wishlist) {
         this.id = id;
         this.courses = courses;
+        this.user = user;
+        this.wishlist = wishlist;
     }
 
     public int getId() {
@@ -78,6 +69,22 @@ public class Student
         this.courses = courses;
     }
 
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Wishlist getWishlist() {
+        return this.wishlist;
+    }
+
+    public void setWishlist(Wishlist wishlist) {
+        this.wishlist = wishlist;
+    }
+
     public Student id(int id) {
         setId(id);
         return this;
@@ -85,6 +92,16 @@ public class Student
 
     public Student courses(List<Courses> courses) {
         setCourses(courses);
+        return this;
+    }
+
+    public Student user(User user) {
+        setUser(user);
+        return this;
+    }
+
+    public Student wishlist(Wishlist wishlist) {
+        setWishlist(wishlist);
         return this;
     }
 
@@ -96,12 +113,12 @@ public class Student
             return false;
         }
         Student student = (Student) o;
-        return id == student.id && Objects.equals(courses, student.courses);
+        return id == student.id && Objects.equals(courses, student.courses) && Objects.equals(user, student.user) && Objects.equals(wishlist, student.wishlist);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, courses);
+        return Objects.hash(id, courses, user, wishlist);
     }
 
     @Override
@@ -109,7 +126,11 @@ public class Student
         return "{" +
             " id='" + getId() + "'" +
             ", courses='" + getCourses() + "'" +
+            ", user='" + getUser() + "'" +
+            ", wishlist='" + getWishlist() + "'" +
             "}";
     }
-    
+
+
+   
 }

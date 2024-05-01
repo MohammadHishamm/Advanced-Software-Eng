@@ -75,7 +75,8 @@ public class InstructorController
          
             instructor.setUser(user);
     
-          
+            instructor.setStatus("Observing");
+
             this.instructorRepository.save(instructor);
     
             
