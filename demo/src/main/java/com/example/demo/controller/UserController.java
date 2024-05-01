@@ -5,10 +5,19 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.example.demo.models.Courses;
+import com.example.demo.models.Student;
 import com.example.demo.models.User;
+import com.example.demo.models.Wishlist;
+import com.example.demo.repositories.CoursesRepository;
+import com.example.demo.repositories.StudentRepository;
 import com.example.demo.repositories.UserRepository;
+import com.example.demo.repositories.WishlistRepository;
 
 import jakarta.servlet.http.HttpSession;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +25,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -24,8 +35,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/user")
 public class UserController {
 
-      @Autowired  
+ @Autowired  
     private UserRepository userRepository;
+    @Autowired  
+    private CoursesRepository coursesRepository;
+    @Autowired  
+    private WishlistRepository wishlistRepository;
+    @Autowired  
+    private StudentRepository studentRepository;
 
     @GetMapping("/profile")
     public ModelAndView viewProfile(HttpSession session) {
@@ -105,5 +122,89 @@ public class UserController {
         return new RedirectView("/");
     }
 
+
+
+    @GetMapping("add-wishlist")
+    public ModelAndView addwishlist(@RequestParam("courseid") int courseid, HttpSession session) {
+        ModelAndView mav = new ModelAndView("wishlist.html");
+        Courses course = this.coursesRepository.findById(courseid);
+        String email = (String) session.getAttribute("email");
+        User user = this.userRepository.findByEmail(email);
+        Student student = this.studentRepository.findByUser(user);
+    
+        Wishlist wishlist = this.wishlistRepository.findByStudent(student);
+        if (wishlist == null) {
+         
+            wishlist = new Wishlist();
+            wishlist.setStudent(student);
+        }
+    
+        List<Courses> courseslist = wishlist.getCourses();
+        courseslist.add(course);
+        wishlist.setCourses(courseslist);
+    
+        
+        this.wishlistRepository.save(wishlist);
+    
+        mav.addObject("courses", courseslist);
+        return mav;
+    }
+    
+ 
+
+@GetMapping("wishlist")
+public ModelAndView viewwishlist( HttpSession session){
+        ModelAndView mav = new ModelAndView("wishlist.html");
+        String email = (String) session.getAttribute("email");
+        User user = this.userRepository.findByEmail(email);
+        Student student = this.studentRepository.findByUser(user);
+        Wishlist wishlist = this.wishlistRepository.findByStudent(student);
+
+        mav.addObject("courses", wishlist.getCourses());
+        return mav;
+     
+
+}
+
+@GetMapping("remove-wishlist")
+public ModelAndView removeWishlist(@RequestParam("courseid") int courseId, HttpSession session) {
+    ModelAndView mav = new ModelAndView("wishlist.html");
+
+    String email = (String) session.getAttribute("email");
+    User user = this.userRepository.findByEmail(email);
+    Student student = this.studentRepository.findByUser(user);
+
+    Wishlist wishlist = this.wishlistRepository.findByStudent(student);
+    if (wishlist != null) {
+        List<Courses> courses = wishlist.getCourses();
+        Courses courseToRemove = null;
+        for (Courses course : courses) {
+            if (course.getCourse_id() == courseId) {
+                courseToRemove = course;
+                break;
+            }
+        }
+        if (courseToRemove != null) {
+            courses.remove(courseToRemove);
+            this.wishlistRepository.save(wishlist);
+        }
+    }
+
+    // Fetch wishlist again after removal in case it's updated
+    wishlist = this.wishlistRepository.findByStudent(student);
+
+    mav.addObject("courses", wishlist.getCourses());
+    return mav;
+}
+
+
+
+
+
+
+    
+
+
+ 
 
 }
