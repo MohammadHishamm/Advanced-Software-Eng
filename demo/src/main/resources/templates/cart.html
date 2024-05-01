@@ -4,9 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/cart.css">
+   
+    <link rel="stylesheet" href="../css/Sidenav.css">
+
+    <link rel="stylesheet" href="../css/MDB css/mdb.min.css">
+    <link rel="stylesheet" href="../css/All.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <title>Cart</title>
 </head>
 <body>
+     <!-- TopNav -->
+     <div th:replace="fragments/Navbar::navigation"></div>
+     <!-- SideNav -->
+    <div th:replace="fragments/SideNav::sidenav"></div>
    
     <h1>Your Cart</h1>
 </br>
@@ -25,7 +38,7 @@
         </div>
         <div class="product-price" th:text="${course.course_price}"></div>
         <div class="product-quantity">
-          <input type="number" value="2" min="1">
+          <input type="number" value="1" min="1">
         </div>
         <div class="product-removal">
           <a   th:href="@{../user/remove-cart(courseid=${course.course_id})}" class="remove-product">
@@ -60,7 +73,7 @@
     
     </div>
 
-
+<script src="../js/side-nav.js"></script>
 <script src="../js/cart.js"></script>
 </body>
 </html>
