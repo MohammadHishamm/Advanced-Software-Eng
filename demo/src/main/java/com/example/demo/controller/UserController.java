@@ -5,10 +5,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.example.demo.models.Cart;
 import com.example.demo.models.Courses;
 import com.example.demo.models.Student;
 import com.example.demo.models.User;
 import com.example.demo.models.Wishlist;
+import com.example.demo.repositories.CartRepository;
 import com.example.demo.repositories.CoursesRepository;
 import com.example.demo.repositories.StudentRepository;
 import com.example.demo.repositories.UserRepository;
@@ -43,6 +45,8 @@ public class UserController {
     private WishlistRepository wishlistRepository;
     @Autowired  
     private StudentRepository studentRepository;
+    @Autowired  
+    private CartRepository cartRepository;
 
     @GetMapping("/profile")
     public ModelAndView viewProfile(HttpSession session) {
@@ -198,6 +202,78 @@ public ModelAndView removeWishlist(@RequestParam("courseid") int courseId, HttpS
 }
 
 
+@GetMapping("add-cart")
+    public ModelAndView addcart(@RequestParam("courseid") int courseid, HttpSession session) {
+        ModelAndView mav = new ModelAndView("cart.html");
+        Courses course = this.coursesRepository.findById(courseid);
+        String email = (String) session.getAttribute("email");
+        User user = this.userRepository.findByEmail(email);
+        Student student = this.studentRepository.findByUser(user);
+    
+        Cart cart = this.cartRepository.findByStudent(student);
+        if (cart == null) {
+         
+            cart = new Cart(); 
+            cart.setStudent(student);
+        }
+    
+        List<Courses> courseslist = cart.getCourses();
+        courseslist.add(course);
+        cart.setCourses(courseslist);
+    
+        
+        this.cartRepository.save(cart);
+    
+        mav.addObject("courses", courseslist);
+        return mav;
+    }
+    
+ 
+
+@GetMapping("cart")
+public ModelAndView viewcart( HttpSession session){
+        ModelAndView mav = new ModelAndView("cart.html");
+        String email = (String) session.getAttribute("email");
+        User user = this.userRepository.findByEmail(email);
+        Student student = this.studentRepository.findByUser(user);
+        Cart cart = this.cartRepository.findByStudent(student);
+
+        mav.addObject("courses", cart.getCourses());
+        return mav;
+     
+
+}
+
+@GetMapping("remove-cart")
+public ModelAndView removecart(@RequestParam("courseid") int courseId, HttpSession session) {
+    ModelAndView mav = new ModelAndView("cart.html");
+
+    String email = (String) session.getAttribute("email");
+    User user = this.userRepository.findByEmail(email);
+    Student student = this.studentRepository.findByUser(user);
+
+    Cart cart = this.cartRepository.findByStudent(student);
+    if (cart != null) {
+        List<Courses> courses = cart.getCourses();
+        Courses courseToRemove = null;
+        for (Courses course : courses) {
+            if (course.getCourse_id() == courseId) {
+                courseToRemove = course;
+                break;
+            }
+        }
+        if (courseToRemove != null) {
+            courses.remove(courseToRemove);
+            this.cartRepository.save(cart);
+        }
+    }
+
+    // Fetch wishlist again after removal in case it's updated
+     cart = this.cartRepository.findByStudent(student);
+
+    mav.addObject("courses", cart.getCourses());
+    return mav;
+}
 
 
 

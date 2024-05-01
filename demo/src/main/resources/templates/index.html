@@ -225,7 +225,7 @@
                                             <a class="addtocart btn btn-primary w-50 m-2" th:href="@{'/user/add-wishlist?courseid=' + ${course.course_id}}" id="addtocart">
                                                 Add to wishlist
                                             </a>
-                                            <a class="addtocart btn btn-success w-50 m-2" href="" id="addtocart">
+                                            <a class="addtocart btn btn-success w-50 m-2" th:href="@{'/user/add-cart?courseid=' + ${course.course_id}}"  id="addtocart">
                                                 Add to Cart
                                             </a>
                                         </div>
