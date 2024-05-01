@@ -93,7 +93,7 @@ public class coursesController {
                 // mav.addObject("error", "Instructor not found");
                 return mav;
             }
-        } else {
+        } else { 
 
             // mav.addObject("error", "User session not found");
             return mav;
