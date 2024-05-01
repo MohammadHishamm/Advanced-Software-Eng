@@ -150,6 +150,10 @@
 
     </div>
 
+         
+    <p th:if="${success == true}" >
+        zayatyyyyyyyy...
+    </p>
     <div class="">
         <div class="p-5 ">
             <!-- Section name -->
@@ -164,11 +168,13 @@
                     </button>
                 </div>
             </div>
-            <!-- section products -->
-            <div class="row d-flex justify-content-center align-items-center">
 
-                <div class="col  mb-3">
-                    <div class="card" style="width: 20rem; height: 35rem;   ">
+
+       
+            <!-- section products -->
+            <div th:if="${success}" class="row d-flex justify-content-center align-items-center">
+                <div th:each="course : ${courses}" class="col  mb-3">
+                    <div  class="card" style="width: 20rem; height: 35rem; ">
                         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light"
                             style="width: 20rem; height: 25rem;  ">
                             <img src="" style="object-fit: cover ; height: 100%; width: 100%;" />
@@ -207,7 +213,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <p class="card-text mb-3 text-muted"></p>
+                                <p class="card-text mb-3 text-muted" th:text="${course.course_title}"></p>
                                 <div>
                                     <div class="d-flex align-items-center justify-content-between mb-3">
                                         <p class="small mb-0"><i class="far fa-clock me-2"></i></p>
@@ -230,7 +236,7 @@
                                         </div>
                                         <div class="d-flex col-12 align-items-center w-100 ">
 
-                                            <a class="addtocart btn btn-secondry w-100" href="">
+                                            <a class="addtocart btn btn-secondry w-100"  th:href="@{'/courses/view-course?courseid=' + ${course.course_id}}">
                                                 view course
                                             </a>
                                         </div>
@@ -241,6 +247,10 @@
                     </div>
                 </div>
 
+            </div>
+
+            <div th:unless="${success}">
+                <p>No courses found</p>
             </div>
         </div>
     </div>

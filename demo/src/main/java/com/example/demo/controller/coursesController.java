@@ -112,6 +112,7 @@ public class coursesController {
                 String useremail = (String) session.getAttribute("email");
                 User user1 = this.userRepository.findByEmail(useremail);
                 Student student = this.studentRepository.findByUser(user1);
+          
                 // all the courses that this student enrolled in
                 List<Courses> courses = student.getCourses();
 
@@ -128,7 +129,11 @@ public class coursesController {
                 mav.addObject("course", course);
                 mav.addObject("User", user2);
                 mav.addObject("enroll", enrolled_in);
-            } else {
+           
+              
+            }
+            else 
+            {
                 mav = new ModelAndView("Signup-in.html");
             }
 
