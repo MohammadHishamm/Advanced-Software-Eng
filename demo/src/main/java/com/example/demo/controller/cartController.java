@@ -8,7 +8,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/cart")
 @RestController
 public class cartController {
-     @GetMapping("")
+    
+    
+    @GetMapping("view-cart")
     public ModelAndView cart() {
        ModelAndView mav = new ModelAndView("cart.html");
        return mav;
