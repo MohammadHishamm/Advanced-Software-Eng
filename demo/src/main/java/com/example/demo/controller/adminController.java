@@ -39,16 +39,24 @@ public class adminController {
         return mav;
     }
 
+
     @GetMapping("/view-tutor")
-    public ModelAndView view_tutor(HttpSession session) {
+    public ModelAndView view_tutor(HttpSession session) 
+    {
         ModelAndView mav = new ModelAndView("Admin/tutor.html");
-        List<Instructor> instructorList = this.instructorRepository.findAll();
-        if (session != null && session.getAttribute("type").toString() == "admin") {
-            mav.addObject("instructorlist", instructorList);
-        } else {
+        List<Instructor> instructorList = this.instructorRepository.findAll(); 
+        if(session != null )
+        {
+            List<User> userlist = this.userRepository.findAll();
+            mav.addObject("users", userlist);
+            mav.addObject("instructors", instructorList);
+        }
+        else
+        {
             mav = new ModelAndView("Signup-in.html");
         }
-
+        
         return mav;
     }
 }
+

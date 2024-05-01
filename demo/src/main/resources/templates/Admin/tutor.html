@@ -1,22 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<html xmlns:th="http://www.thymeleaf.org">
+
 
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
-    <link rel="stylesheet" href="css/all.min.css" />
-    <link rel="stylesheet" href="css/framework.css" />
-    <link rel="stylesheet" href="css/master.css" />
+    <link rel="stylesheet" th:href="@{../css/all.min.css}">
+    <link rel="stylesheet" th:href="@{../css/framework.css}">
+    <link rel="stylesheet" th:href="@{../css/master.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap" rel="stylesheet" />
 </head>
-
 <body>
     <div class="page d-flex">
+        <div th:replace="fragments/side-nav::adminsidenav">
 
+        </div>
+        
         <div class="content w-full">
             <!-- Start Head -->
             <div class="head bg-white p-15 between-flex">
@@ -55,39 +58,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-
-                                        </td>
-
-                                        <td>
-                                            <span class="label btn-shape bg-red c-white"></span>
-                                        </td>
-                                        <td>
-                                            <a href="" class="label btn-shape bg-green c-white"
-                                                style="margin-right: 20px;">Accept</a>
-                                            <a href="" class="label btn-shape bg-red c-white"
-                                                style="margin-right: 20px;">Reject</a>
-                                            <a href="" class="label btn-shape bg-blue c-white">View</a>
-                                        </td>
+                                    <tr th:each="instructor : ${instructors}">
+                                            
+                                                <td ></td>
+                                                <td th:text="${instructor.position}"></td>
+                                                <td th:text="${instructor.country}"></td>
+                                                <td th:text="${instructor.language}"></td>
+                                                    <!-- Add more columns as needed -->
+                                                <td>
+                                                    <!-- Actions for this instructor -->
+                                                </td>
+                                            
                                     </tr>
 
+                                    <!--
                                     <div class="projects p-20 bg-white rad-10 m-20">
                                         <h2 class="mt-0 mb-20">Tutor request view</h2>
                                         <div class="profile-page m-20">
-                                            <!-- Start Overview -->
+                                           
                                             <div class="overview bg-white rad-10 d-flex align-center">
                                                 <div class="avatar-box txt-c p-20">
                                                     <img class="rad-half mb-10" src="../Images/users/" alt="" />
                                                     <h3 class="m-0"></h3>
                                                 </div>
                                                 <div class="info-box w-full txt-c-mobile">
-                                                    <!-- Start Information Row -->
+                                                 
                                                     <div class="box p-20 d-flex align-center">
                                                         <h4 class="c-grey fs-15 m-0 w-full">General Information</h4>
                                                         <div class="fs-14">
@@ -106,8 +101,7 @@
 
                                                         </div>
                                                     </div>
-                                                    <!-- End Information Row -->
-                                                    <!-- Start Information Row -->
+                                          
                                                     <div class="box p-20 d-flex align-center">
                                                         <h4 class="c-grey w-full fs-15 m-0">Personal Information</h4>
                                                         <div class="fs-14 " style="margin-right:50px;">
@@ -122,8 +116,7 @@
 
                                                         </div>
                                                     </div>
-                                                    <!-- End Information Row -->
-                                                    <!-- Start Information Row -->
+                                            
                                                     <div class="box p-20 d-flex align-center">
                                                         <h4 class="c-grey w-full fs-15 m-0">Job Information</h4>
                                                         <div class="fs-14">
@@ -135,16 +128,16 @@
 
                                                         </div>
                                                     </div>
-                                                    <!-- End Information Row -->
+                                                 
                                                 </div>
                                             </div>
-                                            <!-- End Overview -->
+                                       
                                             <span>CV</span>
                                             <embed src=" ../Public/pdf/" type="application/pdf"
                                                 style="width:100%; height:500px; overflow-y:hidden;" />
                                         </div>
                                     </div>
-
+                                    -->
 
                                 </tbody>
                             </table>
