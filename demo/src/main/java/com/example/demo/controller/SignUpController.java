@@ -4,7 +4,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.example.demo.models.Student;
 import com.example.demo.models.User;
+import com.example.demo.repositories.StudentRepository;
 import com.example.demo.repositories.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
@@ -28,6 +30,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SignUpController {
     @Autowired  
     private UserRepository userRepository;
+    @Autowired  
+    private StudentRepository  studentRepository;
+    
 
     @GetMapping("")
     public ModelAndView getpage() {
@@ -65,7 +70,10 @@ public class SignUpController {
         String encodePassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
         user.setPassword(encodePassword);
         user.setType("student");
+        Student student=new Student();
+        student.setUser(user);
         this.userRepository.save(user);
+        this.studentRepository.save(student);
         session.setAttribute("email", user.getEmail());
         session.setAttribute("id", user.getUser_id());
         session.setAttribute("type", user.getType());
@@ -97,6 +105,7 @@ public class SignUpController {
             session.setAttribute("id", user.getUser_id());
             session.setAttribute("email", dbUser.getEmail());
             session.setAttribute("type", dbUser.getType());
+
         }
     }
     if (bindingResult.hasErrors()) {
