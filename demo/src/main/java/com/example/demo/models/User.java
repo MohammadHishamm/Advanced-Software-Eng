@@ -28,8 +28,7 @@ public class User {
     private String password;
     private String type;
 
-    @OneToOne(mappedBy = "user")
-    private Cart cart;
+   
 
 
     public User(int user_id, String name, String email, String password, String type) {

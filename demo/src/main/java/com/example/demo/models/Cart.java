@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -8,6 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import java.util.Objects;
 
@@ -17,21 +20,26 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int cart_id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @ManyToMany
+    @JoinTable(
+        name = "cart_courses",
+        joinColumns = @JoinColumn(name = "cart_id"),
+        inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private List<Courses> courses = new ArrayList<>();
 
-    @OneToMany(mappedBy = "cart")
-    private List<Courses> courses;
+    @OneToOne
+    @JoinColumn(name = "id")
+    private Student student;
 
 
     public Cart() {
     }
 
-    public Cart(int cart_id, User user, List<Courses> courses) {
+    public Cart(int cart_id, List<Courses> courses, Student student) {
         this.cart_id = cart_id;
-        this.user = user;
         this.courses = courses;
+        this.student = student;
     }
 
     public int getCart_id() {
@@ -42,14 +50,6 @@ public class Cart {
         this.cart_id = cart_id;
     }
 
-    public User getUser() {
-        return this.user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public List<Courses> getCourses() {
         return this.courses;
     }
@@ -58,18 +58,26 @@ public class Cart {
         this.courses = courses;
     }
 
+    public Student getStudent() {
+        return this.student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
     public Cart cart_id(int cart_id) {
         setCart_id(cart_id);
         return this;
     }
 
-    public Cart user(User user) {
-        setUser(user);
+    public Cart courses(List<Courses> courses) {
+        setCourses(courses);
         return this;
     }
 
-    public Cart courses(List<Courses> courses) {
-        setCourses(courses);
+    public Cart student(Student student) {
+        setStudent(student);
         return this;
     }
 
@@ -81,22 +89,23 @@ public class Cart {
             return false;
         }
         Cart cart = (Cart) o;
-        return cart_id == cart.cart_id && Objects.equals(user, cart.user) && Objects.equals(courses, cart.courses);
+        return cart_id == cart.cart_id && Objects.equals(courses, cart.courses) && Objects.equals(student, cart.student);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cart_id, user, courses);
+        return Objects.hash(cart_id, courses, student);
     }
 
     @Override
     public String toString() {
         return "{" +
             " cart_id='" + getCart_id() + "'" +
-            ", user='" + getUser() + "'" +
             ", courses='" + getCourses() + "'" +
+            ", student='" + getStudent() + "'" +
             "}";
     }
+
     
 
 }

@@ -38,6 +38,9 @@ public class Student
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
     private Wishlist wishlist;
 
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
+    private Cart cart;
+
 
 
     public Student() {
