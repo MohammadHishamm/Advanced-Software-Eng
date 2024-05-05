@@ -220,11 +220,29 @@ public ModelAndView removeWishlist(@RequestParam("courseid") int courseId, HttpS
                 cart.setStudent(student);
             }
         
+
             List<Courses> courseslist = cart.getCourses();
-            courseslist.add(course);
-            cart.setCourses(courseslist);
+            boolean course_found = false ;
+    
+            for (Courses course_loop : courseslist) {
+                if (course_loop.getCourse_id() == courseid) 
+                {
+                    course_found = true;
+                    break;
+                }
+            }
+   
+            if(!course_found)
+            {
+                courseslist.add(course);
+                cart.setCourses(courseslist);
+            }
+            else
+            {
+                mav.addObject("message", "course already exists");
+            }
         
-            
+
             this.cartRepository.save(cart);
         
             mav.addObject("courses", courseslist);
