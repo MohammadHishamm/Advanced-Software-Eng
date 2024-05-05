@@ -22,9 +22,18 @@
 
 <body style="overflow: hidden">
 
+    <!-- Toast -->
     <audio id="Audio">
         <source src="../images/alert.wav">
-    </audio>
+      </audio>
+      <div  class="toast fade fixed-bottom shadow border border-3 me-5 mb-5 ms-auto " id="toast">
+        <div class="toast-header ">
+          <strong class="me-auto">Arab Data Hub</strong>
+          <small>Notfication</small>
+        </div>
+      <div class="toast-body text-danger"></div>
+      </div>
+    
     <!-- Loaders -->
     <div class="text-center transition transition-1 is-active" id="preloading">
 
@@ -225,9 +234,38 @@
                                             <a class="addtocart btn btn-primary w-50 m-2" th:href="@{'/user/add-wishlist?courseid=' + ${course.course_id}}" id="addtocart">
                                                 Add to wishlist
                                             </a>
-                                            <a class="addtocart btn btn-success w-50 m-2" th:href="@{'/user/add-cart?courseid=' + ${course.course_id}}"  id="addtocart">
-                                                Add to Cart
-                                            </a>
+
+                                           <!-- Your HTML code -->
+                                           <button class="addtocart btn btn-success w-50 m-2" th:onclick="'addToCart(\'' + ${course.course_id} + '\')'">Add to Cart</button>
+
+                                           <script th:inline="javascript">
+                                            function addToCart(courseId) {
+                                                var xhr = new XMLHttpRequest();
+                                                xhr.onreadystatechange = function() {
+                                                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                                                        if (xhr.status === 200) {
+                                                            // Success response
+                                                            var message = xhr.responseText;
+                                                            updateToast(message);
+                                                        } else {
+                                                            // Error response
+                                                            var message = "An error occurred while adding the course to the cart.";
+                                                            updateToast(message);
+                                                        }
+                                                    }
+                                                };
+                                                xhr.open("GET", "/cart/add-cart?courseid=" + courseId, true);
+                                                xhr.send();
+                                            }
+                                        
+                                            function updateToast(message) {
+                                                var toastBody = document.querySelector('#toast .toast-body');
+                                                toastBody.innerText = message;
+                                                showToast();
+                                            }
+                                        </script>
+                                        
+
                                         </div>
                                         <div class="d-flex col-12 align-items-center w-100 ">
 
