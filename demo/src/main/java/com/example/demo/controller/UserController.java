@@ -191,6 +191,7 @@ public ModelAndView removeWishlist(@RequestParam("courseid") int courseId, HttpS
         if (courseToRemove != null) {
             courses.remove(courseToRemove);
             this.wishlistRepository.save(wishlist);
+
         }
     }
 
@@ -296,6 +297,7 @@ public ModelAndView removecart(@RequestParam("courseid") int courseId, HttpSessi
              {
                 courses.remove(courseToRemove);
                 this.cartRepository.save(cart);
+                mav.addObject("message", "course removed from cart");
             }
         }
     
