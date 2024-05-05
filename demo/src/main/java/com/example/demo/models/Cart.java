@@ -31,7 +31,7 @@ public class Cart {
     
 
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "student_id")
     private Student student;
 
 

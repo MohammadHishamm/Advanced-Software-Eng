@@ -205,26 +205,35 @@ public ModelAndView removeWishlist(@RequestParam("courseid") int courseId, HttpS
 @GetMapping("add-cart")
     public ModelAndView addcart(@RequestParam("courseid") int courseid, HttpSession session) {
         ModelAndView mav = new ModelAndView("cart.html");
-        Courses course = this.coursesRepository.findById(courseid);
         String email = (String) session.getAttribute("email");
-        User user = this.userRepository.findByEmail(email);
-        Student student = this.studentRepository.findByUser(user);
-    
-        Cart cart = this.cartRepository.findByStudent(student);
-        if (cart == null) {
-         
-            cart = new Cart(); 
-            cart.setStudent(student);
-        }
-    
-        List<Courses> courseslist = cart.getCourses();
-        courseslist.add(course);
-        cart.setCourses(courseslist);
-    
+        if(email != null)
+        {
+            Courses course = this.coursesRepository.findById(courseid);
+            User user = this.userRepository.findByEmail(email);
+            Student student = this.studentRepository.findByUser(user);
         
-        this.cartRepository.save(cart);
-    
-        mav.addObject("courses", courseslist);
+            Cart cart = this.cartRepository.findByStudent(student);
+            
+            if (cart == null) 
+            { 
+                cart = new Cart(); 
+                cart.setStudent(student);
+            }
+        
+            List<Courses> courseslist = cart.getCourses();
+            courseslist.add(course);
+            cart.setCourses(courseslist);
+        
+            
+            this.cartRepository.save(cart);
+        
+            mav.addObject("courses", courseslist);
+        }
+        else
+        {
+             mav = new ModelAndView("Signup-in.html");
+        }
+
         return mav;
     }
     
@@ -245,33 +254,43 @@ public ModelAndView viewcart( HttpSession session){
 }
 
 @GetMapping("remove-cart")
-public ModelAndView removecart(@RequestParam("courseid") int courseId, HttpSession session) {
+public ModelAndView removecart(@RequestParam("courseid") int courseId, HttpSession session) 
+{
     ModelAndView mav = new ModelAndView("cart.html");
 
     String email = (String) session.getAttribute("email");
-    User user = this.userRepository.findByEmail(email);
-    Student student = this.studentRepository.findByUser(user);
-
-    Cart cart = this.cartRepository.findByStudent(student);
-    if (cart != null) {
-        List<Courses> courses = cart.getCourses();
-        Courses courseToRemove = null;
-        for (Courses course : courses) {
-            if (course.getCourse_id() == courseId) {
-                courseToRemove = course;
-                break;
+    if(email != null)
+    {
+        User user = this.userRepository.findByEmail(email);
+        Student student = this.studentRepository.findByUser(user);
+    
+        Cart cart = this.cartRepository.findByStudent(student);
+        if (cart != null) {
+            List<Courses> courses = cart.getCourses();
+            Courses courseToRemove = null;
+            for (Courses course : courses) {
+                if (course.getCourse_id() == courseId) {
+                    courseToRemove = course;
+                    break;
+                }
+            }
+            if (courseToRemove != null)
+             {
+                courses.remove(courseToRemove);
+                this.cartRepository.save(cart);
             }
         }
-        if (courseToRemove != null) {
-            courses.remove(courseToRemove);
-            this.cartRepository.save(cart);
-        }
+    
+        // Fetch wishlist again after removal in case it's updated
+         cart = this.cartRepository.findByStudent(student);
+    
+        mav.addObject("courses", cart.getCourses());
     }
-
-    // Fetch wishlist again after removal in case it's updated
-     cart = this.cartRepository.findByStudent(student);
-
-    mav.addObject("courses", cart.getCourses());
+    else
+    {
+         mav = new ModelAndView("Signup-in.html");
+    }
+   
     return mav;
 }
 
