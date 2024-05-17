@@ -57,6 +57,10 @@ public class AddContentTest {
         
         CourseContent courseContent = new CourseContent();
         courseContent.setVideo_playlist("1");
+        courseContent.setVideo_title("Science");
+        courseContent.setVideo_description("Learn Science");
+        courseContent.setVideo_thumbnail("Video image");
+        courseContent.setVideo_play("Video");
         BindingResult bindingResult = new BeanPropertyBindingResult(courseContent, "courseContent");
 
         

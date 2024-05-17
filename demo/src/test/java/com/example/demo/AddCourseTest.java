@@ -80,6 +80,12 @@ public class AddCourseTest {
     public void testSaveCourse_ValidData() {
         
         Courses course = new Courses();
+        course.setCourse_id(1);
+        course.setCourse_title("Java");
+        course.setCourse_status("Active");
+        course.setCourse_description("Java is a programming language");
+        course.setCourse_requirements("Java is a programming language");
+        course.setCourse_price(100.00);
         String email = "xplayer222xz@gmail.com";
         MockHttpSession session = new MockHttpSession();
         session.setAttribute("email", email);

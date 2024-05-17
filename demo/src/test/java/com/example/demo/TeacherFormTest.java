@@ -57,6 +57,14 @@ public class TeacherFormTest {
     @Test
     public void testSaveInstructor_ValidData() {
         Instructor instructor = new Instructor();
+        instructor.setStatus("Observing");
+        instructor.setGender("Male");
+        instructor.setPosition("Teacher");
+        instructor.setLanguage("Arabic");
+        instructor.setCountry("Egypt");
+        instructor.setPdf("pdf");
+        instructor.setComment("comment");
+
         String email = "xplayer222xz@gmail.com";
         MockHttpSession session = new MockHttpSession();
         session.setAttribute("email", email);
