@@ -12,7 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockHttpSession;
 
-import com.example.demo.controller.cartController;
+import com.example.demo.controller.UserController;
 import com.example.demo.repositories.CartRepository;
 import com.example.demo.repositories.CoursesRepository;
 import com.example.demo.repositories.StudentRepository;
@@ -26,7 +26,7 @@ import com.example.demo.models.User;
 public class AddCartTest {
 
     @InjectMocks
-    private cartController CartController;
+    private UserController CartController;
 
     @Mock
     private UserRepository userRepository;
