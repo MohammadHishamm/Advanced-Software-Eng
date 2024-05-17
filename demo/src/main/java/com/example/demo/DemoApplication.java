@@ -7,15 +7,20 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.ModelAndViewDefiningException;
 
 import com.example.demo.models.Courses;
 import com.example.demo.repositories.CoursesRepository;
 
 @SpringBootApplication
 @Controller
+@EnableAspectJAutoProxy 
 public class DemoApplication{
 
     @Autowired
@@ -47,4 +52,13 @@ public class DemoApplication{
        return mav;
     }
 
+	@ControllerAdvice
+	public class GlobalExceptionHandler {
+
+    @ExceptionHandler(ModelAndViewDefiningException.class)
+    public ModelAndView handleModelAndViewDefiningException(ModelAndViewDefiningException ex) {
+        return ex.getModelAndView();
+	}
+
+}
 }
