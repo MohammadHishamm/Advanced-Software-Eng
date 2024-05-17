@@ -1,5 +1,5 @@
 <div th:fragment="toast">
-  <div th:if="${message != null}">
+  <div th:if="${sessionerror != null}">
     <audio id="Audio1">
       <source src="../images/alert.wav" />
     </audio>
@@ -11,7 +11,7 @@
         <strong class="me-auto">Arab Data Hub</strong>
         <small>Notfication</small>
       </div>
-      <div class="toast-body text-danger" th:text="${message}"></div>
+      <div class="toast-body text-danger" th:text="${sessionerror}"></div>
     </div>
     <script>
       showToast1();

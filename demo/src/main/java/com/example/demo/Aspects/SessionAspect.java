@@ -26,7 +26,7 @@ public class SessionAspect {
 
             
             ModelAndView mav = new ModelAndView("/index");
-            mav.addObject("message", "User session is empty. Please sign in.");
+            mav.addObject("sessionerror", "User session is empty. Please sign in.");
             throw new ModelAndViewDefiningException(mav);
         }
     }
