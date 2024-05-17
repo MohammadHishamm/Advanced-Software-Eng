@@ -1,18 +1,20 @@
 <div th:fragment="toast">
-
-    <div th:if = "${message != null}">
-    <audio id="Audio">
-      <source src="../images/alert.wav">
+  <div th:if="${message != null}">
+    <audio id="Audio1">
+      <source src="../images/alert.wav" />
     </audio>
-    <div  class="toast fade fixed-bottom shadow border border-3 me-5 mb-5 ms-auto " id="toast">
-      <div class="toast-header ">
+    <div
+      class="toast fade fixed-bottom shadow border border-3 me-5 mb-5 ms-auto"
+      id="toast1"
+    >
+      <div class="toast-header">
         <strong class="me-auto">Arab Data Hub</strong>
         <small>Notfication</small>
       </div>
-    <div class="toast-body text-danger" th:text="${message}"></div>
+      <div class="toast-body text-danger" th:text="${message}"></div>
     </div>
     <script>
-      showToast();
-      </script>
-    </div>
+      showToast1();
+    </script>
   </div>
+</div>

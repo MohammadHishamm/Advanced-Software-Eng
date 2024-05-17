@@ -9,10 +9,11 @@ import org.springframework.web.servlet.ModelAndViewDefiningException;
 import jakarta.servlet.http.HttpSession;
 
 
-
 @Aspect
 @Component
 public class SessionAspect {
+
+    
 
     @Autowired
     private HttpSession httpSession;
@@ -21,9 +22,11 @@ public class SessionAspect {
     public void beforeControllerMethods() throws ModelAndViewDefiningException {
         String userEmail = (String) httpSession.getAttribute("email");
         if (userEmail == null) {
-            // Redirect to home page with an error message
-            ModelAndView mav = new ModelAndView("redirect:/");
-            mav.addObject("error", "User session is empty. Please sign in.");
+          
+
+            
+            ModelAndView mav = new ModelAndView("/index");
+            mav.addObject("message", "User session is empty. Please sign in.");
             throw new ModelAndViewDefiningException(mav);
         }
     }
