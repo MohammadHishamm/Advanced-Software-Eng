@@ -1,171 +1,193 @@
-
 <html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link rel="stylesheet" href="../css/Sidenav.css" />
 
-
-<head>
-    <link rel="stylesheet" href="../css/Sidenav.css">
-
-    <link rel="stylesheet" href="../css/MDB css/mdb.min.css">
-    <link rel="stylesheet" href="../css/All.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/MDB css/mdb.min.css" />
+    <link rel="stylesheet" href="../css/All.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
 
     <script src="../js/Loaders.js"></script>
-</head>
-    <!-- Top Nav -->
-    <div th:replace="fragments/Navbar::navigation"></div>
+  </head>
+  <!-- Top Nav -->
+  <div th:replace="fragments/Navbar::navigation"></div>
 
-    <!-- SideNav -->
-    <div th:replace="fragments/SideNav::sidenav"></div>
+  <!-- SideNav -->
+  <div th:replace="fragments/SideNav::sidenav"></div>
 
-<body style="background-color: #EBEFF4;">
-
-
+  <body style="background-color: #ebeff4">
     <!-- Course Image section -->
-    <div class="p-5 " style="background-color: #2d2f31; width: 100%; height: 330px;">
-        <div class="row" style="margin-top: 100px;">
-            <img src="../Images/courses/thumbs/" alt="" srcset=""
-                style="width: 20%; height: 200px; position: absolute;">
-            <div class="col-12 text-center">
-                <span class="courses_content_name "  th:text='${course.course_title}'></span>
-            </div>
-            <div class="col-12 text-center" style="margin-top: 40px;">
-                <span class="courses_content_teacher"  th:text='${User.name}'></span>
-            </div>
-            <div th:if="${session.email != null && session.type == 'student' && enroll == false}" class="col-12 text-center" style="margin-top: 10px;">
-              
-                <a class="btn btn-primary btn-lg" th:href="@{'/courses/enroll-course?courseid=' + ${course.course_id}}" >Enroll</a>
-
-         
-                
-            </div>
+    <div
+      class="p-5"
+      style="background-color: #2d2f31; width: 100%; height: 330px"
+    >
+      <div class="row" style="margin-top: 100px">
+        <img
+          th:src="@{'../Images/' + ${course.image}}"
+          alt=""
+          srcset=""
+          style="width: 20%; height: 200px; position: absolute"
+        />
+        <div class="col-12 text-center">
+          <span
+            class="courses_content_name"
+            th:text="${course.course_title}"
+          ></span>
         </div>
+        <div class="col-12 text-center" style="margin-top: 40px">
+          <span class="courses_content_teacher" th:text="${User.name}"></span>
+        </div>
+        <div
+          th:if="${session.email != null && session.type == 'student' && enroll == false}"
+          class="col-12 text-center"
+          style="margin-top: 10px"
+        >
+          <a
+            class="btn btn-primary btn-lg"
+            th:href="@{'/courses/enroll-course?courseid=' + ${course.course_id}}"
+            >Enroll</a
+          >
+        </div>
+      </div>
     </div>
 
     <!-- Course Introduction section -->
     <div class="container-fluid mb-11">
+      <div class="row">
+        <div class="col-9 ms-5 mt-5" style="">
+          <div>
+            <span class="courses_content_title"> Introduction </span>
 
-        <div class="row">
-            <div class="col-9 ms-5 mt-5" style=" ">
+            <div class="mt-5">
+              <p class="sidnav_courses_content">Course information</p>
+              <p class="courses_content_information">lectures</p>
+            </div>
+            <div class="mt-3">
+              <p class="sidnav_courses_content">Description</p>
+              <p
+                class="courses_content_information"
+                th:text="${course.course_description}"
+              ></p>
+            </div>
+            <div class="mt-3">
+              <p class="sidnav_courses_content">Requirments</p>
+              <p
+                class="courses_content_information"
+                th:text="${course.course_requirements}"
+              ></p>
+            </div>
+            <div class="mt-3">
+              <p class="sidnav_courses_content">Course Price</p>
+              <p
+                class="courses_content_information"
+                th:text="${course.course_price}"
+              ></p>
+            </div>
+          </div>
 
-                <div>
-                    <span class="courses_content_title">
-                        Introduction
-                    </span>
+          <div class="d-flex flex-wrap mt-5">
+            <div
+              th:if="${session.email != null && session.type == 'student' && enroll == true}"
+              class="col-lg-3 col-12 mb-4 me-4"
+            >
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title"></h4>
 
+                  <p class="card-text text-truncate"></p>
 
-
-                    <div class=" mt-5">
-                        <p class="sidnav_courses_content ">
-                            Course information
-                        </p>
-                        <p class="courses_content_information">
-                            lectures
-                        </p>
-                    </div>
-                    <div class=" mt-3">
-                        <p class="sidnav_courses_content ">
-                            Description
-
-                           
-                        </p>
-                        <p class="courses_content_information" th:text='${course.course_description}'>
-                           
-                        </p>
-                    </div>
-                    <div class=" mt-3">
-                        <p class="sidnav_courses_content ">
-                            Requirments
-                        </p>
-                        <p class="courses_content_information" th:text='${course.course_requirements}'>
-                            
-                        </p>
-                    </div>
-                    <div class=" mt-3">
-                        <p class="sidnav_courses_content ">
-                            Course Price
-                        </p>
-                        <p class="courses_content_information" th:text='${course.course_price}'>
-                           
-                        </p>
-                    </div>
+                  <a
+                    href=""
+                    class="btn"
+                    style="background-color: #58779d; color: white"
+                  >
+                    View Content
+                  </a>
                 </div>
-
-                <div class="d-flex flex-wrap mt-5">
-             
-                        <div th:if="${session.email != null && session.type == 'student' && enroll == true}" class="col-lg-3 col-12 mb-4 me-4" > 
-                            <div class="card" >
-                               <div class="card-body">
-                                  
-                                    <h4 class="card-title"></h4>
-                                    
-                                    <p class="card-text text-truncate"></p>
-                                  
-                                    <a href="" class="btn" style="background-color: #58779D; color: white;">
-                                        View Content
-                                    </a>
-                                </div>
-                            </div> 
-                        </div>
-                          
-                    
-                    <div th:if="${session.email != null && session.type == 'student' && enroll == false}">
-                        <p class="text-primary fs-1 ">Tutorial</p>
-                        <div class="container-fluid">
-                            <video src="" style="height: 500px;"
-                                autoplay controls poster=""
-                                class="w-100 "></video>
-                            <div class="text-muted mb-4 "><i
-                                    class="fas fa-calendar pe-4"></i><span></span></div>
-                            <h3 class="fs-1"></h3>
-                            <div class="fs-5"></div>
-                        </div>
-                    </div>
-
-
-
-          
-
-                </div>
+              </div>
             </div>
 
-            <div class="flex-shrink-0 p-3  mt-5 border shadow col-3 d-none d-xxl-block"
-                style="width: 280px; height: 760px">
-
-                <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-                    <svg class="bi me-2" width="30" height="24">
-                        <use xlink:href="#bootstrap"></use>
-                    </svg>
-                    <span class="fs-5 fw-semibold">Navigation</span>
-                </a>
-                <ul class="list-unstyled ps-0">
-                    <li class="mb-3 mt-3">
-                        <a class="align-items-center rounded collapsed sidnav_courses_content" data-bs-toggle="collapse"
-                            data-bs-target="#home-collapse" aria-expanded="false">
-                            Home
-                        </a>
-
-                    </li>
-                    <li class="mb-3 mt-3">
-                        <a class="align-items-center rounded collapsed sidnav_courses_content" data-bs-toggle="collapse"
-                            data-bs-target="#dashboard-collapse" aria-expanded="false">
-                            Site Pages
-                        </a>
-                    </li>
-                    <li class="mb-3 mt-3">
-                        <a class="align-items-center rounded collapsed sidnav_courses_content" data-bs-toggle="collapse"
-                            data-bs-target="#orders-collapse" aria-expanded="false">
-                            My Courses
-                        </a>
-                    </li>
-                </ul>
+            <div
+              th:if="${session.email != null && session.type == 'student' && enroll == false}"
+            >
+              <p class="text-primary fs-1">Tutorial</p>
+              <div class="container-fluid">
+                <video
+                  src=""
+                  style="height: 500px"
+                  autoplay
+                  controls
+                  poster=""
+                  class="w-100"
+                ></video>
+                <div class="text-muted mb-4">
+                  <i class="fas fa-calendar pe-4"></i><span></span>
+                </div>
+                <h3 class="fs-1"></h3>
+                <div class="fs-5"></div>
+              </div>
             </div>
+          </div>
         </div>
+
+        <div
+          class="flex-shrink-0 p-3 mt-5 border shadow col-3 d-none d-xxl-block"
+          style="width: 280px; height: 760px"
+        >
+          <a
+            href="/"
+            class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom"
+          >
+            <svg class="bi me-2" width="30" height="24">
+              <use xlink:href="#bootstrap"></use>
+            </svg>
+            <span class="fs-5 fw-semibold">Navigation</span>
+          </a>
+          <ul class="list-unstyled ps-0">
+            <li class="mb-3 mt-3">
+              <a
+                class="align-items-center rounded collapsed sidnav_courses_content"
+                data-bs-toggle="collapse"
+                data-bs-target="#home-collapse"
+                aria-expanded="false"
+              >
+                Home
+              </a>
+            </li>
+            <li class="mb-3 mt-3">
+              <a
+                class="align-items-center rounded collapsed sidnav_courses_content"
+                data-bs-toggle="collapse"
+                data-bs-target="#dashboard-collapse"
+                aria-expanded="false"
+              >
+                Site Pages
+              </a>
+            </li>
+            <li class="mb-3 mt-3">
+              <a
+                class="align-items-center rounded collapsed sidnav_courses_content"
+                data-bs-toggle="collapse"
+                data-bs-target="#orders-collapse"
+                aria-expanded="false"
+              >
+                My Courses
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div th:replace="~{fragments/bottomNav::bottom_navigation}"></div>
-</body>
-
+  </body>
 </html>

@@ -163,7 +163,7 @@
                                                                     </div>
                                                                     <div class="thumb">
                                                                         <span>0</span>
-                                                                        <img src="" alt="">
+                                                                        <img th:src="@{'../Images/' + ${course.image}}" alt="">
                                                                     </div>
                                                                     <h3 class="title" name="course_title" th:text="${course.course_title}"></h3>
                                                                     <p class="description" name="course_description" th:text="${course.course_description}"></p>
