@@ -132,30 +132,62 @@ public class UserController {
 
 
     @GetMapping("add-wishlist")
-    public ModelAndView addwishlist(@RequestParam("courseid") int courseid, HttpSession session) {
-        ModelAndView mav = new ModelAndView("wishlist.html");
+    public void addwishlist(@RequestParam("courseid") int courseid, HttpSession session ,  HttpServletResponse response) {
         Courses course = this.coursesRepository.findById(courseid);
         String email = (String) session.getAttribute("email");
+        
+        if(email != null) {
         User user = this.userRepository.findByEmail(email);
         Student student = this.studentRepository.findByUser(user);
     
         Wishlist wishlist = this.wishlistRepository.findByStudent(student);
+        
         if (wishlist == null) {
          
             wishlist = new Wishlist();
             wishlist.setStudent(student);
         }
-    
         List<Courses> courseslist = wishlist.getCourses();
-        courseslist.add(course);
-        wishlist.setCourses(courseslist);
+
+        boolean course_found = false;
+
+        for (Courses course_loop : courseslist) {
+            if (course_loop.getCourse_id() == courseid) {
+                course_found = true;
+                break;
+            }
+        }
+
+        if(!course_found) {
+            courseslist.add(course);
+            wishlist.setCourses(courseslist);
+            this.wishlistRepository.save(wishlist);
+            // Write response message
+            try {
+                response.getWriter().write("Course added to Wishlist successfully.");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // Write response message
+            try {
+                response.getWriter().write("Course already exists in the Wishlist.");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        }
+        else
+        {
+            try {
+                response.getWriter().write("User not logged in.");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     
-        
-        this.wishlistRepository.save(wishlist);
-    
-        mav.addObject("courses", courseslist);
-        return mav;
     }
+    
     
  
 
@@ -194,7 +226,7 @@ public ModelAndView removeWishlist(@RequestParam("courseid") int courseId, HttpS
         if (courseToRemove != null) {
             courses.remove(courseToRemove);
             this.wishlistRepository.save(wishlist);
-
+            mav.addObject("message", "course removed from wishlist");
         }
     }
 

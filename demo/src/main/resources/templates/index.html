@@ -34,7 +34,7 @@
       <div class="toast-body text-danger"></div>
       </div>
     
-      <div th:replace="fragments/toast::toast"></div>
+      <div th:replace="~{fragments/toast::toast}"></div>
 
 
 
@@ -223,9 +223,8 @@
                                         <div class="d-flex col-6 align-items-center w-100 mb-2">
 
 
-                                            <a class="addtocart btn btn-primary w-50 m-2" th:href="@{'/user/add-wishlist?courseid=' + ${course.course_id}}" id="addtocart">
-                                                Add to wishlist
-                                            </a>
+                              
+                                          <button class="addtocart btn btn-primary w-50 m-2" th:onclick="'addToWishlist(\'' + ${course.course_id} + '\')'">Add to wishlist</button>
 
                                            <!-- Your HTML code -->
                                            <button class="addtocart btn btn-success w-50 m-2" th:onclick="'addToCart(\'' + ${course.course_id} + '\')'">Add to Cart</button>
@@ -250,6 +249,25 @@
                                                 xhr.send();
                                             }
                                         
+                                            function addToWishlist(courseId) {
+                                                var xhr = new XMLHttpRequest();
+                                                xhr.onreadystatechange = function() {
+                                                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                                                        if (xhr.status === 200) {
+                                                            // Success response
+                                                            var message = xhr.responseText;
+                                                            updateToast(message);
+                                                        } else {
+                                                            // Error response
+                                                            var message = "An error occurred while adding the course to the wishlist.";
+                                                            updateToast(message);
+                                                        }
+                                                    }
+                                                };
+                                                xhr.open("GET", "/user/add-wishlist?courseid=" + courseId, true);
+                                                xhr.send();
+                                            }
+
                                             function updateToast(message) {
                                                 var toastBody = document.querySelector('#toast .toast-body');
                                                 toastBody.innerText = message;

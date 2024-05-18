@@ -16,3 +16,8 @@
 2024-05-17 22:45:40 INFO  c.e.demo.controller.SignUpController - Attempting to sign in user: omar2108721@miuegypt.edu.eg
 2024-05-17 22:45:40 INFO  c.e.demo.controller.SignUpController - User omar2108721@miuegypt.edu.eg signed in successfully
 2024-05-17 22:46:08 INFO  c.e.demo.controller.SignUpController - User omar2108721@miuegypt.edu.eg signed out
+2024-05-18 23:07:04 INFO  c.e.demo.controller.SignUpController - Navigating to signup/signin page
+2024-05-18 23:11:40 INFO  c.e.demo.controller.SignUpController - Attempting to sign in user: zeiadalziyaty@gmail.com
+2024-05-18 23:11:40 ERROR c.e.demo.controller.SignUpController - Signin failed: Incorrect password for email zeiadalziyaty@gmail.com
+2024-05-18 23:11:53 INFO  c.e.demo.controller.SignUpController - Attempting to sign in user: zeiadalziyaty@gmail.com
+2024-05-18 23:11:53 INFO  c.e.demo.controller.SignUpController - User zeiadalziyaty@gmail.com signed in successfully

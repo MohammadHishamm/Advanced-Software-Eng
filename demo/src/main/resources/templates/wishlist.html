@@ -23,9 +23,9 @@
   <script src="../js/Toast.js"></script>
 
   <body>
-    <audio id="Audio">
-      <source src="../images/alert.wav" />
-    </audio>
+
+    <div th:replace="~{fragments/toast::toast}"></div>
+
     <!-- TopNav -->
     <div th:replace="fragments/Navbar::navigation"></div>
 
