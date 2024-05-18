@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.models.CourseContent;
@@ -25,6 +26,7 @@ import com.example.demo.repositories.InstructorRepository;
 import com.example.demo.repositories.StudentRepository;
 
 import com.example.demo.repositories.UserRepository;
+import com.example.demo.Services.ImageService;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -32,6 +34,9 @@ import jakarta.validation.Valid;
 @RequestMapping("/courses")
 @RestController
 public class coursesController {
+
+    @Autowired
+    ImageService imageservice;
 
     @Autowired
     private CoursesRepository coursesRepository;
@@ -64,9 +69,12 @@ public class coursesController {
 
     @PostMapping("save-course")
     public ModelAndView saveCourse(@ModelAttribute @Valid Courses course, BindingResult bindingResult,
-            HttpSession session) {
+            HttpSession session ,  @RequestParam("coursethumbnail") MultipartFile courseThumbnail) throws IOException {
+
         ModelAndView mav = new ModelAndView("teacher-coursespage.html");
 
+      
+        
         if (bindingResult.hasErrors()) {
             mav.addObject("errors", bindingResult.getAllErrors());
             return mav;
@@ -80,6 +88,11 @@ public class coursesController {
             if (instructor != null) {
 
                 List<Courses> instructorCourses = instructor.getCourses();
+                
+                String filePath = imageservice.uploadImage(courseThumbnail);
+                course.setImage(filePath);
+
+        
                 instructorCourses.add(course);
                 instructor.setCourses(instructorCourses);
                 course.setInstructor(instructor);

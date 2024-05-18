@@ -42,7 +42,34 @@ public class Courses {
     @Positive(message = "Course price must be a positive number")
     private Double course_price;
 
+    private String image;
 
+
+    public Courses(int course_id, String course_title, String course_status, String course_description, String course_requirements, Double course_price, String image, Instructor instructor, List<Student> students, List<CourseContent> coursecontent) {
+        this.course_id = course_id;
+        this.course_title = course_title;
+        this.course_status = course_status;
+        this.course_description = course_description;
+        this.course_requirements = course_requirements;
+        this.course_price = course_price;
+        this.image = image;
+        this.instructor = instructor;
+        this.students = students;
+        this.coursecontent = coursecontent;
+    }
+
+    public String getImage() {
+        return this.image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Courses image(String image) {
+        setImage(image);
+        return this;
+    }
     
     @ManyToOne
     @JoinColumn(name = "instructor_id")

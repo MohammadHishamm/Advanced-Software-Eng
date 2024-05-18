@@ -1,23 +1,7 @@
-2024-05-17 17:56:07 INFO  c.e.demo.controller.SignUpController - Navigating to signup/signin page
-2024-05-17 17:56:14 INFO  c.e.demo.controller.SignUpController - Attempting to sign in user: xplayer222xz@gmail.com
-2024-05-17 17:56:15 INFO  c.e.demo.controller.SignUpController - User xplayer222xz@gmail.com signed in successfully
-2024-05-17 21:50:36 INFO  c.e.demo.controller.SignUpController - Navigating to signup/signin page
-2024-05-17 22:08:45 INFO  c.e.demo.controller.SignUpController - Navigating to signup/signin page
-2024-05-17 22:09:53 INFO  c.e.demo.controller.SignUpController - Navigating to signup/signin page
-2024-05-17 22:33:07 INFO  c.e.demo.controller.SignUpController - Navigating to signup/signin page
-2024-05-17 22:33:12 INFO  c.e.demo.controller.SignUpController - Attempting to sign in user: omar2108721@miuegypt.edu.eg
-2024-05-17 22:33:12 INFO  c.e.demo.controller.SignUpController - User omar2108721@miuegypt.edu.eg signed in successfully
-2024-05-17 22:35:35 INFO  c.e.demo.controller.SignUpController - User omar2108721@miuegypt.edu.eg signed out
-2024-05-17 22:37:51 INFO  c.e.demo.controller.SignUpController - Navigating to signup/signin page
-2024-05-17 22:37:55 INFO  c.e.demo.controller.SignUpController - Attempting to sign in user: omar2108721@miuegypt.edu.eg
-2024-05-17 22:37:56 INFO  c.e.demo.controller.SignUpController - User omar2108721@miuegypt.edu.eg signed in successfully
-2024-05-17 22:39:28 INFO  c.e.demo.controller.SignUpController - User omar2108721@miuegypt.edu.eg signed out
-2024-05-17 22:45:36 INFO  c.e.demo.controller.SignUpController - Navigating to signup/signin page
-2024-05-17 22:45:40 INFO  c.e.demo.controller.SignUpController - Attempting to sign in user: omar2108721@miuegypt.edu.eg
-2024-05-17 22:45:40 INFO  c.e.demo.controller.SignUpController - User omar2108721@miuegypt.edu.eg signed in successfully
-2024-05-17 22:46:08 INFO  c.e.demo.controller.SignUpController - User omar2108721@miuegypt.edu.eg signed out
-2024-05-18 23:07:04 INFO  c.e.demo.controller.SignUpController - Navigating to signup/signin page
-2024-05-18 23:11:40 INFO  c.e.demo.controller.SignUpController - Attempting to sign in user: zeiadalziyaty@gmail.com
-2024-05-18 23:11:40 ERROR c.e.demo.controller.SignUpController - Signin failed: Incorrect password for email zeiadalziyaty@gmail.com
-2024-05-18 23:11:53 INFO  c.e.demo.controller.SignUpController - Attempting to sign in user: zeiadalziyaty@gmail.com
-2024-05-18 23:11:53 INFO  c.e.demo.controller.SignUpController - User zeiadalziyaty@gmail.com signed in successfully
+2024-05-19 00:05:04 INFO  c.e.demo.controller.SignUpController - Navigating to signup/signin page
+2024-05-19 00:05:10 INFO  c.e.demo.controller.SignUpController - Attempting to sign in user: teacher@gmail.com
+2024-05-19 00:05:11 INFO  c.e.demo.controller.SignUpController - User teacher@gmail.com signed in successfully
+2024-05-19 00:28:19 INFO  c.e.demo.controller.SignUpController - User teacher@gmail.com signed out
+2024-05-19 00:29:03 INFO  c.e.demo.controller.SignUpController - Navigating to signup/signin page
+2024-05-19 00:29:08 INFO  c.e.demo.controller.SignUpController - Attempting to sign in user: teacher@gmail.com
+2024-05-19 00:29:08 INFO  c.e.demo.controller.SignUpController - User teacher@gmail.com signed in successfully
