@@ -20,12 +20,14 @@ import com.example.demo.models.Courses;
 import com.example.demo.models.Instructor;
 import com.example.demo.models.Student;
 import com.example.demo.models.User;
+import com.example.demo.repositories.CartRepository;
 import com.example.demo.repositories.CoursesRepository;
 import com.example.demo.repositories.InstructorRepository;
 
 import com.example.demo.repositories.StudentRepository;
 
 import com.example.demo.repositories.UserRepository;
+import com.example.demo.repositories.WishlistRepository;
 import com.example.demo.Services.ImageService;
 
 import jakarta.servlet.http.HttpSession;
@@ -49,6 +51,10 @@ public class coursesController {
 
     @Autowired
     private StudentRepository studentRepository;
+    @Autowired
+    private WishlistRepository wishlistRepository;
+    @Autowired
+    private CartRepository cartRepository;
 
     @GetMapping("")
     public ModelAndView getcourses() {
@@ -76,7 +82,7 @@ public class coursesController {
       
         
         if (bindingResult.hasErrors()) {
-            mav.addObject("errors", bindingResult.getAllErrors());
+            mav.addObject("courseerrors", bindingResult.getAllErrors());
             return mav;
         }
 
@@ -103,12 +109,12 @@ public class coursesController {
                 return new ModelAndView("redirect:/user/profile");
             } else {
 
-                // mav.addObject("error", "Instructor not found");
+           
                 return mav;
             }
         } else { 
 
-            // mav.addObject("error", "User session not found");
+        
             return mav;
         }
 
@@ -209,15 +215,15 @@ public class coursesController {
     }
 
     @PostMapping("/update-course")
-    public ModelAndView updateCourse(@ModelAttribute("existingCourse") Courses updatedCourse,
+    public ModelAndView updateCourse(@ModelAttribute("existingCourse") @Valid Courses updatedCourse,
             BindingResult bindingResult,
             HttpSession session) {
         ModelAndView mav = new ModelAndView("edit-course.html");
 
-        int courseId = updatedCourse.getCourse_id(); // Retrieve course_id from updatedCourse
+        int courseId = updatedCourse.getCourse_id(); 
 
         if (bindingResult.hasErrors()) {
-            mav.addObject("errors", bindingResult.getAllErrors());
+            mav.addObject("courseerrors", bindingResult.getAllErrors());
             return mav;
         }
 
@@ -248,6 +254,7 @@ public class coursesController {
         ModelAndView mav = new ModelAndView();
 
         Courses courseToDelete = coursesRepository.findById(courseId);
+        
 
         if (courseToDelete != null) {
             coursesRepository.delete(courseToDelete);
