@@ -39,9 +39,3 @@
 2024-05-22 11:53:21 INFO  c.e.demo.controller.SignUpController - Navigating to signup/signin page
 2024-05-22 11:53:26 INFO  c.e.demo.controller.SignUpController - Attempting to sign in user: mohammadhesham65@gmail.com
 2024-05-22 11:53:27 INFO  c.e.demo.controller.SignUpController - User mohammadhesham65@gmail.com signed in successfully
-2024-05-24 16:11:21 INFO  c.e.demo.controller.SignUpController - Navigating to signup/signin page
-2024-05-24 16:12:06 INFO  c.e.demo.controller.SignUpController - Attempting to sign in user: 
-2024-05-24 16:12:06 ERROR c.e.demo.controller.SignUpController - Signin failed: Invalid email 
-2024-05-24 16:12:12 INFO  c.e.demo.controller.SignUpController - Attempting to sign in user: mark@email.com
-2024-05-24 16:12:31 INFO  c.e.demo.controller.SignUpController - Attempting to save new user: mark@email.com
-2024-05-24 16:12:32 INFO  c.e.demo.controller.SignUpController - User mark@email.com signed up successfully
