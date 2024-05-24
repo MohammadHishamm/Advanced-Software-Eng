@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -14,9 +14,9 @@ import java.util.Objects;
 @Entity
 public class User {
     @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int user_id;
-   
+
     @NotEmpty(message = "Name cannot be empty")
     private String name;
 
@@ -27,9 +27,6 @@ public class User {
     @Size(min = 6, message = "Password must be at least 6 characters long")
     private String password;
     private String type;
-
-   
-
 
     public User(int user_id, String name, String email, String password, String type) {
         this.user_id = user_id;
@@ -51,7 +48,6 @@ public class User {
         setType(type);
         return this;
     }
-  
 
     public User() {
     }
@@ -123,7 +119,8 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return user_id == user.user_id && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
+        return user_id == user.user_id && Objects.equals(name, user.name) && Objects.equals(email, user.email)
+                && Objects.equals(password, user.password);
     }
 
     @Override
@@ -134,13 +131,11 @@ public class User {
     @Override
     public String toString() {
         return "{" +
-            " user_id='" + getUser_id() + "'" +
-            ", name='" + getName() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", password='" + getPassword() + "'" +
-            "}";
+                " user_id='" + getUser_id() + "'" +
+                ", name='" + getName() + "'" +
+                ", email='" + getEmail() + "'" +
+                ", password='" + getPassword() + "'" +
+                "}";
     }
-   
 
-    
 }

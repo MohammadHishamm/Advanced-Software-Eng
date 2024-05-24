@@ -1,6 +1,5 @@
-
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 
 <head>
     <meta charset="UTF-8" />
@@ -13,34 +12,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap" rel="stylesheet" />
-    
 </head>
 
 <body>
-
-    
-
     <div class="page d-flex">
-        <div th:replace="fragments/side-nav::adminsidenav">
+        <div th:replace="fragments/side-nav::adminsidenav"></div>
 
-        </div>
-        
-       
-            <!-- Start Head -->
-           
-            <!-- End Head -->
-            <section id="dashboard">
+        <section id="dashboard">
             <h1 class="p-relative">Dashboard</h1>
-
             <div>
-                <div style=" margin: 0 auto; width: 800px;"><canvas id="myChart"></canvas></div>
+                <div style="margin: 0 auto; width: 800px;">
+                    <canvas id="myChart"></canvas>
+                </div>
             </div>
 
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
             <script>
                 const ctx = document.getElementById('myChart');
-
                 new Chart(ctx, {
                     type: 'bar',
                     data: {
@@ -60,44 +48,30 @@
                     }
                 });
             </script>
-         </section>
+        </section>
 
-         <section id="teacher" style="display: none;">
-        <p>1</p>
-        
-        
+        <section id="teacher" style="display: none;">
+            <p>1</p>
         </section>
-         <section id="courses" style="display: none;">
+
+        <section id="courses" style="display: none;">
             <p>2</p>
-        
-        
-        
         </section>
-         <section id="users" style="display: none;">
+
+        <section id="users" style="display: none;">
             <div class="content w-full">
-               
-                <!-- End Head -->
                 <h1 class="p-relative">Users</h1>
                 <div class="friends-page d-grid m-20 gap-20">
-    
                     <div th:each="user : ${users}" class="friend bg-white rad-6 p-20 p-relative">
                         <div class="contact">
-    
                             <i class="fa-solid fa-phone"></i>
                             <i class="fa-regular fa-envelope"></i>
                         </div>
                         <div class="txt-c">
-    
-                            <!-- <img class="rad-half mt-10 mb-10 w-100 h-100" th:src="" alt="" /> -->
                             <h4 class="m-0" th:text="${user.name}"></h4>
                             <p class="c-grey fs-13 mt-5 mb-0" th:text="${user.email}"></p>
                         </div>
                         <div class="icons fs-14 p-relative">
-    
-                            <!-- <div class="mb-10">
-                                <i class="fas fa-user-alt"></i>
-                                <span></span>
-                            </div> -->
                             <div class="mb-10">
                                 <i class="fa-solid fa-code-commit fa-fw"></i>
                                 <span>15 Courses</span>
@@ -107,58 +81,70 @@
                             <span class="c-grey">Joined </span>
                             <div>
                                 <a class="bg-blue c-white btn-shape" href="profile.html">Profile</a>
-                                <form action="" method="post">
-                                    <input type="hidden" name="user_id" value="">
-                                    <button style="margin-top: 10px" type="submit" class="btn-shape bg-red c-white"
-                                        onclick="return confirm('Are you sure you want to remove this user?')">Remove</button>
-                                </form>
+                                <button style="margin-top: 10px" class="btn-shape bg-red c-white"
+                                    th:onclick="'deleteUser(' + ${user.user_id} + ')'">Remove</button>
                             </div>
                         </div>
                     </div>
-    
                 </div>
             </div>
-        
         </section>
 
+        <script>
+            function showDashboard(event) {
+                event.preventDefault();
+                document.getElementById('dashboard').style.display = 'block';
+                document.getElementById('teacher').style.display = 'none';
+                document.getElementById('courses').style.display = 'none';
+                document.getElementById('users').style.display = 'none';
+            }
 
-         <script>
-                                                    function showDashboard(event) {
-                                                        event.preventDefault();
-                                                        document.getElementById('dashboard').style.display = 'block';
-                                                        document.getElementById('teacher').style.display = 'none';
-                                                        document.getElementById('courses').style.display = 'none';
-                                                        document.getElementById('users').style.display = 'none';
-                                                    }
-                                                    function showTeachers(event) {
-                                                        event.preventDefault();
-                                                        document.getElementById('dashboard').style.display = 'none';
-                                                        document.getElementById('teacher').style.display = 'block';
-                                                        document.getElementById('courses').style.display = 'none';
-                                                        document.getElementById('users').style.display = 'none';
-                                                    }
-                                                    function showUsers(event) {
-                                                        event.preventDefault();
-                                                        document.getElementById('dashboard').style.display = 'none';
-                                                        document.getElementById('teacher').style.display = 'none';
-                                                        document.getElementById('courses').style.display = 'none';
-                                                        document.getElementById('users').style.display = 'block';
-                                                    }
-                                                    function showcourses(event) {
-                                                        event.preventDefault();
-                                                        document.getElementById('dashboard').style.display = 'none';
-                                                        document.getElementById('teacher').style.display = 'none';
-                                                        document.getElementById('courses').style.display = 'block';
-                                                        document.getElementById('users').style.display = 'none';
-                                                    }
+            function showTeachers(event) {
+                event.preventDefault();
+                document.getElementById('dashboard').style.display = 'none';
+                document.getElementById('teacher').style.display = 'block';
+                document.getElementById('courses').style.display = 'none';
+                document.getElementById('users').style.display = 'none';
+            }
 
-                                                    document.getElementById('dash').addEventListener('click', showDashboard);
-                                                document.getElementById('teach').addEventListener('click', showTeachers);
-                                                document.getElementById('user').addEventListener('click', showUsers);
-                                                document.getElementById('course').addEventListener('click', showcourses);
-            
-         </script>
-           
+            function showUsers(event) {
+                event.preventDefault();
+                document.getElementById('dashboard').style.display = 'none';
+                document.getElementById('teacher').style.display = 'none';
+                document.getElementById('courses').style.display = 'none';
+                document.getElementById('users').style.display = 'block';
+            }
+
+            function showcourses(event) {
+                event.preventDefault();
+                document.getElementById('dashboard').style.display = 'none';
+                document.getElementById('teacher').style.display = 'none';
+                document.getElementById('courses').style.display = 'block';
+                document.getElementById('users').style.display = 'none';
+            }
+
+            function deleteUser(userId) {
+                if (confirm('Are you sure you want to remove this user?')) {
+                    fetch(`/admin/delete-user/${userId}`, {
+                        method: 'DELETE'
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                alert('User deleted successfully');
+                                location.reload(); // Reload the page to update the list of users
+                            } else {
+                                alert('Failed to delete user');
+                            }
+                        });
+                }
+            }
+
+            document.getElementById('dash').addEventListener('click', showDashboard);
+            document.getElementById('teach').addEventListener('click', showTeachers);
+            document.getElementById('user').addEventListener('click', showUsers);
+            document.getElementById('course').addEventListener('click', showcourses);
+        </script>
+    </div>
 </body>
 
 </html>
