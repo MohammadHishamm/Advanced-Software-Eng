@@ -25,15 +25,11 @@ public class adminController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("")
-    public ModelAndView getUsersPage() {
-        ModelAndView mav = new ModelAndView("Admin/index.html");
-        return mav;
-    }
+    
 
-    @GetMapping("/users")
+    @GetMapping("")
     public ModelAndView getpage() {
-        ModelAndView mav = new ModelAndView("Admin/users.html");
+        ModelAndView mav = new ModelAndView("Admin/index.html");
         List<User> users = userRepository.findAll();
         mav.addObject("users", users);
         return mav;

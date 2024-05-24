@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap" rel="stylesheet" />
+    
 </head>
 
 <body>
@@ -73,8 +74,50 @@
         
         </section>
          <section id="users" style="display: none;">
-            <p>3</p>
-        
+            <div class="content w-full">
+               
+                <!-- End Head -->
+                <h1 class="p-relative">Users</h1>
+                <div class="friends-page d-grid m-20 gap-20">
+    
+                    <div th:each="user : ${users}" class="friend bg-white rad-6 p-20 p-relative">
+                        <div class="contact">
+    
+                            <i class="fa-solid fa-phone"></i>
+                            <i class="fa-regular fa-envelope"></i>
+                        </div>
+                        <div class="txt-c">
+    
+                            <!-- <img class="rad-half mt-10 mb-10 w-100 h-100" th:src="" alt="" /> -->
+                            <h4 class="m-0" th:text="${user.name}"></h4>
+                            <p class="c-grey fs-13 mt-5 mb-0" th:text="${user.email}"></p>
+                        </div>
+                        <div class="icons fs-14 p-relative">
+    
+                            <!-- <div class="mb-10">
+                                <i class="fas fa-user-alt"></i>
+                                <span></span>
+                            </div> -->
+                            <div class="mb-10">
+                                <i class="fa-solid fa-code-commit fa-fw"></i>
+                                <span>15 Courses</span>
+                            </div>
+                        </div>
+                        <div class="info between-flex fs-13">
+                            <span class="c-grey">Joined </span>
+                            <div>
+                                <a class="bg-blue c-white btn-shape" href="profile.html">Profile</a>
+                                <form action="" method="post">
+                                    <input type="hidden" name="user_id" value="">
+                                    <button style="margin-top: 10px" type="submit" class="btn-shape bg-red c-white"
+                                        onclick="return confirm('Are you sure you want to remove this user?')">Remove</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
         
         </section>
 
