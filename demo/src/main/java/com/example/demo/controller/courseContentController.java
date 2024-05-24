@@ -56,38 +56,43 @@ public ModelAndView courseContent(@RequestParam("course_id") int courseId) {
     return mav;
 }
 @PostMapping("save-course-content")
-public ModelAndView saveCourseContent(@ModelAttribute @Valid CourseContent courseContent,
-                                      BindingResult bindingResult) {
-    ModelAndView mav = new ModelAndView("courses.html");
+public ModelAndView saveCourseContent(@ModelAttribute @Valid CourseContent courseContent, BindingResult bindingResult, HttpSession session) {
+
+
+    ModelAndView mav = new ModelAndView("teacher-coursespage.html");
+    String email = session.getAttribute("email").toString();
+    User user = userRepository.findByEmail(email);
+    Instructor instructor = this.instructorRepository.findByUser(user);
+    List<Courses> courses= instructor.getCourses();
+    if (bindingResult.hasErrors()) {
+        System.out.println("Validation errors:");
+        bindingResult.getAllErrors().forEach(error -> System.out.println(error.toString()));
+        mav.addObject("contenterrors", bindingResult.getAllErrors());
+        mav.addObject("courses", courses);
+        return mav;
+    }
+    
+
+
     int courseid = Integer.parseInt(courseContent.getVideo_playlist());
     Courses exsistingcourse = this.coursesRepository.findById(courseid);
     List<CourseContent> contentlist = exsistingcourse.getCoursecontent();
     contentlist.add(courseContent);
     exsistingcourse.setCoursecontent(contentlist);
     courseContent.setCourse(exsistingcourse);
-
-
-
-
     this.courseContentRepository.save(courseContent);
     this.coursesRepository.save(exsistingcourse);
     
     return new ModelAndView("redirect:/teacher/view-course");
+  
+
+ 
 
 
 
-
-
-    // if (bindingResult.hasErrors()) {
-        
-    //      mav.addObject("contenterrors", bindingResult.getAllErrors());
-    //     return mav;
-    
-    // }
-        
-
+   
      
-
+ 
     
 }
 

@@ -298,8 +298,8 @@
                                                         
                                                         <option value="" selected disabled>-- Select course --</option>
                   
-                    <option th:each="course : ${courses}" th:value="${course.course_id}" th:text="${course.course_title}"></option>
-                </select>
+                                      <option th:each="course : ${courses}" th:value="${course.course_id}" th:text="${course.course_title}"></option>
+                                             </select>
                                                     <span th:each="error : ${contenterrors}"
                                                         th:if="${error.field == 'video_playlist'}" class="alert"
                                                         th:text="${error.defaultMessage}"
@@ -316,15 +316,15 @@
                                                         th:text="${error.defaultMessage}"
                                                         style="color: red; width: max-content;"></span>
 
-                                                    <p>Video thumbnail <span>*</span></p>
+                                                    <!-- <p>Video thumbnail <span>*</span></p>
                                                     <input type="file" name="video_thumbnail" accept="image/*"
-                                                        class="box">
+                                                        class="box"> -->
 
 
 
-                                                    <p>Attach Video <span>*</span></p>
+                                                    <!-- <p>Attach Video <span>*</span></p>
                                                     <input type="file" name="video_play" accept="image/*" class="box">
-                                                    </br>
+                                                    </br> -->
                                                     <input type="submit" value="Add video" name="submit" class="btn">
 
                                                 </form>

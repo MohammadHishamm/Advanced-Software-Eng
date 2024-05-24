@@ -32,4 +32,9 @@ build/
 ### VS Code ###
 .vscode/
 
+
+
 logs/*
+
+# Ignore signup-signin.log
+signup-signin.log
