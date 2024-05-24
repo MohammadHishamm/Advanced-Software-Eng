@@ -168,7 +168,7 @@
                                                         <option value="active">Active</option>
                                                         <option value="deactive">Deactive</option>
                                                     </select>
-                                                    <span th:each="error : ${errors}"
+                                                    <span th:each="error : ${courseerrors}"
                                                         th:if="${error.field == 'course_status'}" class="alert"
                                                         th:text="${error.defaultMessage}"
                                                         style="color: red; width: max-content;"></span>
@@ -176,7 +176,7 @@
                                                     <p>Course title <span>*</span></p>
                                                     <input type="text" name="course_title" maxlength="100"
                                                         placeholder="enter playlist title" class="box">
-                                                    <span th:each="error : ${errors}"
+                                                    <span th:each="error : ${courseerrors}"
                                                         th:if="${error.field == 'course_title'}" class="alert"
                                                         th:text="${error.defaultMessage}"
                                                         style="color: red; width: max-content;"></span>
@@ -185,7 +185,7 @@
                                                     <textarea name="course_description" class="box"
                                                         placeholder="write description" maxlength="1000" cols="30"
                                                         rows="10"></textarea>
-                                                    <span th:each="error : ${errors}"
+                                                    <span th:each="error : ${courseerrors}"
                                                         th:if="${error.field == 'course_description'}" class="alert"
                                                         th:text="${error.defaultMessage}"
                                                         style="color: red; width: max-content;"></span>
@@ -193,7 +193,7 @@
                                                     <textarea name="course_requirements" class="box"
                                                         placeholder="write requirements" maxlength="1000" cols="30"
                                                         rows="10"></textarea>
-                                                    <span th:each="error : ${errors}"
+                                                    <span th:each="error : ${courseerrors}"
                                                         th:if="${error.field == 'course_requirements'}" class="alert"
                                                         th:text="${error.defaultMessage}"
                                                         style="color: red; width: max-content;"></span>
@@ -202,7 +202,7 @@
                                                     <p>Course Price <span>*</span></p>
                                                     <input type="text" name="course_price" maxlength="100"
                                                         placeholder="enter playlist Price" class="box">
-                                                    <span th:each="error : ${errors}"
+                                                    <span th:each="error : ${courseerrors}"
                                                         th:if="${error.field == 'course_price'}" class="alert"
                                                         th:text="${error.defaultMessage}"
                                                         style="color: red; width: max-content;"></span>

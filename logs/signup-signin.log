@@ -39,3 +39,7 @@
 2024-05-22 11:53:21 INFO  c.e.demo.controller.SignUpController - Navigating to signup/signin page
 2024-05-22 11:53:26 INFO  c.e.demo.controller.SignUpController - Attempting to sign in user: mohammadhesham65@gmail.com
 2024-05-22 11:53:27 INFO  c.e.demo.controller.SignUpController - User mohammadhesham65@gmail.com signed in successfully
+2024-05-24 16:17:08 INFO  c.e.demo.controller.SignUpController - User omar@gmail.com signed out
+2024-05-24 16:17:11 INFO  c.e.demo.controller.SignUpController - Navigating to signup/signin page
+2024-05-24 16:17:17 INFO  c.e.demo.controller.SignUpController - Attempting to sign in user: omar@gmail.com
+2024-05-24 16:17:17 INFO  c.e.demo.controller.SignUpController - User omar@gmail.com signed in successfully

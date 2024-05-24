@@ -101,44 +101,53 @@
                             <!-- side nav -->
 
                             <div class="col-lg-3">
-                              <div class=" mb-4 mb-lg-0">
-                                  <div class=" p-0">
-                                  <ul class="list-group">
-                          
-                         
-                                     
-                                      <li class="list-group-item d-flex justify-content-start align-items-start pt-3 w-100">
-                                          <div class="dropdown w-100">
-                                              <a class="btn btn-light w-100 dropdown-toggle active" href="#" role="button" id="dropdownMenuLink"
-                                                 data-mdb-dropdown-init data-mdb-ripple-init aria-expanded="false">My Courses
-                                              </a>
-                                              <ul class="dropdown-menu w-100 text-center" aria-labelledby="dropdownMenuLink">
-                                                  <li><a id="addCourseLink" class="dropdown-item" href="">Add Courses</a></li>
-                                                
-                                                  <li><a id="viewCourseLink" class="dropdown-item" href="">View Courses</a></li>
-                                              </ul>
-                                          </div>
-                                      </li>
-                                      
-                                      <li class="list-group-item d-flex justify-content-start align-items-start pt-3 w-100">
-                                          <div class="dropdown w-100">
-                                              <a class="btn btn-light w-100 dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                                 data-mdb-dropdown-init data-mdb-ripple-init aria-expanded="false">Course Content
-                                              </a>
-                                              <ul class="dropdown-menu w-100 text-center" aria-labelledby="dropdownMenuLink">
-                                                  <li><a id="addCourseContentLink" class="dropdown-item" href="">Add Content</a></li>
-                                                
-                                                  <li><a class="dropdown-item" href="">View Content</a></li>
-                                              </ul>
-                                          </div>
-                                      </li>
-                                      
-                          
-                          </ul>
-                          
-                                  </div>
-                              </div>
-                          </div>
+                                <div class=" mb-4 mb-lg-0">
+                                    <div class=" p-0">
+                                        <ul class="list-group">
+
+
+
+                                            <li
+                                                class="list-group-item d-flex justify-content-start align-items-start pt-3 w-100">
+                                                <div class="dropdown w-100">
+                                                    <a class="btn btn-light w-100 dropdown-toggle active" href="#"
+                                                        role="button" id="dropdownMenuLink" data-mdb-dropdown-init
+                                                        data-mdb-ripple-init aria-expanded="false">My Courses
+                                                    </a>
+                                                    <ul class="dropdown-menu w-100 text-center"
+                                                        aria-labelledby="dropdownMenuLink">
+                                                        <li><a id="addCourseLink" class="dropdown-item" href="">Add
+                                                                Courses</a></li>
+
+                                                        <li><a id="viewCourseLink" class="dropdown-item"
+                                                                href="">View Courses</a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+
+                                            <li
+                                                class="list-group-item d-flex justify-content-start align-items-start pt-3 w-100">
+                                                <div class="dropdown w-100">
+                                                    <a class="btn btn-light w-100 dropdown-toggle" href="#"
+                                                        role="button" id="dropdownMenuLink" data-mdb-dropdown-init
+                                                        data-mdb-ripple-init aria-expanded="false">Course Content
+                                                    </a>
+                                                    <ul class="dropdown-menu w-100 text-center"
+                                                        aria-labelledby="dropdownMenuLink">
+                                                        <li><a id="addCourseContentLink" class="dropdown-item"
+                                                                href="">Add Content</a></li>
+
+                                                       
+                                                    </ul>
+                                                </div>
+                                            </li>
+
+
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
                              
                               <div class="col-lg-8 ">
                                   <div class=" mb-4">
@@ -157,25 +166,42 @@
                                             <form action="../courses/update-course" method="post" enctype="multipart/form-data">
                                                 <p>Course status <span>*</span></p>
                                                 <select name="course_status" class="box">
-                                                    <option value="" selected disabled>
-                                                        -- select status
-                                                    </option>
+                                                    <option value="" selected disabled>-- select status</option>
                                                     <option value="active">Active</option>
                                                     <option value="deactive">Deactive</option>
                                                 </select>
-                                                <span th:each="error : ${errors}" th:if="${error.field == 'course_status'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content"></span>
+                                                <span th:each="error : ${courseerrors}"
+                                                th:if="${error.field == 'course_status'}" class="alert"
+                                                th:text="${error.defaultMessage}"
+                                                style="color: red; width: max-content;"></span>
                                         
                                                 <p>Course title <span>*</span></p>
                                                 <input type="text" name="course_title" maxlength="100" placeholder="Enter course title" class="box" th:value="${existingCourse.course_title}" />
+                                                <span th:each="error : ${courseerrors}"
+                                                        th:if="${error.field == 'course_title'}" class="alert"
+                                                        th:text="${error.defaultMessage}"
+                                                        style="color: red; width: max-content;"></span>
+
                                         
                                                 <p>Course description <span>*</span></p>
                                                 <textarea name="course_description" class="box" placeholder="Write description" maxlength="1000" cols="30" rows="10" th:text="${existingCourse.course_description}"></textarea>
+                                                <span th:each="error : ${courseerrors}"
+                                                th:if="${error.field == 'course_description'}" class="alert"
+                                                th:text="${error.defaultMessage}"
+                                                style="color: red; width: max-content;"></span>
                                         
                                                 <p>Course requirements <span>*</span></p>
                                                 <textarea name="course_requirements" class="box" placeholder="Write requirements" maxlength="1000" cols="30" rows="10" th:text="${existingCourse.course_requirements}"></textarea>
-                                        
+                                                <span th:each="error : ${courseerrors}"
+                                                th:if="${error.field == 'course_requirements'}" class="alert"
+                                                th:text="${error.defaultMessage}"
+                                                style="color: red; width: max-content;"></span>
                                                 <p>Course Price <span>*</span></p>
                                                 <input type="text" name="course_price" maxlength="100" placeholder="Enter course price" class="box" th:value="${existingCourse.course_price}" />
+                                                <span th:each="error : ${courseerrors}"
+                                                th:if="${error.field == 'course_price'}" class="alert"
+                                                th:text="${error.defaultMessage}"
+                                                style="color: red; width: max-content;"></span>
                                         
                                                 <p>Course thumbnail <span>*</span></p>
                                                 <input type="file" name="course_thumbnail" accept="image/*" class="box" />
