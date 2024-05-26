@@ -12,6 +12,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+
+
 </head>
 
 <body>
@@ -55,32 +62,51 @@
         </section>
 
         <section id="courses" style="display: none;">
-            <p>2</p>
+           
+            
+                <div class="content w-full">
+                    <h1 class="p-relative">Courses</h1>
+                    <div class="friends-page d-flex m-20 gap-20 flex-wrap">
+                        <div th:each="course : ${courses}" class="friend bg-white rad-6 p-20 p-relative equal-height">
+                            <div class="txt-c">
+                                <h4 class="m-0" th:text="${course.course_title}"></h4>
+                                <p class="c-grey fs-13 mt-5 mb-0" th:text="${course.course_description}"></p>
+                            </div>
+
+                            <div class="mb-10">
+                                
+                                <p class="c-grey fs-13 mt-5 mb-0">
+                                    Added by: <span th:text="${course.instructor.user.name}"></span>
+                                </p>
+                           
+                        </div>
+                            <div class="info between-flex fs-13">
+                                <span class="c-grey" th:text="${course.course_status}"></span>
+                               
+                                    
+                                <div>
+                                    <button style="margin-top: 10px" class="btn-shape bg-red c-white"
+                                    th:onclick="'deleteCourse(' + ${course.course_id} + ')'" >Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+       
         </section>
 
         <section id="users" style="display: none;">
             <div class="content w-full">
                 <h1 class="p-relative">Users</h1>
-                <div class="friends-page d-grid m-20 gap-20">
-                    <div th:each="user : ${users}" class="friend bg-white rad-6 p-20 p-relative">
-                        <div class="contact">
-                            <i class="fa-solid fa-phone"></i>
-                            <i class="fa-regular fa-envelope"></i>
-                        </div>
+                <div class="friends-page d-flex m-20 gap-20 flex-wrap">
+                    <div th:each="user : ${users}" class="friend bg-white rad-6 p-20 p-relative equal-height">
                         <div class="txt-c">
                             <h4 class="m-0" th:text="${user.name}"></h4>
                             <p class="c-grey fs-13 mt-5 mb-0" th:text="${user.email}"></p>
                         </div>
-                        <div class="icons fs-14 p-relative">
-                            <div class="mb-10">
-                                <i class="fa-solid fa-code-commit fa-fw"></i>
-                                <span>15 Courses</span>
-                            </div>
-                        </div>
                         <div class="info between-flex fs-13">
                             <span class="c-grey">Joined </span>
                             <div>
-                                <a class="bg-blue c-white btn-shape" href="profile.html">Profile</a>
                                 <button style="margin-top: 10px" class="btn-shape bg-red c-white"
                                     th:onclick="'deleteUser(' + ${user.user_id} + ')'">Remove</button>
                             </div>
@@ -89,7 +115,35 @@
                 </div>
             </div>
         </section>
-
+        
+        <style>
+            .friends-page {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+        
+            .friend {
+                flex: 1 1 300px; /* Adjust the basis to control the card width */
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+        
+            .equal-height {
+                display: flex;
+                flex-direction: column;
+            }
+        
+            .txt-c {
+                flex-grow: 1;
+            }
+        
+            .info {
+                margin-top: auto; /* Push the info section to the bottom */
+            }
+        </style>
+        
         <script>
             function showDashboard(event) {
                 event.preventDefault();
@@ -138,6 +192,18 @@
                         });
                 }
             }
+
+            function deleteCourse(courseId) {
+        fetch('/admin/delete-course/' + courseId, {
+            method: 'DELETE',
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data);
+            location.reload(); // Reload the page to see the changes
+        })
+        .catch(error => console.error('Error:', error));
+    }
 
             document.getElementById('dash').addEventListener('click', showDashboard);
             document.getElementById('teach').addEventListener('click', showTeachers);
