@@ -97,13 +97,18 @@ public ModelAndView saveCourseContent(@ModelAttribute @Valid CourseContent cours
 }
 
 @GetMapping("view-content")
-public ModelAndView view_content(@RequestParam("courseid") int courseId) {
-    Courses course= this.coursesRepository.findById(courseId);
+public ModelAndView view_content(@RequestParam("contentid") int content_id , @RequestParam("courseid") int course_id ) {
+    Courses course= this.coursesRepository.findById(course_id);
     ModelAndView mav = new ModelAndView("view-content.html");
-   
+    CourseContent specific_content = null ; 
     List<CourseContent> content = course.getCoursecontent();
-   
-         mav.addObject("courseContents" , content );
+    for (CourseContent c : content) {
+        if (c.getVideo_id() == content_id) {
+            specific_content = c;
+            break;
+        }
+    }
+         mav.addObject("specific_content" , specific_content );
        
    
    

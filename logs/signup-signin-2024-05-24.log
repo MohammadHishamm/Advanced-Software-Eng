@@ -1,0 +1,7 @@
+2024-05-24 22:01:03 INFO  c.e.demo.controller.SignUpController - Navigating to signup/signin page
+2024-05-24 22:01:09 INFO  c.e.demo.controller.SignUpController - Attempting to sign in user: zeiadalziyaty@gmail.com
+2024-05-24 22:01:09 ERROR c.e.demo.controller.SignUpController - Signin failed: Incorrect password for email zeiadalziyaty@gmail.com
+2024-05-24 22:02:20 INFO  c.e.demo.controller.SignUpController - Attempting to sign in user: zeiadalziyaty@gmail.com
+2024-05-24 22:02:20 ERROR c.e.demo.controller.SignUpController - Signin failed: Incorrect password for email zeiadalziyaty@gmail.com
+2024-05-24 22:02:33 INFO  c.e.demo.controller.SignUpController - Attempting to sign in user: zeiadalziyaty@gmail.com
+2024-05-24 22:02:34 INFO  c.e.demo.controller.SignUpController - User zeiadalziyaty@gmail.com signed in successfully

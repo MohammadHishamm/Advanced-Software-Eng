@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import com.example.demo.models.Instructor;
 import com.example.demo.models.Student;
 import com.example.demo.models.User;
 import com.example.demo.repositories.CartRepository;
+import com.example.demo.repositories.CourseContentRepository;
 import com.example.demo.repositories.CoursesRepository;
 import com.example.demo.repositories.InstructorRepository;
 
@@ -40,6 +42,8 @@ public class coursesController {
     @Autowired
     ImageService imageservice;
 
+    @Autowired
+    private CourseContentRepository courseContentrepository;
     @Autowired
     private CoursesRepository coursesRepository;
 
@@ -124,6 +128,7 @@ public class coursesController {
     public ModelAndView view_course(@RequestParam("courseid") int id, HttpSession session) {
         ModelAndView mav = new ModelAndView("view-course.html");
         Courses course = this.coursesRepository.findById(id);
+       
         if (course != null) {
             if (session != null) {
                 // get student from user id to see if the student is already enrolled in the
@@ -134,22 +139,24 @@ public class coursesController {
           
                 // all the courses that this student enrolled in
                 List<Courses> courses = student.getCourses();
-
+                
                 boolean enrolled_in = false;
+                List<CourseContent> content = new ArrayList<>();
                 for (Courses c : courses) {
                     if (c.getCourse_id() == id) {
                         enrolled_in = true;
+                        content =  c.getCoursecontent();
                         break;
                     }
                 }
                 System.out.println(enrolled_in);
+                
                 Instructor instructor = course.getInstructor();
                 User user2 = instructor.getUser();
                 mav.addObject("course", course);
+                mav.addObject("content", content);
                 mav.addObject("User", user2);
-                mav.addObject("enroll", enrolled_in);
-           
-              
+                mav.addObject("enroll", enrolled_in);   
             }
             else 
             {
