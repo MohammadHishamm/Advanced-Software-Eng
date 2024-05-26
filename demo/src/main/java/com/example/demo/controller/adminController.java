@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.models.Instructor;
 import com.example.demo.models.User;
+import com.example.demo.models.Courses;
+import com.example.demo.repositories.CoursesRepository;
 import com.example.demo.repositories.InstructorRepository;
 import com.example.demo.repositories.UserRepository;
 
@@ -25,12 +27,17 @@ public class adminController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private CoursesRepository courseRepository;
 
     @GetMapping("")
     public ModelAndView getpage() {
         ModelAndView mav = new ModelAndView("Admin/index.html");
         List<User> users = userRepository.findAll();
         mav.addObject("users", users);
+        
+        List<Courses> courses = courseRepository.findAll();
+        mav.addObject("courses", courses);
         return mav;
     }
 
@@ -40,6 +47,12 @@ public class adminController {
     public String deleteUser(@PathVariable int id) {
         userRepository.deleteById(id);
         return "User deleted successfully";
+    }
+
+    @DeleteMapping("/delete-course/{id}")
+    public String deleteCourse(@PathVariable int id) {
+        courseRepository.deleteById(id);
+        return "Course deleted successfully";
     }
 
 }
