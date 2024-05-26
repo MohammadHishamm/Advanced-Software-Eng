@@ -11,17 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.Services.InstructorService;
 import com.example.demo.models.Courses;
 import com.example.demo.models.Instructor;
 import com.example.demo.models.User;
-import com.example.demo.repositories.CoursesRepository;
+
 import com.example.demo.repositories.InstructorRepository;
 import com.example.demo.repositories.UserRepository;
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestParam;
+
+
 
 
 
@@ -29,61 +30,46 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 public class InstructorController 
 {
-
     @Autowired  
     private InstructorRepository instructorRepository;
     @Autowired  
     private UserRepository userRepository;
-    
 
+    @Autowired
+    private InstructorService instructorService;
+
+    
 
     @GetMapping("teacherform")
     public ModelAndView viewInstructor(HttpSession session) {
-        if (session.getAttribute("email") != null)
-        {
-        ModelAndView mav= new ModelAndView("Teacher-Form.html");
-        Instructor newInstructor= new Instructor();
-        mav.addObject("instructor", newInstructor);
-        return mav;
-        }
-        else
-        {
-            return new ModelAndView("redirect:/sign");      
-    }}
-
- 
-    @PostMapping("teacherform")
-    public ModelAndView saveInstructor(@ModelAttribute @Valid Instructor instructor, BindingResult bindingResult, HttpSession session ) {
-        ModelAndView mav = new ModelAndView("Teacher-Form.html");
-       
-        if (bindingResult.hasErrors()) {
-            mav.addObject("errors", bindingResult.getAllErrors());
-            
+        if (session.getAttribute("email") != null) {
+            ModelAndView mav = new ModelAndView("Teacher-Form.html");
+            Instructor newInstructor = new Instructor();
+            mav.addObject("instructor", newInstructor);
             return mav;
-            
-        }   
-        else{
+        } else {
+            return new ModelAndView("redirect:/sign");
+        }
+    }
 
+    @PostMapping("teacherform")
+    public ModelAndView saveInstructor(@ModelAttribute @Valid Instructor instructor, BindingResult bindingResult, HttpSession session) {
+        if (bindingResult.hasErrors()) {
+            ModelAndView mav = new ModelAndView("Teacher-Form.html");
+            mav.addObject("errors", bindingResult.getAllErrors());
+            return mav;
+        } else {
             String email = (String) session.getAttribute("email");
-    
-         
             User user = this.userRepository.findByEmail(email);
-    
-         
             user.setType("instructor");
-    
-         
             instructor.setUser(user);
-    
             instructor.setStatus("Observing");
 
-            this.instructorRepository.save(instructor);
-    
-            
+            this.instructorService.save(instructor);
+
             return new ModelAndView("redirect:/");
         }
-        } 
-            
+    }
         
      
    
