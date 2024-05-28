@@ -54,7 +54,7 @@
                             <td th:text="${instructor.language}"></td>
                             <td th:text="${instructor.status}"></td>
                             <td th:text="${instructor.country}"></td>
-                            <td><a th:href="@{${instructor.pdf}}" th:text="${instructor.pdf}">Download CV</a></td>
+                            <td><a th:href="@{'../Images/courses/cvs/' + ${instructor.pdf}}}" th:text="${instructor.pdf}">Download CV</a></td>
                             <td th:text="${instructor.comment}"></td>
                             <td th:text="${instructor.id}"></td>
                             <td>

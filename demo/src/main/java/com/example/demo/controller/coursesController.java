@@ -225,7 +225,7 @@ public class coursesController {
     @PostMapping("/update-course")
     public ModelAndView updateCourse(@ModelAttribute("existingCourse") @Valid Courses updatedCourse,
             BindingResult bindingResult,
-            HttpSession session) {
+            HttpSession session ,  @RequestParam("coursethumbnail") MultipartFile courseThumbnail) throws IOException {
         ModelAndView mav = new ModelAndView("edit-course.html");
 
         int courseId = updatedCourse.getCourse_id(); 
@@ -239,6 +239,8 @@ public class coursesController {
 
         if (existingCourse != null) {
             // Update the existing course with the new data
+            String filePath = fileservice.uploadImage(courseThumbnail ,"demo/src/main/resources/static/Images/courses/thumbs/" );
+            existingCourse.setImage(filePath);
             existingCourse.setCourse_title(updatedCourse.getCourse_title());
             existingCourse.setCourse_status(updatedCourse.getCourse_status());
             existingCourse.setCourse_description(updatedCourse.getCourse_description());
