@@ -59,8 +59,12 @@ public class InstructorController
             mav.addObject("errors", bindingResult.getAllErrors());
             return mav;
         } else {
-           
+            String email = (String) session.getAttribute("email");
+            User user = this.userRepository.findByEmail(email);
         
+            instructor.setUser(user);
+            instructor.setStatus("Observing");
+
             this.instructorService.save(instructor);
 
             return new ModelAndView("redirect:/");
