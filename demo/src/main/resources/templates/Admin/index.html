@@ -66,9 +66,10 @@
                                 </ul>
                             </td>
                             <td>
-                                <form th:action="@{admin/updateUserType}" method="post">
+                                <span id="buttonStatus" th:text="${instructor.status eq 'Observing' ? '' : 'Confirmed'}"></span>
+                                <form id="updateForm" th:action="@{admin/updateUserType}" method="post">
                                     <input type="hidden" th:name="userId" th:value="${instructor.user.email}" />
-                                    <button type="submit">Make Instructor</button>
+                                    <button id="updateButton" type="submit" th:if="${instructor.status eq 'Observing'}">Make Instructor</button>
                                 </form>
                             </td>
                         </tr>
@@ -76,7 +77,19 @@
                 </tbody>
             </table>
 
-
+            <script th:inline="javascript">
+                function updateStatus() {
+                    var button = document.getElementById('updateButton');
+                    var buttonStatus = document.getElementById('buttonStatus');
+            
+                    if (button) {
+                        button.style.display = 'none';  // Hide the button
+                    }
+                    if (buttonStatus) {
+                        buttonStatus.textContent = 'Confirmed'; // Update the button text to "Confirmed"
+                    }
+                }
+            </script>
 
 
 

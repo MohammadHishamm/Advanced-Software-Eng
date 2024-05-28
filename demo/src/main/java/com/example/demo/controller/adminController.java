@@ -72,6 +72,7 @@ public class adminController {
         }
         Instructor instructor = instructorRepository.findByUser(user);
         instructor.setStatus("Confirmed");
+        mav.addObject("statusUpdated", true);
         return mav;
     }
 
