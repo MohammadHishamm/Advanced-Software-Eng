@@ -67,8 +67,11 @@ public class adminController {
         User user = userRepository.findByEmail(userId);
         if (user != null) {
             user.setType("instructor");
+
             userRepository.save(user);
         }
+        Instructor instructor = instructorRepository.findByUser(user);
+        instructor.setStatus("Confirmed");
         return mav;
     }
 

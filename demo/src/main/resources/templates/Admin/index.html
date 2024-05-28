@@ -26,7 +26,7 @@
         <div th:replace="fragments/side-nav::adminsidenav"></div>
 
 
-        <section id="teacher" style="display: none;" class="test">
+        <section id="teacher"  class="test">
 
             <table border="1">
                 <thead>
@@ -229,7 +229,7 @@
                             <p class="c-grey fs-13 mt-5 mb-0" th:text="${user.email}"></p>
                         </div>
                         <div class="info between-flex fs-13">
-                            <span class="c-grey">Joined </span>
+                            <span class="c-grey" th:text="${user.type}"> </span>
                             <div>
                                 <button style="margin-top: 10px" class="btn-shape bg-red c-white"
                                     th:onclick="'deleteUser(' + ${user.user_id} + ')'">Remove</button>
