@@ -24,19 +24,8 @@
   <div th:replace="fragments/SideNav::sidenav"></div>
 
   <body style="background-color: #ebeff4">
-    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-        <!-- Check if there are course contents -->
-        <div th:if="${courseContents.empty}">
-            <p style="font-size: 2em; color: red;">No content to show</p>
-            <a href="/user/profile" class="btn btn-primary">Back</a>
-        </div>
-
-        <!-- Button to go back -->
-        
-    </div>
-
     <!-- Iterate over course contents if available -->
-    <div class="container-fluid mb-5" th:each="content : ${courseContents}">
+    <div class="container-fluid mb-5" th:each="content : ${specific_content}">
       <div class="row">
         <div class="col-9 ms-5 mt-5">
           <div>
@@ -61,8 +50,6 @@
                 th:text="${content.video_description}"
               ></p>
             </div>
-            <a th:href="@{'/coursescontent/delete-content?courseid=' + ${content.video_id}}" class="btn btn-danger">delete</a>
-            <a href="/user/profile" class="btn btn-primary">Back</a>
           </div>
         </div>
       </div>
