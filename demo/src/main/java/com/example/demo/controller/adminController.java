@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.models.Instructor;
@@ -38,6 +40,10 @@ public class adminController {
         
         List<Courses> courses = courseRepository.findAll();
         mav.addObject("courses", courses);
+
+        List<Instructor>Instructors = instructorRepository.findAll();
+        mav.addObject("instructors", Instructors);
+
         return mav;
     }
 
@@ -53,6 +59,17 @@ public class adminController {
     public String deleteCourse(@PathVariable int id) {
         courseRepository.deleteById(id);
         return "Course deleted successfully";
+    }
+
+    @PostMapping("/updateUserType")
+    ModelAndView updateUserType(@RequestParam("userId") String userId) {
+        ModelAndView mav = new ModelAndView("redirect:/admin");
+        User user = userRepository.findByEmail(userId);
+        if (user != null) {
+            user.setType("instructor");
+            userRepository.save(user);
+        }
+        return mav;
     }
 
 }
