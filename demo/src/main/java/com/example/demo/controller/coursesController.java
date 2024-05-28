@@ -30,7 +30,8 @@ import com.example.demo.repositories.StudentRepository;
 
 import com.example.demo.repositories.UserRepository;
 import com.example.demo.repositories.WishlistRepository;
-import com.example.demo.Services.ImageService;
+import com.example.demo.Services.FileService;
+
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -40,7 +41,7 @@ import jakarta.validation.Valid;
 public class coursesController {
 
     @Autowired
-    ImageService imageservice;
+    FileService fileservice;
 
     @Autowired
     private CourseContentRepository courseContentrepository;
@@ -99,7 +100,7 @@ public class coursesController {
 
                 List<Courses> instructorCourses = instructor.getCourses();
                 
-                String filePath = imageservice.uploadImage(courseThumbnail);
+                String filePath = fileservice.uploadImage(courseThumbnail ,"demo/src/main/resources/static/Images/courses/thumbs/" );
                 course.setImage(filePath);
 
         

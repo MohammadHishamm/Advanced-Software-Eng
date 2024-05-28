@@ -12,10 +12,12 @@ import java.io.File;
 
 
 @Service
-public class ImageService {
-    private static final String UPLOADED_FOLDER = Paths.get("demo/src/main/resources/static/Images/").toAbsolutePath().toString() + "/";
+public class FileService {
+    public String UPLOADED_FOLDER;
 
-    public String uploadImage(MultipartFile file) throws IOException {
+    public String uploadImage(MultipartFile file , String filename) throws IOException {
+        
+        UPLOADED_FOLDER = Paths.get(filename).toAbsolutePath().toString() + "/";
         if (file.isEmpty()) {
             throw new IOException("Failed to store empty file.");
         }
@@ -42,5 +44,8 @@ public class ImageService {
         // Return the relative path for saving in the database
         return  originalFilename;
     }
+
+
+    
 }
 

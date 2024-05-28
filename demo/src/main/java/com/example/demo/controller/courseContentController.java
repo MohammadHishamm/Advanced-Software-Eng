@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.example.demo.Services.FileService;
 import com.example.demo.models.CourseContent;
 import com.example.demo.models.Courses;
 import com.example.demo.models.Instructor;
@@ -27,6 +29,8 @@ import java.util.List;
 @RequestMapping("/coursescontent")
 @RestController
 public class courseContentController {
+    @Autowired
+    FileService fileservice;
 
     @Autowired
     private CourseContentRepository courseContentRepository;
@@ -56,7 +60,9 @@ public ModelAndView courseContent(@RequestParam("course_id") int courseId) {
     return mav;
 }
 @PostMapping("save-course-content")
-public ModelAndView saveCourseContent(@ModelAttribute @Valid CourseContent courseContent, BindingResult bindingResult, HttpSession session) {
+public ModelAndView saveCourseContent(@ModelAttribute @Valid CourseContent courseContent, BindingResult bindingResult, HttpSession session,
+@RequestParam("coursethumbnail") MultipartFile courseThumbnail ,  @RequestParam("coursevideo") MultipartFile coursevideo
+) throws IOException {
 
 
     ModelAndView mav = new ModelAndView("teacher-coursespage.html");
@@ -74,12 +80,22 @@ public ModelAndView saveCourseContent(@ModelAttribute @Valid CourseContent cours
     
 
 
+     String filePath1 = fileservice.uploadImage(courseThumbnail ,"demo/src/main/resources/static/Images/courses/thumbs/" );
+     System.out.println("Uploaded image file name: " + courseThumbnail.getOriginalFilename());
+
+    String  filePath2 = fileservice.uploadImage(coursevideo ,"demo/src/main/resources/static/Images/courses/videos/" );
+    System.out.println("Uploaded image file name: " + coursevideo.getOriginalFilename());
+
+    courseContent.setVideo_thumbnail(filePath1);
+    courseContent.setVideo_play(filePath2);
     int courseid = Integer.parseInt(courseContent.getVideo_playlist());
     Courses exsistingcourse = this.coursesRepository.findById(courseid);
     List<CourseContent> contentlist = exsistingcourse.getCoursecontent();
     contentlist.add(courseContent);
+
     exsistingcourse.setCoursecontent(contentlist);
     courseContent.setCourse(exsistingcourse);
+    
     this.courseContentRepository.save(courseContent);
     this.coursesRepository.save(exsistingcourse);
     

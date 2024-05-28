@@ -17,14 +17,36 @@
 
     <script src="../js/Loaders.js"></script>
   </head>
-  <!-- Top Nav -->
+ 
+  <style>
+    .video-container {
+        position: relative;
+        width: 100%;
+        max-width: 800px; /* Optional: Adjust max-width as needed */
+    }
+
+    .video-container video {
+        width: 100%;
+        display: block;
+    }
+
+    .video-container .thumbnail {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        cursor: pointer;
+    }
+</style>
+  <body style="background-color: #ebeff4">
+    <!-- Iterate over course contents if available -->
+
+     <!-- Top Nav -->
   <div th:replace="fragments/Navbar::navigation"></div>
 
   <!-- SideNav -->
   <div th:replace="fragments/SideNav::sidenav"></div>
 
-  <body style="background-color: #ebeff4">
-    <!-- Iterate over course contents if available -->
     <div class="container-fluid mb-5" th:each="content : ${specific_content}">
       <div class="row">
         <div class="col-9 ms-5 mt-5">
@@ -49,11 +71,20 @@
                 class="courses_content_information"
                 th:text="${content.video_description}"
               ></p>
+              <video width="100%" height="240" controls>
+              <source th:src="@{'../Images/courses/videos/' + ${content.video_play}}" type="video/mp4">
+             
+              Your browser does not support the video tag.
+              </video>
+            
+      
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    
 
     <div th:replace="~{fragments/bottomNav::bottom_navigation}"></div>
     
