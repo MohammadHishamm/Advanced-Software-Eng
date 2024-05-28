@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8081"
+    depends_on:
+      - mysql
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/aswe
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_JPA_HIBERNATE_DDL-AUTO=update
+      - SERVER_PORT=8081
+      - SPRING_SESSION_JDBC_INITIALIZE-SCHEMA=always
+      - LOGGING_LEVEL_ROOT=ERROR
+      - LOGGING_LEVEL_COM_EXAMPLE_DEMO_CONTROLLER=INFO
+
+  mysql:
+    image: mysql:latest
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: aswe
