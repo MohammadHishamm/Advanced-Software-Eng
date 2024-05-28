@@ -111,7 +111,7 @@
                 <div class="friends-page d-flex m-20 gap-20 flex-wrap">
                     <div th:each="course : ${courses}" class="friend bg-white rad-6 p-20 p-relative equal-height">
                         <div class="d-flex align-items-start">
-                            <img th:src="@{'../Images/' + ${course.image}}" class="course-image" />
+                            <img th:src="@{'../Images/courses/thumbs/' + ${course.image}}" class="course-image" />
                             <div class="txt-c">
                                 <h4 class="m-0" th:text="${course.course_title}"></h4>
                                 <p class="c-grey fs-13 mt-5 mb-0" th:text="${course.course_description}"></p>
