@@ -38,7 +38,6 @@ public class Instructor {
 
     private String Country;
 
-    @NotEmpty(message = "CV is required")
     private String Pdf; 
 
     private String Comment;

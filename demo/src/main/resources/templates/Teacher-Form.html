@@ -36,7 +36,7 @@
 
     <!-- Multi step form -->
     <section class="multi_step_form">
-        <form method="post" th:object="${instructor}" >
+        <form method="post" th:object="${instructor}"  enctype="multipart/form-data">
             <!-- Tittle -->
             <div class="tittle">
                 <h2>Become a teacher with us!</h2>
@@ -344,9 +344,8 @@
                         name="name">
                     </div>
                     <div class="form-group ">
-                        <input type="file"  th:field="*{Pdf}"  name="Pdf" class="form-control" accept=".pdf" />
+                        <input type="file"  name="cv" class="form-control" accept=".pdf" />
                     </div>
-                    <span th:each="error : ${errors}" th:if="${error.field == 'Pdf'}" class="alert" th:text="${error.defaultMessage}" style="color: red; width: max-content;"></span>
                     <br />
                     
 

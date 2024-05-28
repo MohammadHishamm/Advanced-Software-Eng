@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.Services.FileService;
 import com.example.demo.Services.InstructorService;
 import com.example.demo.models.Courses;
 import com.example.demo.models.Instructor;
@@ -34,7 +38,8 @@ public class InstructorController
     private InstructorRepository instructorRepository;
     @Autowired  
     private UserRepository userRepository;
-
+    @Autowired
+    FileService fileservice;
     @Autowired
     private InstructorService instructorService;
 
@@ -53,7 +58,9 @@ public class InstructorController
     }
 
     @PostMapping("teacherform")
-    public ModelAndView saveInstructor(@ModelAttribute @Valid Instructor instructor, BindingResult bindingResult, HttpSession session) {
+    public ModelAndView saveInstructor(@ModelAttribute @Valid Instructor instructor, BindingResult bindingResult, HttpSession session,
+    @RequestParam("cv") MultipartFile pdf
+    ) throws IOException {
         if (bindingResult.hasErrors()) {
             ModelAndView mav = new ModelAndView("Teacher-Form.html");
             mav.addObject("errors", bindingResult.getAllErrors());
@@ -62,9 +69,12 @@ public class InstructorController
             String email = (String) session.getAttribute("email");
             User user = this.userRepository.findByEmail(email);
         
+            String filePath = fileservice.uploadImage(pdf ,"demo/src/main/resources/static/Images/courses/cvs/" );
+            
+
             instructor.setUser(user);
             instructor.setStatus("Observing");
-
+            instructor.setPdf(filePath);
             this.instructorService.save(instructor);
 
             return new ModelAndView("redirect:/");
