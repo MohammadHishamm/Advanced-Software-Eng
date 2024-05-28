@@ -108,9 +108,7 @@
                                         <li class="list-group-item d-flex justify-content-start align-items-start pt-3">
                                             <a href="" class="btn btn-light mb-0 w-100 active" style="">Profile</a>
                                         </li>
-                                        <li class="list-group-item d-flex justify-content-start align-items-start pt-3">
-                                            <a href="" class="btn btn-light w-100 mb-0" style="">Account</a>
-                                        </li>
+                                    
                                     
                                         
                             
@@ -134,18 +132,28 @@
                                             <form method="post" action="/user/update">
                                               <div class="row">
                                                   <div class="col-sm-3">
-                                                      <p class="mb-0" style="font-size: 1.3rem; font-weight: bold;">Name</p>
+                                                      <p class="mb-0"  style="font-size: 1.3rem; font-weight: bold;">Name</p>
+                                                      
                                                   </div>
                                                   <div class="col-sm-6">
                                                       <input class="text-muted mb-0" name="name" th:value="${name}"  style="width: 240px;"/>
+                                                      <span th:each="error : ${usererrors}"
+                                                      th:if="${error.field == 'name'}" class="alert"
+                                                      th:text="${error.defaultMessage}"
+                                                      style="color: red; width: max-content;"></span>
                                                   </div>
                                               </div>
                                               <div class="row">
                                                   <div class="col-sm-3">
                                                       <p class="mb-0" style="font-size: 1.3rem; font-weight: bold;">Email</p>
+                                                      
                                                   </div>
                                                   <div class="col-sm-6">
                                                       <input class="text-muted mb-0" name="email" th:value="${email}"  style="width: 240px;"/>
+                                                      <span th:each="error : ${usererrors}"
+                                                      th:if="${error.field == 'email'}" class="alert"
+                                                      th:text="${error.defaultMessage}"
+                                                      style="color: red; width: max-content;"></span>
                                                   </div>
                                               </div>
                                               <div class="row">
@@ -154,6 +162,10 @@
                                                   </div>
                                                   <div class="col-sm-6">
                                                       <input type="password" class="text-muted mb-0" name="password" placeholder="Enter new password"  style="width: 240px;"/>
+                                                      <span th:each="error : ${usererrors}"
+                                                      th:if="${error.field == 'password'}" class="alert"
+                                                      th:text="${error.defaultMessage}"
+                                                      style="color: red; width: max-content;"></span>
                                                   </div>
                                               </div>
                                               <div class="row">
