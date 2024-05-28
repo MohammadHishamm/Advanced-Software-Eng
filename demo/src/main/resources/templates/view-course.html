@@ -22,7 +22,7 @@
   <div th:replace="fragments/Navbar::navigation"></div>
 
   <!-- SideNav -->
-  <div th:replace="fragments/SideNav::sidenav"></div>
+  <div th:replace="~{fragments/SideNav::sidenav}"></div>
 
   <body style="background-color: #ebeff4">
     <!-- Course Image section -->
@@ -99,25 +99,27 @@
               th:if="${session.email != null && session.type == 'student' && enroll == true}"
               class="col-lg-3 col-12 mb-4 me-4"
             >
-            <div th:each="item : ${content}" class="card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title" th:text="${item.video_title}"></h4>
+              <div th:each="item : ${content}" class="card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title" th:text="${item.video_title}"></h4>
 
-                  <p class="card-text text-truncate" th:text="${item.video_description}"></p>
+                    <p
+                      class="card-text text-truncate"
+                      th:text="${item.video_description}"
+                    ></p>
 
-                  <a
-               
-                    class="btn"
-                    style="background-color: #58779d; color: white"
-                    th:href="@{/coursescontent/view-content(contentid=${item.video_id}, courseid=${course.course_id})}"
-                  >
-                    View Content
-                  </a>
+                    <a
+                      class="btn"
+                      style="background-color: #58779d; color: white"
+                      th:href="@{/coursescontent/view-content(contentid=${item.video_id}, courseid=${course.course_id})}"
+                    >
+                      View Content
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
             <div
               th:if="${session.email != null && session.type == 'student' && enroll == false}"
@@ -192,5 +194,6 @@
     </div>
 
     <div th:replace="~{fragments/bottomNav::bottom_navigation}"></div>
+    <script src="../js/side-nav.js"></script>
   </body>
 </html>
